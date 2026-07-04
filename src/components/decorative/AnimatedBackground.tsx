@@ -27,87 +27,50 @@ export default function AnimatedBackground({ variant = "light", intensity = "med
 
     const isDark = variant === "dark";
 
-    // CIS colors from the brand
-    const primaryColor = { r: 14, g: 143, b: 168 };    // #0e8fa8 accent
-    const secondaryColor = { r: 196, g: 224, b: 232 }; // #c4e0e8 mist
+    // Grid configuration
+    const gridSize = 60; // Size of each grid cell
+    const lineWidth = 1;
 
-    // Opacity based on intensity
-    const baseOpacity = intensity === "subtle" ? 0.15 : intensity === "medium" ? 0.25 : 0.35;
+    // CIS brand colors
+    const accentColor = { r: 14, g: 143, b: 168 };    // #0e8fa8
+    const mistColor = { r: 196, g: 224, b: 232 };     // #c4e0e8
 
-    // Gradient orbs that slowly drift and pulse
-    class GradientOrb {
+    // Base opacity based on variant
+    const baseOpacity = isDark ? 0.15 : 0.12;
+
+    // Animated nodes at grid intersections
+    class GridNode {
       x: number;
       y: number;
-      vx: number;
-      vy: number;
-      radius: number;
-      baseRadius: number;
+      baseIntensity: number;
       pulseSpeed: number;
       pulseOffset: number;
-      color: { r: number; g: number; b: number };
 
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        // Slow drift
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
-        this.baseRadius = Math.random() * 150 + 100;
-        this.radius = this.baseRadius;
-        this.pulseSpeed = Math.random() * 0.02 + 0.01;
+      constructor(x: number, y: number) {
+        this.x = x;
+        this.y = y;
+        this.baseIntensity = Math.random() * 0.5 + 0.3;
+        this.pulseSpeed = Math.random() * 0.8 + 0.4;
         this.pulseOffset = Math.random() * Math.PI * 2;
-        // Randomly pick between primary and secondary color
-        this.color = Math.random() > 0.5 ? primaryColor : secondaryColor;
       }
 
-      update(time: number) {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        // Wrap around edges for seamless effect
-        if (this.x < -this.baseRadius) this.x = canvas.width + this.baseRadius;
-        if (this.x > canvas.width + this.baseRadius) this.x = -this.baseRadius;
-        if (this.y < -this.baseRadius) this.y = canvas.height + this.baseRadius;
-        if (this.y > canvas.height + this.baseRadius) this.y = -this.baseRadius;
-
-        // Gentle pulsing
-        this.radius = this.baseRadius + Math.sin(time * this.pulseSpeed + this.pulseOffset) * 20;
-      }
-
-      draw() {
-        if (!ctx) return;
-
-        // Create radial gradient
-        const gradient = ctx.createRadialGradient(
-          this.x, this.y, 0,
-          this.x, this.y, this.radius
-        );
-
-        const opacity = isDark ? baseOpacity * 0.8 : baseOpacity;
-
-        gradient.addColorStop(0, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${opacity})`);
-        gradient.addColorStop(0.5, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${opacity * 0.3})`);
-        gradient.addColorStop(1, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, 0)`);
-
-        ctx.fillStyle = gradient;
-        ctx.fillRect(
-          this.x - this.radius,
-          this.y - this.radius,
-          this.radius * 2,
-          this.radius * 2
-        );
+      getIntensity(time: number): number {
+        return this.baseIntensity + Math.sin(time * this.pulseSpeed + this.pulseOffset) * 0.3;
       }
     }
 
-    // Create orbs - fewer but larger for more visible effect
-    const orbs: GradientOrb[] = [];
-    const orbCount = intensity === "subtle" ? 3 : intensity === "medium" ? 5 : 7;
+    // Create grid nodes
+    const nodes: GridNode[] = [];
+    const cols = Math.ceil(canvas.width / gridSize) + 1;
+    const rows = Math.ceil(canvas.height / gridSize) + 1;
 
-    for (let i = 0; i < orbCount; i++) {
-      orbs.push(new GradientOrb());
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        nodes.push(new GridNode(col * gridSize, row * gridSize));
+      }
     }
 
-    // Animation loop
+    // Animation
     let startTime = Date.now();
     let animationId: number;
 
@@ -116,10 +79,61 @@ export default function AnimatedBackground({ variant = "light", intensity = "med
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Update and draw orbs
-      orbs.forEach((orb) => {
-        orb.update(currentTime);
-        orb.draw();
+      // Draw vertical lines
+      for (let x = 0; x <= canvas.width; x += gridSize) {
+        for (let y = 0; y < canvas.height - gridSize; y += gridSize) {
+          const node = nodes.find(n => n.x === x && n.y === y);
+          if (!node) continue;
+
+          const intensity = node.getIntensity(currentTime);
+          const opacity = baseOpacity * intensity;
+
+          // Use mist color for vertical lines
+          ctx.strokeStyle = `rgba(${mistColor.r}, ${mistColor.g}, ${mistColor.b}, ${opacity})`;
+          ctx.lineWidth = lineWidth;
+          ctx.beginPath();
+          ctx.moveTo(x, y);
+          ctx.lineTo(x, y + gridSize);
+          ctx.stroke();
+        }
+      }
+
+      // Draw horizontal lines
+      for (let y = 0; y <= canvas.height; y += gridSize) {
+        for (let x = 0; x < canvas.width - gridSize; x += gridSize) {
+          const node = nodes.find(n => n.x === x && n.y === y);
+          if (!node) continue;
+
+          const intensity = node.getIntensity(currentTime);
+          const opacity = baseOpacity * intensity;
+
+          // Use accent color for horizontal lines
+          ctx.strokeStyle = `rgba(${accentColor.r}, ${accentColor.g}, ${accentColor.b}, ${opacity})`;
+          ctx.lineWidth = lineWidth;
+          ctx.beginPath();
+          ctx.moveTo(x, y);
+          ctx.lineTo(x + gridSize, y);
+          ctx.stroke();
+        }
+      }
+
+      // Draw glowing dots at intersections occasionally
+      nodes.forEach(node => {
+        const intensity = node.getIntensity(currentTime);
+        if (intensity > 0.8) {
+          const opacity = (intensity - 0.8) * 5 * baseOpacity;
+          const dotSize = 3;
+
+          // Gradient for glow effect
+          const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, dotSize * 3);
+          gradient.addColorStop(0, `rgba(${accentColor.r}, ${accentColor.g}, ${accentColor.b}, ${opacity})`);
+          gradient.addColorStop(1, `rgba(${accentColor.r}, ${accentColor.g}, ${accentColor.b}, 0)`);
+
+          ctx.fillStyle = gradient;
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, dotSize * 3, 0, Math.PI * 2);
+          ctx.fill();
+        }
       });
 
       animationId = requestAnimationFrame(animate);
@@ -137,7 +151,6 @@ export default function AnimatedBackground({ variant = "light", intensity = "med
     <canvas
       ref={canvasRef}
       className="pointer-events-none absolute inset-0 z-0"
-      style={{ mixBlendMode: variant === "dark" ? "screen" : "multiply" }}
     />
   );
 }

@@ -17,7 +17,7 @@ export default function ContactForm() {
 
   if (sent) {
     return (
-      <div className="rounded-2xl border border-mist-line bg-mist-soft p-10 text-center">
+      <div className="rounded-lg border border-mist-line bg-mist-soft p-10 text-center">
         <h3 className="text-xl font-bold text-ink">
           お問い合わせありがとうございます。
         </h3>

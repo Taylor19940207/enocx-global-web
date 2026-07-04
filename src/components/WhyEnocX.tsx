@@ -116,7 +116,7 @@ export default function WhyEnocX() {
               delay={i * 90}
               className="group relative"
             >
-              <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent p-8 transition-all duration-500 hover:border-accent hover:from-white/10">
+              <div className="relative overflow-hidden rounded-lg border border-white/10 bg-gradient-to-br from-white/5 to-transparent p-8 transition-all duration-500 hover:border-accent hover:from-white/10">
                 {/* Number badge */}
                 <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-accent/20">
                   <span className="font-latin text-lg font-bold text-accent">

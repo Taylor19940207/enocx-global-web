@@ -73,7 +73,7 @@ export default function ByTheNumbers() {
           {metrics.map((m, idx) => (
             <div
               key={m.label}
-              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] p-8 backdrop-blur-sm transition-all duration-500 hover:border-accent/50 hover:from-white/10 hover:to-white/5"
+              className="group relative overflow-hidden rounded-lg border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] p-8 backdrop-blur-sm transition-all duration-500 hover:border-accent/50 hover:from-white/10 hover:to-white/5"
             >
               {/* Decorative corner accent */}
               <div className="absolute right-0 top-0 h-20 w-20 translate-x-10 -translate-y-10 rounded-full bg-accent/20 blur-2xl transition-transform duration-500 group-hover:translate-x-6 group-hover:-translate-y-6" />
@@ -113,7 +113,7 @@ export default function ByTheNumbers() {
         {/* Secondary metrics - Bento box style */}
         <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-6">
           {/* Large featured metric */}
-          <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-accent/10 to-transparent p-10 backdrop-blur-sm sm:col-span-3 lg:col-span-2">
+          <div className="group relative overflow-hidden rounded-lg border border-white/10 bg-gradient-to-br from-accent/10 to-transparent p-10 backdrop-blur-sm sm:col-span-3 lg:col-span-2">
             <div className="absolute right-0 top-0 h-32 w-32 translate-x-16 -translate-y-16 rounded-full bg-accent/30 blur-3xl" />
             <p className="font-latin relative text-6xl font-bold tracking-tight text-white lg:text-7xl">
               <CountUp end={1000} suffix="" />
@@ -123,7 +123,7 @@ export default function ByTheNumbers() {
           </div>
 
           {/* Two smaller metrics */}
-          <div className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-all duration-300 hover:border-accent/50 hover:bg-white/10 sm:col-span-3 lg:col-span-2">
+          <div className="group overflow-hidden rounded-lg border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-all duration-300 hover:border-accent/50 hover:bg-white/10 sm:col-span-3 lg:col-span-2">
             <p className="font-latin text-5xl font-bold text-white lg:text-6xl">
               <CountUp end={6} />
             </p>
@@ -133,7 +133,7 @@ export default function ByTheNumbers() {
             </p>
           </div>
 
-          <div className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-all duration-300 hover:border-accent/50 hover:bg-white/10 sm:col-span-6 lg:col-span-2">
+          <div className="group overflow-hidden rounded-lg border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-all duration-300 hover:border-accent/50 hover:bg-white/10 sm:col-span-6 lg:col-span-2">
             <p className="font-latin text-5xl font-bold text-white lg:text-6xl">
               <CountUp end={3} />
             </p>

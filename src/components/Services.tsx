@@ -25,7 +25,6 @@ export default function Services({
   return (
     <section id="services" className="relative overflow-hidden bg-paper py-24 lg:py-section">
       <AnimatedBackground variant="light" intensity="medium" />
-      <BackgroundArcs variant="light" />
       <div className="relative z-10 mx-auto max-w-[1320px] px-6 md:px-10">
         {withHeading && (
           <SectionHeading
@@ -113,7 +112,7 @@ export default function Services({
             {/* Right: Active Service Content */}
             <div className="col-span-8">
               <Reveal delay={150}>
-                <div className="rounded-2xl border border-mist-line bg-paper p-10 shadow-2xl lg:p-12">
+                <div className="rounded-lg border border-mist-line bg-paper p-10 shadow-2xl lg:p-12">
                   <div className="mb-8 flex items-start justify-between">
                     <div>
                       <span className="font-latin text-sm font-semibold tracking-widest text-accent">
@@ -123,7 +122,7 @@ export default function Services({
                         {coreServices[activeService].title}
                       </h3>
                     </div>
-                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-accent-soft">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-accent-soft">
                       <Image
                         src={coreServices[activeService].icon}
                         alt=""
@@ -182,7 +181,7 @@ export default function Services({
                 key={s.no}
                 delay={i * 80}
                 as="article"
-                className="group overflow-hidden rounded-2xl border border-mist-line bg-paper shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+                className="group overflow-hidden rounded-lg border border-mist-line bg-paper shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
               >
                 <div className="p-8">
                   <div className="flex items-start justify-between">

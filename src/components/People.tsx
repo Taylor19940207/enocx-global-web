@@ -30,7 +30,6 @@ export default function People({
   return (
     <section id="people" className={`relative overflow-hidden ${bg} py-24 lg:py-section`}>
       <AnimatedBackground variant="light" intensity="medium" />
-      <BackgroundArcs variant="light" />
       <div className="relative z-10 mx-auto max-w-[1320px] px-6 md:px-10">
         {withHeading && (
           <SectionHeading
@@ -53,7 +52,7 @@ export default function People({
               as="article"
               className="group"
             >
-              <div className="flex h-full flex-col overflow-hidden rounded-2xl bg-paper shadow-lg ring-1 ring-mist-line transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:ring-accent/40">
+              <div className="flex h-full flex-col overflow-hidden rounded-lg bg-paper shadow-lg ring-1 ring-mist-line transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:ring-accent/40">
                 {/* Photo - consistent aspect ratio */}
                 <div className="relative aspect-[4/5] overflow-hidden bg-mist-soft">
                   {e.photo ? (
