@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import CountUp from "./CountUp";
-import SectionHeading from "./SectionHeading";
 import BackgroundArcs from "./decorative/BackgroundArcs";
 
 type Metric = {
@@ -42,70 +41,106 @@ export default function ByTheNumbers() {
 
   return (
     <section className="relative overflow-hidden bg-ink py-24 lg:py-section">
+      {/* Enhanced background effects */}
       <div
         className="pointer-events-none absolute -right-40 top-1/4 h-[520px] w-[520px] rounded-full opacity-25 blur-3xl"
         style={{ background: "radial-gradient(circle, #0e8fa8, transparent 70%)" }}
       />
+      <div
+        className="pointer-events-none absolute -left-40 bottom-1/4 h-[420px] w-[420px] rounded-full opacity-20 blur-3xl"
+        style={{ background: "radial-gradient(circle, #c4e0e8, transparent 70%)" }}
+      />
       <BackgroundArcs variant="dark" />
-      <div className="relative z-10 mx-auto max-w-[1320px] px-6 md:px-10">
-        <SectionHeading
-          eyebrow="By the Numbers"
-          title="実績を、数字で。"
-          lead="創業以来、日中をまたぐ企業の起業と成長を、確かな数字で支えてきました。"
-          invert
-        />
 
-        <div ref={ref} className="mt-16 grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-          {metrics.map((m) => (
-            <div key={m.label}>
-              <div className="flex items-baseline gap-1 text-white">
-                <CountUp
-                  end={m.end}
-                  className="font-latin text-5xl font-bold tracking-tight lg:text-6xl"
-                />
-                <span className="font-latin text-2xl font-bold text-accent">
-                  {m.suffix}
-                </span>
-                <span className="ml-1 text-sm font-medium text-white/50">
+      <div className="relative z-10 mx-auto max-w-[1320px] px-6 md:px-10">
+        {/* Split header layout for impact */}
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-end">
+          <div>
+            <p className="eyebrow text-accent">By the Numbers</p>
+            <h2 className="mt-6 text-4xl font-bold leading-tight text-white lg:text-5xl">
+              実績を、数字で。
+            </h2>
+          </div>
+          <div>
+            <p className="text-lg leading-relaxed text-white/70 lg:text-xl">
+              創業以来、日中をまたぐ企業の起業と成長を、確かな数字で支えてきました。
+            </p>
+          </div>
+        </div>
+
+        {/* Hero metrics - larger, more prominent */}
+        <div ref={ref} className="mt-20 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {metrics.map((m, idx) => (
+            <div
+              key={m.label}
+              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] p-8 backdrop-blur-sm transition-all duration-500 hover:border-accent/50 hover:from-white/10 hover:to-white/5"
+            >
+              {/* Decorative corner accent */}
+              <div className="absolute right-0 top-0 h-20 w-20 translate-x-10 -translate-y-10 rounded-full bg-accent/20 blur-2xl transition-transform duration-500 group-hover:translate-x-6 group-hover:-translate-y-6" />
+
+              <div className="relative">
+                <div className="flex items-baseline gap-1">
+                  <CountUp
+                    end={m.end}
+                    className="font-latin text-6xl font-bold tracking-tight text-white lg:text-7xl"
+                  />
+                  <span className="font-latin text-3xl font-bold text-accent">
+                    {m.suffix}
+                  </span>
+                </div>
+                <span className="font-latin mt-2 block text-sm font-medium text-white/40">
                   {m.unit}
                 </span>
+
+                {/* Enhanced progress bar */}
+                <div className="mt-6 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+                  <div
+                    className={`stat-bar h-full rounded-full bg-gradient-to-r from-accent to-accent/60 shadow-lg shadow-accent/50 ${
+                      visible ? "is-visible" : ""
+                    }`}
+                    style={{ width: `${m.barPct}%` }}
+                  />
+                </div>
+
+                <p className="mt-5 text-sm font-medium leading-snug text-white/70">
+                  {m.label}
+                </p>
               </div>
-              <div className="mt-4 h-1 w-full overflow-hidden rounded-full bg-white/10">
-                <div
-                  className={`stat-bar h-full rounded-full bg-accent ${
-                    visible ? "is-visible" : ""
-                  }`}
-                  style={{ width: `${m.barPct}%` }}
-                />
-              </div>
-              <p className="mt-4 text-sm leading-snug text-white/70">{m.label}</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-3">
-          <div className="bg-ink p-8">
-            <p className="font-latin text-4xl font-bold text-white lg:text-5xl">
+        {/* Secondary metrics - Bento box style */}
+        <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-6">
+          {/* Large featured metric */}
+          <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-accent/10 to-transparent p-10 backdrop-blur-sm sm:col-span-3 lg:col-span-2">
+            <div className="absolute right-0 top-0 h-32 w-32 translate-x-16 -translate-y-16 rounded-full bg-accent/30 blur-3xl" />
+            <p className="font-latin relative text-6xl font-bold tracking-tight text-white lg:text-7xl">
               <CountUp end={1000} suffix="" />
-              <span className="text-accent">億円</span>
             </p>
-            <p className="mt-3 text-sm text-white/70">累計資産規模</p>
+            <p className="font-latin relative mt-2 text-2xl font-bold text-accent">億円</p>
+            <p className="relative mt-4 text-sm font-medium text-white/70">累計資産規模</p>
           </div>
-          <div className="bg-ink p-8">
-            <p className="font-latin text-4xl font-bold text-white lg:text-5xl">
+
+          {/* Two smaller metrics */}
+          <div className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-all duration-300 hover:border-accent/50 hover:bg-white/10 sm:col-span-3 lg:col-span-2">
+            <p className="font-latin text-5xl font-bold text-white lg:text-6xl">
               <CountUp end={6} />
-              <span className="text-accent"> 拠点</span>
             </p>
-            <p className="mt-3 text-sm text-white/70">
+            <p className="font-latin mt-2 text-xl font-semibold text-accent">拠点</p>
+            <p className="mt-3 text-xs leading-relaxed text-white/60">
               東京・福岡・上海・北京・香港・シンガポール
             </p>
           </div>
-          <div className="bg-ink p-8">
-            <p className="font-latin text-4xl font-bold text-white lg:text-5xl">
+
+          <div className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-all duration-300 hover:border-accent/50 hover:bg-white/10 sm:col-span-6 lg:col-span-2">
+            <p className="font-latin text-5xl font-bold text-white lg:text-6xl">
               <CountUp end={3} />
-              <span className="text-accent"> 言語</span>
             </p>
-            <p className="mt-3 text-sm text-white/70">日本語・中国語・英語で対応</p>
+            <p className="font-latin mt-2 text-xl font-semibold text-accent">言語</p>
+            <p className="mt-3 text-xs leading-relaxed text-white/60">
+              日本語・中国語・英語で対応
+            </p>
           </div>
         </div>
       </div>
