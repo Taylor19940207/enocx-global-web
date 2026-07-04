@@ -1,26 +1,188 @@
 @import "tailwindcss";
 
+/*
+  EnocX design system.
+  Palette kept to the client's muted CIS (slate blue-grey + powder blue),
+  paired with a clean, whitespace-driven layout and an international grotesk
+  for Latin — evoking global consulting firms with Japanese rigor.
+*/
+@theme {
+  --color-ink: #14181a;
+  --color-ink-soft: #333333;
+
+  --color-slate: #58656b;
+  --color-slate-dark: #3c464a;
+  --color-slate-600: #4a565b;
+
+  --color-mist: #c4e0e8;
+  --color-mist-soft: #eef5f7;
+  --color-mist-line: #dde6e9;
+
+  /* Bolder brand accent — a saturated teal drawn from the CIS blue family */
+  --color-accent: #0e8fa8;
+  --color-accent-600: #0b7488;
+  --color-accent-soft: #e3f3f6;
+
+  --color-paper: #ffffff;
+  --color-paper-2: #f7f9fa;
+
+  --font-sans: var(--font-noto-jp), "Noto Sans JP", system-ui, sans-serif;
+  --font-latin: var(--font-latin), "Inter", system-ui, sans-serif;
+
+  --spacing-section: 8.5rem;
+}
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #14181a;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-noto-jp), "Noto Sans JP", system-ui, sans-serif;
+  font-feature-settings: "palt" 1;
+  letter-spacing: 0.01em;
+}
+
+/* Latin labels / numerals in the international grotesk */
+.font-latin {
+  font-family: var(--font-latin), "Inter", system-ui, sans-serif;
+}
+
+/* Eyebrow label with a small slate tick — a restrained, professional accent */
+.eyebrow {
+  font-family: var(--font-latin), "Inter", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+}
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 1.75rem;
+  height: 2px;
+  margin-right: 0.85rem;
+  background: var(--color-accent);
+  opacity: 1;
+}
+
+/* Legacy greater-than accent (kept for compatibility) */
+.mark-gt::before {
+  content: "";
+  display: inline-block;
+  width: 0.58em;
+  height: 0.58em;
+  margin-right: 0.5em;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  transform: rotate(45deg) translateY(0.06em);
+  opacity: 0.7;
+}
+
+/* Consulting-style link with animated underline + arrow */
+.link-arrow {
+  font-family: var(--font-latin), "Inter", system-ui, sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-weight: 600;
+}
+.link-arrow svg {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-arrow:hover svg {
+  transform: translateX(0.35rem);
+}
+
+/* Reveal-on-scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* Client logo marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+.marquee-mask:hover .marquee-track {
+  animation-play-state: paused;
+}
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+
+/* Animated stat bar */
+.stat-bar {
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.stat-bar.is-visible {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+  .stat-bar {
+    transform: scaleX(1);
+    transition: none;
+  }
 }
