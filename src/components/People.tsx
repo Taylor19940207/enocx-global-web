@@ -29,7 +29,7 @@ export default function People({
 
   return (
     <section id="people" className={`relative overflow-hidden ${bg} py-24 lg:py-section`}>
-      <AnimatedBackground variant="light" density="low" />
+      <AnimatedBackground variant="light" intensity="medium" />
       <BackgroundArcs variant="light" />
       <div className="relative z-10 mx-auto max-w-[1320px] px-6 md:px-10">
         {withHeading && (
