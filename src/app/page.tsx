@@ -17,7 +17,6 @@ export default function Home() {
       <ByTheNumbers />
       <SectionWave fill="#f7f9fa" />
       <People limit={3} moreHref="/people" />
-      <SectionWave fill="#14181a" flip />
       <WhyEnocX />
       <SectionWave fill="#ffffff" />
       <Proof />

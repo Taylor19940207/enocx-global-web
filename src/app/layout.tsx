@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageMargins from "@/components/decorative/PageMargins";
+import PageTransition from "@/components/PageTransition";
 
 const notoJP = Noto_Sans_JP({
   variable: "--font-noto-jp",
@@ -55,6 +56,7 @@ export default function RootLayout({
     <html lang="ja" className={`${notoJP.variable} ${inter.variable} h-full`}>
       <body className="min-h-full flex flex-col bg-paper text-ink">
         <PageMargins />
+        <PageTransition />
         <Header />
         <main className="relative z-10 flex-1">{children}</main>
         <Footer />

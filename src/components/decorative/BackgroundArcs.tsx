@@ -40,7 +40,7 @@ export default function BackgroundArcs({ variant = "dark" }: Props) {
   }
 
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+    <div aria-hidden className="pointer-events-none absolute inset-0">
       <svg
         className="absolute -right-32 -top-24 h-[560px] w-[560px] text-mist/20"
         viewBox="0 0 400 400"

@@ -5,7 +5,18 @@ import BackgroundArcs from "./decorative/BackgroundArcs";
 
 export default function WhyEnocX() {
   return (
-    <section id="why" className="relative overflow-hidden bg-ink py-24 lg:py-section">
+    <section id="why" className="relative bg-ink py-24 lg:py-section">
+      {/* Top wave decoration */}
+      <div className="absolute left-0 right-0 top-0 h-16 w-full overflow-hidden" aria-hidden>
+        <svg
+          viewBox="0 0 1440 64"
+          preserveAspectRatio="none"
+          className="absolute inset-0 h-full w-full"
+        >
+          <path d="M0,48 C360,0 1080,64 1440,16 L1440,0 L0,0 Z" fill="#f7f9fa" />
+        </svg>
+      </div>
+
       <div
         className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full opacity-20 blur-3xl"
         style={{ background: "radial-gradient(circle, #c4e0e8, transparent 70%)" }}
