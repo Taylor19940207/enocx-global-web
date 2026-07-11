@@ -1,6 +1,5 @@
 import { advantages } from "@/lib/content";
 import Reveal from "./Reveal";
-import SectionHeading from "./SectionHeading";
 import BackgroundArcs from "./decorative/BackgroundArcs";
 
 export default function WhyEnocX() {

@@ -1,28 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 
 export default function PageTransition() {
   const pathname = usePathname();
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  // Remounts Overlay on every route change, replaying its enter/fade animation.
+  return <Overlay key={pathname} />;
+}
 
-  useEffect(() => {
-    // Show transition
-    setIsTransitioning(true);
-
-    // Hide after animation
-    const timer = setTimeout(() => {
-      setIsTransitioning(false);
-    }, 800);
-
-    return () => clearTimeout(timer);
-  }, [pathname]);
-
-  if (!isTransitioning) return null;
+function Overlay() {
+  const [visible, setVisible] = useState(true);
+  if (!visible) return null;
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[9999] flex items-center justify-center bg-ink/95 backdrop-blur-md animate-fadeOut">
+    <div
+      onAnimationEnd={() => setVisible(false)}
+      className="pointer-events-none fixed inset-0 z-[9999] flex items-center justify-center bg-ink/95 backdrop-blur-md animate-fadeOut"
+    >
       <div className="relative h-40 w-40">
         {/* Center glow */}
         <div className="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/30 blur-2xl animate-pulse" />
@@ -47,20 +42,17 @@ export default function PageTransition() {
         ))}
 
         {/* Outer ring particles */}
-        {[...Array(12)].map((_, i) => {
-          const angle = (i * 360) / 12;
-          return (
-            <div
-              key={`ring-${i}`}
-              className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/40"
-              style={{
-                animation: `orbit 3s linear infinite`,
-                animationDelay: `${i * 0.08}s`,
-                transformOrigin: 'center',
-              }}
-            />
-          );
-        })}
+        {[...Array(12)].map((_, i) => (
+          <div
+            key={`ring-${i}`}
+            className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/40"
+            style={{
+              animation: `orbit 3s linear infinite`,
+              animationDelay: `${i * 0.08}s`,
+              transformOrigin: 'center',
+            }}
+          />
+        ))}
       </div>
 
       <style jsx>{`

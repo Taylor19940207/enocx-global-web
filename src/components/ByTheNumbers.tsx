@@ -70,7 +70,7 @@ export default function ByTheNumbers() {
 
         {/* Hero metrics - larger, more prominent */}
         <div ref={ref} className="mt-20 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {metrics.map((m, idx) => (
+          {metrics.map((m) => (
             <div
               key={m.label}
               className="group relative overflow-hidden rounded-lg border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] p-8 backdrop-blur-sm transition-all duration-500 hover:border-accent/50 hover:from-white/10 hover:to-white/5"

@@ -3,7 +3,6 @@ import { experts } from "@/lib/content";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 import ArrowLink from "./ArrowLink";
-import BackgroundArcs from "./decorative/BackgroundArcs";
 import AnimatedBackground from "./decorative/AnimatedBackground";
 
 type Props = {

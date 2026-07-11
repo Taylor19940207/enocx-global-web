@@ -4,12 +4,12 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageMargins from "@/components/decorative/PageMargins";
-import PageTransition from "@/components/PageTransition";
+import PageTransition from "@/components/PageTransitionLoader";
 
 const notoJP = Noto_Sans_JP({
   variable: "--font-noto-jp",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700", "900"],
+  weight: ["400", "500", "700"],
   display: "swap",
 });
 
