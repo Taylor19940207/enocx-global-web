@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 type Props = {
   end: number;
@@ -18,7 +18,6 @@ export default function CountUp({
   className = "",
 }: Props) {
   const ref = useRef<HTMLSpanElement>(null);
-  const [value, setValue] = useState(0);
   const started = useRef(false);
 
   useEffect(() => {
@@ -28,13 +27,18 @@ export default function CountUp({
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
+    let frameId: number | null = null;
+
+    const renderValue = (value: number) => {
+      el.textContent = `${prefix}${value.toLocaleString("en-US")}${suffix}`;
+    };
 
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !started.current) {
           started.current = true;
           if (prefersReduced) {
-            setValue(end);
+            renderValue(end);
             io.disconnect();
             return;
           }
@@ -43,24 +47,25 @@ export default function CountUp({
             const p = Math.min((now - start) / duration, 1);
             // easeOutExpo
             const eased = p === 1 ? 1 : 1 - Math.pow(2, -10 * p);
-            setValue(Math.round(end * eased));
-            if (p < 1) requestAnimationFrame(tick);
+            renderValue(Math.round(end * eased));
+            if (p < 1) frameId = requestAnimationFrame(tick);
           };
-          requestAnimationFrame(tick);
+          frameId = requestAnimationFrame(tick);
           io.disconnect();
         }
       },
       { threshold: 0.4 }
     );
     io.observe(el);
-    return () => io.disconnect();
-  }, [end, duration]);
+    return () => {
+      io.disconnect();
+      if (frameId !== null) cancelAnimationFrame(frameId);
+    };
+  }, [end, duration, prefix, suffix]);
 
   return (
     <span ref={ref} className={className}>
-      {prefix}
-      {value.toLocaleString("en-US")}
-      {suffix}
+      {prefix}0{suffix}
     </span>
   );
 }

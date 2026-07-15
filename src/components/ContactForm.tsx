@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 const field =
-  "w-full rounded-lg border border-mist-line bg-paper px-4 py-3 text-sm text-ink outline-none transition focus:border-slate focus:ring-2 focus:ring-slate/15";
+  "w-full rounded-lg border border-mist-line bg-paper px-4 py-3 text-base text-ink outline-none transition focus:border-slate focus:ring-2 focus:ring-slate/15";
 const label = "block text-sm font-medium text-ink";
 
 export default function ContactForm() {
@@ -22,7 +22,7 @@ export default function ContactForm() {
           お問い合わせありがとうございます。
         </h3>
         <p className="mt-3 text-sm leading-relaxed text-slate-600">
-          担当者より、通常2営業日以内にご連絡いたします。
+          内容を確認のうえ、担当者よりご連絡いたします。
         </p>
       </div>
     );

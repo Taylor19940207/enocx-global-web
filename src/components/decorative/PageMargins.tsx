@@ -5,7 +5,7 @@ export default function PageMargins() {
   const edge = "max(1.5rem, calc(50% - 676px))";
 
   return (
-    <div aria-hidden className="pointer-events-none fixed inset-0 z-[1] hidden lg:block">
+    <div aria-hidden className="page-margins pointer-events-none fixed inset-0 z-[1] hidden lg:block">
       <div
         className="absolute top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-slate/30 to-transparent"
         style={{ left: edge }}
