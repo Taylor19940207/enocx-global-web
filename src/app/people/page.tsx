@@ -15,6 +15,8 @@ export default function PeoplePage() {
       <PageHero
         eyebrow="People"
         title="有資格の専門家が、直接あなたの課題に向き合う。"
+        mobileTitleLines={["有資格の専門家が、", "直接あなたの課題に", "向き合う。"]}
+        desktopTitleLines={["有資格の専門家が、", "直接あなたの課題に向き合う。"]}
         lead="税理士・国税OB・司法書士・弁護士など、各分野の実務家がチームとして越境案件を支えます。"
         crumbs={[{ label: "Home", href: "/" }, { label: "専門家" }]}
       />

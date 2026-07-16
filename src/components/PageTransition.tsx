@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 
 export default function PageTransition() {
   const pathname = usePathname();
-  // Remounts Overlay on every route change, replaying its enter/fade animation.
   return <Overlay key={pathname} />;
 }
 
@@ -15,89 +14,26 @@ function Overlay() {
 
   return (
     <div
-      onAnimationEnd={() => setVisible(false)}
-      className="pointer-events-none fixed inset-0 z-[9999] flex items-center justify-center bg-ink/95 backdrop-blur-md animate-fadeOut"
+      aria-hidden
+      onAnimationEnd={(event) => {
+        if (event.currentTarget === event.target) setVisible(false);
+      }}
+      className="page-transition pointer-events-none fixed inset-0 z-[9999] flex items-center justify-center bg-ink/95 backdrop-blur-sm"
     >
-      <div className="relative h-40 w-40">
-        {/* Center glow */}
-        <div className="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/30 blur-2xl animate-pulse" />
-
-        {/* Breathing particles - larger and more refined */}
-        {[...Array(8)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-            style={{
-              animation: `breathe 2s ease-in-out infinite`,
-              animationDelay: `${i * 0.12}s`,
-            }}
-          >
-            <div
-              className="h-4 w-4 rounded-full bg-gradient-to-br from-accent to-mist shadow-lg shadow-accent/50"
-              style={{
-                opacity: 0.9 - i * 0.08,
-              }}
-            />
-          </div>
-        ))}
-
-        {/* Outer ring particles */}
-        {[...Array(12)].map((_, i) => (
-          <div
-            key={`ring-${i}`}
-            className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/40"
-            style={{
-              animation: `orbit 3s linear infinite`,
-              animationDelay: `${i * 0.08}s`,
-              transformOrigin: 'center',
-            }}
-          />
-        ))}
+      <div className="relative w-[min(72vw,520px)]">
+        <div className="mb-5 flex items-end justify-between">
+          <span className="font-latin text-sm font-bold tracking-[0.2em] text-white">EnocX</span>
+          <span className="font-latin text-[9px] uppercase tracking-[0.24em] text-white/45">Cross-border advisory</span>
+        </div>
+        <div className="relative h-px overflow-hidden bg-white/15">
+          <span className="page-transition-sweep absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-accent to-transparent" />
+        </div>
+        <div className="mt-4 flex justify-between font-latin text-[9px] tracking-[0.18em] text-white/45">
+          <span>TOKYO</span>
+          <span>SHANGHAI</span>
+          <span>ASIA</span>
+        </div>
       </div>
-
-      <style jsx>{`
-        @keyframes breathe {
-          0%, 100% {
-            transform: translate(-50%, -50%) scale(0.8);
-            opacity: 0.9;
-          }
-          50% {
-            transform: translate(-50%, -50%) scale(2.5);
-            opacity: 0.1;
-          }
-        }
-
-        @keyframes orbit {
-          0% {
-            transform: translate(-50%, -50%) rotate(0deg) translateX(60px) scale(1);
-            opacity: 0.6;
-          }
-          50% {
-            transform: translate(-50%, -50%) rotate(180deg) translateX(60px) scale(1.3);
-            opacity: 0.3;
-          }
-          100% {
-            transform: translate(-50%, -50%) rotate(360deg) translateX(60px) scale(1);
-            opacity: 0.6;
-          }
-        }
-
-        @keyframes fadeOut {
-          0% {
-            opacity: 1;
-          }
-          60% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 0;
-          }
-        }
-
-        .animate-fadeOut {
-          animation: fadeOut 800ms ease-out forwards;
-        }
-      `}</style>
     </div>
   );
 }

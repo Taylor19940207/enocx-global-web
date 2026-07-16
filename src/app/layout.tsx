@@ -3,8 +3,6 @@ import { Noto_Sans_JP, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import PageMargins from "@/components/decorative/PageMargins";
-import PageTransition from "@/components/PageTransitionLoader";
 
 const notoJP = Noto_Sans_JP({
   variable: "--font-noto-jp",
@@ -55,10 +53,9 @@ export default function RootLayout({
   return (
     <html lang="ja" className={`${notoJP.variable} ${inter.variable} h-full`}>
       <body className="min-h-full flex flex-col bg-paper text-ink">
-        <PageMargins />
-        <PageTransition />
+        <a href="#main-content" className="skip-link">本文へ移動</a>
         <Header />
-        <main className="relative z-10 flex-1">{children}</main>
+        <main id="main-content" className="relative z-10 flex-1">{children}</main>
         <Footer />
       </body>
     </html>

@@ -1,8 +1,11 @@
 import Reveal from "./Reveal";
+import type { ReactNode } from "react";
 
 type Props = {
-  eyebrow: string;
-  title: string;
+  eyebrow?: string;
+  title: ReactNode;
+  /** Semantic wrap units: line breaks may only occur between units. */
+  titleUnits?: string[];
   lead?: string;
   align?: "left" | "center";
   invert?: boolean;
@@ -11,27 +14,36 @@ type Props = {
 export default function SectionHeading({
   eyebrow,
   title,
+  titleUnits,
   lead,
   align = "left",
   invert = false,
 }: Props) {
   return (
     <Reveal
-      className={`max-w-3xl ${align === "center" ? "mx-auto text-center" : ""}`}
+      className={`max-w-[46rem] ${align === "center" ? "mx-auto text-center" : ""}`}
     >
-      <p className={`eyebrow ${invert ? "text-mist" : "text-slate"}`}>
-        {eyebrow}
-      </p>
+      {eyebrow && (
+        <p className={`eyebrow ${invert ? "text-mist" : "text-slate"}`}>
+          {eyebrow}
+        </p>
+      )}
       <h2
-        className={`mt-6 text-[2rem] font-bold leading-[1.2] tracking-tight sm:text-4xl lg:text-[2.9rem] lg:leading-[1.15] ${
+        className={`${eyebrow ? "mt-5" : ""} max-w-[22ch] text-[clamp(1.9rem,3.8vw,2.65rem)] font-bold leading-[1.32] tracking-[-0.025em] [text-wrap:balance] ${
           invert ? "text-white" : "text-ink"
         }`}
       >
-        {title}
+        {titleUnits
+          ? titleUnits.map((unit) => (
+              <span key={unit} className="inline-block">
+                {unit}
+              </span>
+            ))
+          : title}
       </h2>
       {lead && (
         <p
-          className={`mt-6 text-base leading-[1.9] sm:text-[1.05rem] ${
+          className={`mt-6 max-w-[44rem] text-base leading-[1.85] [text-wrap:pretty] sm:text-[1.05rem] ${
             invert ? "text-white/70" : "text-slate-600"
           }`}
         >

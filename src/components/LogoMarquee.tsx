@@ -5,15 +5,15 @@ export default function LogoMarquee() {
   const loop = [...partnerLogos, ...partnerLogos];
   return (
     <div className="marquee-mask overflow-hidden">
-      <div className="marquee-track gap-24 py-6">
+      <div className="marquee-track gap-16 py-3 md:gap-20 md:py-4">
         {loop.map((logo, i) => (
-          <div key={i} className="flex w-48 shrink-0 items-center justify-center">
+          <div key={i} className="flex w-52 shrink-0 items-center justify-center md:w-60">
             <Image
               src={logo}
-              alt="Partner logo"
+              alt=""
               width={160}
               height={76}
-              className="h-14 w-auto object-contain opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0 md:h-16"
+              className="h-18 w-auto object-contain opacity-85 transition hover:opacity-100 md:h-20"
             />
           </div>
         ))}

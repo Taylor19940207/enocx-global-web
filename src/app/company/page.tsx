@@ -18,6 +18,8 @@ export default function CompanyPage() {
       <PageHero
         eyebrow="Company"
         title="アジアを結ぶ、グローバルビジネスハブ。"
+        mobileTitleLines={["アジアを結ぶ、", "グローバル", "ビジネスハブ。"]}
+        desktopTitleLines={["アジアを結ぶ、", "グローバルビジネスハブ。"]}
         lead="会計税務事務所を前身とし、東京・福岡・上海・北京・香港・シンガポールの6拠点で越境ビジネスを支援しています。"
         crumbs={[{ label: "Home", href: "/" }, { label: "会社概要" }]}
         image="/media/inside-bg.png"
@@ -25,7 +27,7 @@ export default function CompanyPage() {
 
       <section className="bg-paper py-24 lg:py-section">
         <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-16 px-6 md:px-10 lg:grid-cols-[0.8fr_1.2fr]">
-          <SectionHeading eyebrow="Profile" title="企業情報" />
+          <SectionHeading title="企業情報" />
           <Reveal>
             <dl className="divide-y divide-mist-line border-t border-mist-line">
               {company.rows.map((r) => (
@@ -43,13 +45,12 @@ export default function CompanyPage() {
       </section>
 
       <section className="bg-paper-2 py-24 lg:py-section">
-        <div className="mx-auto max-w-[1320px] px-6 md:px-10">
+        <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-16 px-6 md:px-10 lg:grid-cols-[0.68fr_1.32fr] lg:gap-24">
           <SectionHeading
-            eyebrow="History"
             title="沿革"
             lead="会計税務事務所から、グローバルビジネスハブへ。"
           />
-          <div className="relative mt-16 pl-1 md:pl-0">
+          <div className="relative pl-1 md:pl-0">
             {/* decorative vertical rail with gradient fade */}
             <span
               aria-hidden
@@ -71,13 +72,6 @@ export default function CompanyPage() {
                       isLast ? "bg-accent" : "bg-slate"
                     }`}
                   />
-                  {isLast && (
-                    <span
-                      aria-hidden
-                      className="absolute left-0 top-1.5 h-3 w-3 -translate-x-1/2 animate-ping rounded-full bg-accent/60 md:left-[8rem]"
-                    />
-                  )}
-
                   {/* year column */}
                   <div className="mb-2 pl-6 md:mb-0 md:pl-0 md:pr-10 md:text-right">
                     <span className="font-latin text-xl font-bold tracking-tight text-slate md:text-2xl">
@@ -107,27 +101,21 @@ export default function CompanyPage() {
       <section className="bg-paper py-24 lg:py-section">
         <div className="mx-auto max-w-[1320px] px-6 md:px-10">
           <SectionHeading
-            eyebrow="Global Presence"
             title="アジアをまたぐ6拠点体制。"
             lead="東京・福岡・上海・北京・香港・シンガポールを結び、越境案件をシームレスに支援します。"
           />
 
           <Reveal className="mt-14">
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-x-8 gap-y-3">
               {presenceCities.map((c) => (
-                <span
-                  key={c}
-                  className="font-latin rounded-full border border-mist-line bg-paper-2 px-5 py-2.5 text-sm font-medium text-ink"
-                >
-                  {c}
-                </span>
+                <span key={c} className="font-latin text-sm font-medium tracking-wide text-slate">{c}</span>
               ))}
             </div>
           </Reveal>
 
-          <div className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-mist-line bg-mist-line md:grid-cols-3">
-            {offices.map((o) => (
-              <Reveal key={o.address} as="article" className="bg-paper p-8">
+          <div className="mt-10 grid grid-cols-1 border-t border-mist-line md:grid-cols-3">
+            {offices.map((o, index) => (
+              <Reveal key={o.address} as="article" className={`border-b border-mist-line py-8 md:px-8 ${index > 0 ? "md:border-l" : "md:pl-0"}`}>
                 <p className="font-latin text-xs font-semibold uppercase tracking-widest text-slate">
                   {o.en}
                 </p>

@@ -1,9 +1,9 @@
-const puppeteer = require('puppeteer');
-const fs = require('fs');
-const path = require('path');
+import puppeteer from 'puppeteer';
+import fs from 'fs';
+import path from 'path';
 
 // 读取Markdown报告
-const mdContent = fs.readFileSync(path.join(__dirname, 'EnocX网站内容对比分析报告.md'), 'utf-8');
+const mdContent = fs.readFileSync(path.join(import.meta.dirname, 'EnocX网站内容对比分析报告.md'), 'utf-8');
 
 // 转换Markdown为HTML（简单版本）
 function mdToHtml(md) {
@@ -275,7 +275,7 @@ const htmlContent = `
   await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
 
   await page.pdf({
-    path: path.join(__dirname, 'EnocX网站内容对比分析报告.pdf'),
+    path: path.join(import.meta.dirname, 'EnocX网站内容对比分析报告.pdf'),
     format: 'A4',
     printBackground: true,
     margin: {

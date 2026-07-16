@@ -16,6 +16,8 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title="日本進出の第一歩を、まずは相談から。"
+        mobileTitleLines={["日本進出の", "第一歩を、", "まずは相談から。"]}
+        desktopTitleLines={["日本進出の第一歩を、", "まずは相談から。"]}
         lead="先行相談料はいただきません。日本語・中国語・英語のいずれでも、御社の状況に合わせてご相談いただけます。"
         crumbs={[{ label: "Home", href: "/" }, { label: "お問い合わせ" }]}
       />
@@ -28,7 +30,7 @@ export default function ContactPage() {
 
           <Reveal delay={120} className="space-y-10">
             <div>
-              <p className="eyebrow text-slate">Direct</p>
+              <p className="font-latin text-xs font-semibold uppercase tracking-[0.12em] text-slate">Direct</p>
               <a
                 href="mailto:info@enocx.co.jp"
                 className="mt-3 block text-lg font-bold text-ink transition hover:text-slate"
@@ -59,7 +61,7 @@ export default function ContactPage() {
             </div>
 
             <div className="border-t border-mist-line pt-8">
-              <p className="eyebrow text-slate">Global Presence</p>
+              <p className="font-latin text-xs font-semibold uppercase tracking-[0.12em] text-slate">Global Presence</p>
               <ul className="font-latin mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm text-ink">
                 {presenceCities.map((c) => (
                   <li key={c}>{c}</li>

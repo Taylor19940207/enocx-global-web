@@ -9,32 +9,34 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.2fr_1fr_1fr]">
           <div>
             <Image
-              src="/media/logo-b.svg"
+              src="/media/ft-logo.png"
               alt="EnocX"
-              width={140}
-              height={36}
-              className="h-9 w-auto"
+              width={1338}
+              height={374}
+              className="h-12 w-auto"
             />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-slate-600">
               中国・海外企業の日本市場進出を、法人設立から会計税務・法務・事業拡大まで一気通貫で支援する日中ビジネスハブ。
             </p>
           </div>
 
-          <nav className="flex flex-col gap-3">
-            <p className="eyebrow mb-1 text-slate">Menu</p>
-            {footerNav.map((n) => (
-              <Link
-                key={n.href}
-                href={n.href}
-                className="text-sm text-ink transition hover:text-slate"
-              >
-                {n.label}
-              </Link>
-            ))}
+          <nav>
+            <p className="font-latin mb-1 text-xs font-semibold uppercase tracking-[0.12em] text-slate">Menu</p>
+            <div className="mt-2 grid grid-cols-2 gap-x-6">
+              {footerNav.map((n) => (
+                <Link
+                  key={n.href}
+                  href={n.href}
+                  className="flex min-h-11 items-center text-sm text-ink transition hover:text-slate"
+                >
+                  {n.label}
+                </Link>
+              ))}
+            </div>
           </nav>
 
           <div className="flex flex-col gap-4">
-            <p className="eyebrow mb-1 text-slate">Global Presence</p>
+            <p className="font-latin mb-1 text-xs font-semibold uppercase tracking-[0.12em] text-slate">Global Presence</p>
             <ul className="font-latin flex flex-wrap gap-x-4 gap-y-2 text-sm text-ink">
               {presenceCities.map((c) => (
                 <li key={c}>{c}</li>
@@ -49,15 +51,10 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-mist-line pt-8 sm:flex-row sm:items-center">
+        <div className="mt-14 border-t border-mist-line pt-8">
           <p className="text-xs text-slate-600">
             © {new Date().getFullYear()} {site.nameJp}. All rights reserved.
           </p>
-          <div className="font-latin flex items-center gap-4 text-xs font-semibold tracking-wide text-slate">
-            <span>JP</span>
-            <span className="opacity-40">CN</span>
-            <span className="opacity-40">EN</span>
-          </div>
         </div>
       </div>
     </footer>

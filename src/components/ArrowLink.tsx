@@ -27,7 +27,7 @@ export default function ArrowLink({
   variant = "text",
   className = "",
 }: Props) {
-  const base = "link-arrow transition";
+  const base = `link-arrow transition ${variant === "text" ? "" : "pressable"}`;
   const styles = {
     text: "text-sm text-ink hover:text-slate",
     outline:
