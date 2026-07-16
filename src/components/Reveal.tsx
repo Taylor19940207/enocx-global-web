@@ -38,7 +38,7 @@ export default function Reveal({
   return (
     <Tag
       ref={ref}
-      className={`reveal ${visible ? "is-visible" : ""} ${className}`}
+      className={["reveal", visible ? "is-visible" : "", className].filter(Boolean).join(" ")}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
