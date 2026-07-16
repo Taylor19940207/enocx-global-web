@@ -18,7 +18,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-ink/60 to-transparent" />
       <div className="hero-route pointer-events-none absolute inset-y-0 right-0 hidden w-[46%] lg:block" aria-hidden>
         <svg viewBox="0 0 720 900" className="h-full w-full" fill="none" preserveAspectRatio="xMidYMid slice">
-          <path className="hero-route-corridor" d="M690 154C515 208 574 388 396 442C222 495 260 680 38 744" />
+          <path className="hero-route-corridor" pathLength={1} d="M690 154C515 208 574 388 396 442C222 495 260 680 38 744" />
           <path className="hero-route-line" d="M690 154C515 208 574 388 396 442C222 495 260 680 38 744" />
           <path className="hero-route-line hero-route-line-secondary" d="M742 238C565 270 620 470 436 514C274 552 286 714 90 802" />
           <circle className="hero-route-signal" r="4">

@@ -66,7 +66,7 @@ QA viewports: 390, 768, 1024, 1440, 1920 (+2560 when plausible). Hero: full view
 | Budget | Value |
 |--------|-------|
 | Site-level signature effects | 0 — coherence via composition; Hero route and Global Hub network are section-scoped content-semantic scenes, not the site theme |
-| Max distinct motion behaviors per page | 5 (reveal, count-up, marquee, one content-semantic scene animation, page transition) |
+| Max distinct motion behaviors per page | Shared behaviors: 5 (enter-stagger, reveal, count-up, selection feedback, page transition). Content-semantic scene animations: 2 (Hero route, Global Hub network — each may include a scene-scoped depth/draw treatment). Marquee: route-scoped (company/partners). No further behavior classes without a change note. |
 | Max decorative (non-content) elements per section | 1 |
 | Card usage whitelist | Form controls and genuinely bounded interactive states only |
 | Dominant visual minimum share | Hero media: full viewport at all widths; Global Hub network: ≥40% of section width at ≥1024px |
@@ -83,8 +83,8 @@ Numbers band (4 primary + 3 supporting, DATA-01) after Services; team credential
 ## 12. Effect Hierarchy
 
 - Site-level signature: none.
-- Shared vocabulary: reveal, hairline borders, accent active rails, eyebrow labels.
-- Content-semantic exceptions: Hero route (geographic movement), Global Hub network (geographic presence), Market Entry process lines, Cases timeline (real sequence).
+- Shared vocabulary: reveal, hairline borders, accent active rails (desktop selector rail slides between selections — selection-relationship feedback), eyebrow labels.
+- Content-semantic exceptions: Hero route (geographic movement; draws in once on load — the corridor forms, then flow begins), Global Hub network (geographic presence; pointer-driven depth on fine pointers), Market Entry process lines, Cases timeline (real sequence). Scene treatments stay inside their sections and degrade fully under reduced motion.
 - Explicit rejections: generic decorative arcs (VIS-03), card inflation (VIS-04), fake progress bars/decorative charts, tinted portraits, generic black CTA without brand context.
 
 ## 13. Persistent Cross-Section Device
@@ -114,3 +114,4 @@ None.
 ## Change Notes
 
 1. **2026-07-16 — Desktop section spacing 112px → 96px.** Evidence: rendered site uses 96px on every homepage section and passed prior visual review rounds; mobile 72px matches spec exactly. Owner decision 2026-07-16: rendered reality is canonical. `brand-spec.md` amended to match. Whole-page impact: none (documents existing appearance).
+2. **2026-07-16 — §9 motion budget taxonomy corrected; scene deepening approved.** The adoption freeze's "5 behaviors" list did not match the already-approved homepage inventory (two scenes, enter-stagger, selection feedback; no marquee on home). Budget rewritten as shared-5 + scenes-2. Owner-approved additions, each verified rendered with full reduced-motion degradation: Hero route draw-in on load (scene 1, progression), Global Hub pointer depth on fine pointers (scene 2, presence), sliding selection rail (deepens existing selection feedback; no new behavior class). Also fixed: SMIL route signals now hidden under reduced motion (pre-existing gap). Whole-page impact: motion remains section-scoped; no cross-section device introduced.

@@ -1,4 +1,5 @@
 import { advantages, presenceCities } from "@/lib/content";
+import NetworkParallax from "./NetworkParallax";
 import Reveal from "./Reveal";
 
 const cityPositions = [
@@ -32,6 +33,7 @@ export default function WhyEnocX() {
           </div>
 
           <Reveal delay={150}>
+            <NetworkParallax>
             <figure className="network-field relative mx-auto aspect-square w-full max-w-[650px]" aria-labelledby="network-caption">
               <div className="absolute inset-[15%] rounded-full border border-white/15" />
               <div className="absolute inset-[28%] rounded-full border border-white/10" />
@@ -63,6 +65,7 @@ export default function WhyEnocX() {
                 東京、福岡、上海、北京、香港、シンガポールを結ぶEnocXのアジアネットワーク
               </figcaption>
             </figure>
+            </NetworkParallax>
           </Reveal>
         </div>
 

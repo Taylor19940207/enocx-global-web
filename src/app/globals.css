@@ -199,12 +199,31 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .marquee-track,
+  .hero-route,
   .hero-route-line,
   .hero-route-node,
+  .hero-route-corridor,
+  .hero-route-signal,
+  .service-detail-enter,
   .network-orbit,
-  .network-pulse,
-  .service-detail-enter {
+  .network-pulse {
     animation: none !important;
+  }
+  /* !important: these base rules appear later in the file, and media queries add no specificity. */
+  .hero-route-corridor {
+    stroke-dasharray: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+  /* SMIL animateMotion ignores CSS animation rules; hide the moving signals instead. */
+  .hero-route-signal {
+    display: none;
+  }
+  .service-rail,
+  .network-parallax {
+    transition: none !important;
+  }
+  .network-parallax {
+    transform: none !important;
   }
 }
 .marquee-mask {
@@ -258,6 +277,7 @@ body {
   opacity: 0.72;
   -webkit-mask-image: linear-gradient(to left, #000 68%, transparent 100%);
   mask-image: linear-gradient(to left, #000 68%, transparent 100%);
+  animation: route-fade 600ms ease 260ms both;
 }
 
 .hero-route-line {
@@ -265,32 +285,65 @@ body {
   stroke-width: 1.5;
   stroke-dasharray: 5 11;
   opacity: 0.55;
-  animation: route-drift 16s linear infinite;
+  animation: route-fade 800ms ease 1250ms both, route-drift 16s linear infinite;
 }
 
 .hero-route-corridor {
   stroke: rgba(14, 143, 168, 0.08);
   stroke-width: 26;
   stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: route-draw 1500ms cubic-bezier(0.22, 1, 0.36, 1) 420ms forwards;
 }
 
 .hero-route-line-secondary {
   stroke: var(--color-mist);
   stroke-width: 0.8;
   opacity: 0.28;
-  animation-duration: 22s;
-  animation-direction: reverse;
+  animation: route-fade 800ms ease 1400ms both, route-drift 22s linear reverse infinite;
 }
 
 .hero-route-node {
   fill: var(--color-accent);
   filter: drop-shadow(0 0 10px rgba(14, 143, 168, 0.9));
-  animation: node-breathe 3.8s ease-in-out infinite;
+  animation: route-fade 700ms ease 1500ms both, node-breathe 3.8s ease-in-out infinite;
 }
 
 .hero-route-signal {
   fill: var(--color-mist);
   filter: drop-shadow(0 0 7px rgba(196, 224, 232, 0.9));
+  animation: route-fade 700ms ease 1700ms both;
+}
+
+@keyframes route-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes route-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Services: single accent rail slides between selected items. */
+.service-rail {
+  position: absolute;
+  left: 0;
+  width: 3px;
+  background: var(--color-accent);
+  transition:
+    top 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    height 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Global Hub: pointer-driven depth on the network scene (desktop pointers only; JS-gated). */
+.network-parallax {
+  transform: translate3d(calc(var(--px, 0) * 14px), calc(var(--py, 0) * 10px), 0);
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 
 .hero-route-signal-delayed {

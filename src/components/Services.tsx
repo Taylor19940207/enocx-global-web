@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { coreServices, extendedServices } from "@/lib/content";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
@@ -20,6 +20,19 @@ export default function Services({
   const [activeService, setActiveService] = useState(0);
   const [openMobile, setOpenMobile] = useState<number | null>(0);
   const active = coreServices[activeService];
+
+  const btnRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const [rail, setRail] = useState<{ top: number; height: number } | null>(null);
+
+  useLayoutEffect(() => {
+    const measure = () => {
+      const el = btnRefs.current[activeService];
+      if (el) setRail({ top: el.offsetTop, height: el.offsetHeight });
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [activeService]);
 
   return (
     <section id="services" className="relative bg-paper py-18 md:py-20 lg:py-24">
@@ -41,7 +54,8 @@ export default function Services({
         <div className={withHeading ? "mt-14 lg:mt-16" : ""}>
           <div className="hidden border-t border-mist-line lg:grid lg:grid-cols-12">
             <Reveal className="col-span-4 border-r border-mist-line pr-10">
-              <div className="sticky top-28">
+              <div className="relative sticky top-28">
+                {rail && <span aria-hidden className="service-rail" style={{ top: rail.top, height: rail.height }} />}
                 {coreServices.map((service, index) => {
                   const selected = activeService === index;
                   return (
@@ -49,12 +63,14 @@ export default function Services({
                       key={service.no}
                       type="button"
                       aria-pressed={selected}
+                      ref={(el) => {
+                        btnRefs.current[index] = el;
+                      }}
                       onClick={() => setActiveService(index)}
                       className={`group relative flex w-full items-center gap-5 border-b border-mist-line py-6 pl-6 pr-4 text-left transition-colors ${
                         selected ? "text-ink" : "text-slate hover:text-ink"
                       }`}
                     >
-                      <span className={`absolute inset-y-0 left-0 w-[3px] bg-accent transition-opacity ${selected ? "opacity-100" : "opacity-0"}`} />
                       <span className="font-latin w-8 text-xs font-semibold tracking-[0.16em] text-accent-600">
                         {service.no}
                       </span>
