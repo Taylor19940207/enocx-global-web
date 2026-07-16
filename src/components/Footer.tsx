@@ -11,8 +11,8 @@ export default function Footer() {
             <Image
               src="/media/ft-logo.png"
               alt="EnocX"
-              width={219}
-              height={107}
+              width={1338}
+              height={374}
               className="h-12 w-auto"
             />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-slate-600">

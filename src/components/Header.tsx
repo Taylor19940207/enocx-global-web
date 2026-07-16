@@ -45,8 +45,8 @@ export default function Header() {
           <Image
             src="/media/ft-logo.png"
             alt=""
-            width={219}
-            height={107}
+            width={1338}
+            height={374}
             aria-hidden
             className={`absolute left-0 top-1/2 h-10 w-auto -translate-y-1/2 transition-opacity duration-300 ${
               solid ? "opacity-100" : "opacity-0"
@@ -56,8 +56,8 @@ export default function Header() {
           <Image
             src="/media/top-logo.png"
             alt="EnocX"
-            width={219}
-            height={107}
+            width={1338}
+            height={374}
             className={`absolute left-0 top-1/2 h-10 w-auto -translate-y-1/2 transition-opacity duration-300 ${
               solid ? "opacity-0" : "opacity-100"
             }`}
