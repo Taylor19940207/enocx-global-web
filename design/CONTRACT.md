@@ -109,6 +109,7 @@ None. Coherence mechanism: shared editorial grid, alignment handoffs, informatio
 None.
 
 - **F1 — fixed 2026-07-16.** Hero title now carries semantic wrap units in `src/lib/content.ts` (line breaks only between units); mobile clamp floor 1.85rem. Rendered: 2 lines at 390/768/1440, no particle-initial break, no overflow. Evidence: DOM line counts + `fix_hero_390` capture.
+- **V1–V5 — fixed 2026-07-16** (rendered re-audit follow-up; see `design/fix-2026-07-16-visual-audit.md`): /cases/ PageHero line plan rewritten to semantic units within §9 budgets; display h2 wrap units added on cases/market-entry; small accent text on light fields moved to Accent deep; index numerals mist → accent (large-text AA); /company/ locations band de-tab-barred. No frozen value changed; no direction change.
 - **F3 — fixed 2026-07-16.** `#0b7488` registered as **Accent deep** in `brand-spec.md` tokens (contrast-adjusted accent for small text on light fields; already `--color-accent-600` in CSS). Numbers band field changed `bg-paper-2` → `bg-mist-soft`, fulfilling the storyboard's brand-supporting role; consecutive-neutral run resolved (only People remains intentionally neutral). Evidence: rendered bg `#eef5f7`, unit colors ink + accent-600, full-page 390/1440 captures.
 
 ## Change Notes

@@ -27,6 +27,7 @@ export default function MarketEntryPage() {
         <div className="mx-auto max-w-[1320px] px-6 md:px-10">
           <SectionHeading
             title="戦略設計から運営まで、4つのステップ。"
+            titleUnits={["戦略設計から", "運営まで、", "4つのステップ。"]}
             lead="各工程の判断を、日本の現地目線で伴走します。"
           />
 
@@ -39,7 +40,7 @@ export default function MarketEntryPage() {
                 className={`process-cell relative flex flex-col overflow-hidden border-b border-mist-line py-9 md:px-10 ${i % 2 ? "md:border-l" : "md:pl-0"}`}
               >
                 <div className="flex items-baseline gap-4">
-                  <span className="process-no font-latin text-4xl font-bold tracking-tight text-mist">
+                  <span className="process-no font-latin text-4xl font-bold tracking-tight text-accent">
                     {s.no}
                   </span>
                   <h3 className="text-2xl font-bold text-ink">{s.title}</h3>

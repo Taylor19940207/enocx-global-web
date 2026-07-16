@@ -4,6 +4,8 @@ import type { ReactNode } from "react";
 type Props = {
   eyebrow?: string;
   title: ReactNode;
+  /** Semantic wrap units: line breaks may only occur between units. */
+  titleUnits?: string[];
   lead?: string;
   align?: "left" | "center";
   invert?: boolean;
@@ -12,6 +14,7 @@ type Props = {
 export default function SectionHeading({
   eyebrow,
   title,
+  titleUnits,
   lead,
   align = "left",
   invert = false,
@@ -30,7 +33,13 @@ export default function SectionHeading({
           invert ? "text-white" : "text-ink"
         }`}
       >
-        {title}
+        {titleUnits
+          ? titleUnits.map((unit) => (
+              <span key={unit} className="inline-block">
+                {unit}
+              </span>
+            ))
+          : title}
       </h2>
       {lead && (
         <p

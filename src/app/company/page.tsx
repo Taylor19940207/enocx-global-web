@@ -105,15 +105,15 @@ export default function CompanyPage() {
             lead="東京・福岡・上海・北京・香港・シンガポールを結び、越境案件をシームレスに支援します。"
           />
 
-          <Reveal className="mt-14 border-y border-mist-line py-6">
-            <div className="grid grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-3 lg:grid-cols-6">
+          <Reveal className="mt-14">
+            <div className="flex flex-wrap gap-x-8 gap-y-3">
               {presenceCities.map((c) => (
-                <span key={c} className="font-latin text-sm font-medium tracking-wide text-ink">{c}</span>
+                <span key={c} className="font-latin text-sm font-medium tracking-wide text-slate">{c}</span>
               ))}
             </div>
           </Reveal>
 
-          <div className="mt-12 grid grid-cols-1 border-t border-mist-line md:grid-cols-3">
+          <div className="mt-10 grid grid-cols-1 border-t border-mist-line md:grid-cols-3">
             {offices.map((o, index) => (
               <Reveal key={o.address} as="article" className={`border-b border-mist-line py-8 md:px-8 ${index > 0 ? "md:border-l" : "md:pl-0"}`}>
                 <p className="font-latin text-xs font-semibold uppercase tracking-widest text-slate">

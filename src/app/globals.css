@@ -399,7 +399,7 @@ body {
 
 @media (hover: hover) {
   .process-cell:hover .process-no {
-    color: var(--color-accent);
+    color: var(--color-accent-600);
     transform: translateY(-3px);
   }
 }

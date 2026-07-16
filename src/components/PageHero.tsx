@@ -8,6 +8,10 @@ type Props = {
   title: string;
   mobileTitleLines?: string[];
   desktopTitleLines?: string[];
+  /** For titles whose planned lines exceed the default measure: widens the
+      desktop measure and lowers the mobile clamp floor so the per-breakpoint
+      line plans stay within the §9 line budget. */
+  longTitle?: boolean;
   lead?: string;
   crumbs?: Crumb[];
   image?: string;
@@ -18,6 +22,7 @@ export default function PageHero({
   title,
   mobileTitleLines,
   desktopTitleLines,
+  longTitle = false,
   lead,
   crumbs,
   image = "/media/inside-city.png",
@@ -50,7 +55,11 @@ export default function PageHero({
           </nav>
         )}
         <p className="page-hero-enter page-hero-enter-2 eyebrow text-mist">{eyebrow}</p>
-        <h1 className="page-hero-enter page-hero-enter-3 mt-5 max-w-[19ch] text-[clamp(2.35rem,5vw,3.75rem)] font-bold leading-[1.18] tracking-[-0.035em] text-white [text-wrap:balance] md:max-w-[14em]">
+        <h1 className={`page-hero-enter page-hero-enter-3 mt-5 max-w-[19ch] font-bold leading-[1.18] tracking-[-0.035em] text-white [text-wrap:balance] ${
+          longTitle
+            ? "text-[clamp(1.85rem,5vw,3.75rem)] md:max-w-none"
+            : "text-[clamp(2.35rem,5vw,3.75rem)] md:max-w-[14em]"
+        }`}>
           {mobileTitleLines || desktopTitleLines ? (
             <>
               {mobileTitleLines && <span className="md:hidden">

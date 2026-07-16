@@ -19,8 +19,9 @@ export default function CasesPage() {
       <PageHero
         eyebrow="Case Study"
         title={cs.title}
-        mobileTitleLines={["東京都心の", "オフィスビル取得を、", "ODI備案から", "権利登記まで。"]}
-        desktopTitleLines={["東京都心のオフィス", "ビル取得を、ODI備案", "から権利登記まで。"]}
+        mobileTitleLines={["東京都心のオフィスビル", "取得を、ODI備案から", "権利登記まで。"]}
+        desktopTitleLines={["東京都心のオフィスビル取得を、", "ODI備案から権利登記まで。"]}
+        longTitle
         lead={cs.lead}
         crumbs={[{ label: "Home", href: "/" }, { label: "支援事例" }]}
       />
@@ -81,6 +82,7 @@ export default function CasesPage() {
         <div className="mx-auto max-w-[1320px] px-6 md:px-10">
           <SectionHeading
             title="投資判断の前に、三つの課題があった。"
+            titleUnits={["投資判断の前に、", "三つの課題があった。"]}
             lead="いずれも、対日投資を検討する企業が繰り返し直面する論点です。"
           />
           <div className="mt-14 grid grid-cols-1 border-t border-mist-line md:grid-cols-3">
@@ -104,6 +106,7 @@ export default function CasesPage() {
         <div className="mx-auto max-w-[1320px] px-6 md:px-10">
           <SectionHeading
             title="稀少な物件を押さえ、期日を守り切る。"
+            titleUnits={["稀少な物件を押さえ、", "期日を守り切る。"]}
             lead="物件へのアクセスと、資金送金の確実性。この二点に絞って設計しました。"
           />
 
@@ -116,7 +119,7 @@ export default function CasesPage() {
                 className={`flex flex-col border-b border-mist-line py-8 lg:py-10 ${i > 0 ? "md:border-l md:pl-10" : "md:pr-10"}`}
               >
                 <div className="flex items-baseline gap-4">
-                  <span className="font-latin text-4xl font-bold tracking-tight text-mist">
+                  <span className="font-latin text-4xl font-bold tracking-tight text-accent">
                     {s.no}
                   </span>
                   <h3 className="text-2xl font-bold text-ink">{s.title}</h3>
@@ -146,6 +149,7 @@ export default function CasesPage() {
           <div className="lg:sticky lg:top-32 lg:self-start">
             <SectionHeading
               title="備案から権利登記まで、約9ヶ月。"
+              titleUnits={["備案から", "権利登記まで、", "約9ヶ月。"]}
               lead="各工程の期日を起点に逆算し、滞りなく次の手続きへつなぎました。"
             />
           </div>
@@ -155,7 +159,7 @@ export default function CasesPage() {
               {cs.timeline.map((t) => (
                 <li key={t.date} className="relative pb-12 last:pb-0">
                   <span className="absolute -left-[2.3rem] top-1.5 h-2.5 w-2.5 rounded-full bg-accent ring-4 ring-paper-2 md:-left-[3.3rem]" />
-                  <p className="font-latin text-sm font-semibold tracking-wide text-accent">
+                  <p className="font-latin text-sm font-semibold tracking-wide text-accent-600">
                     {t.date}
                   </p>
                   <h3 className="mt-2 text-xl font-bold text-ink">{t.title}</h3>
@@ -196,12 +200,13 @@ export default function CasesPage() {
         <div className="mx-auto max-w-[1320px] px-6 md:px-10">
           <SectionHeading
             title="この事例が、次の一社の参考になる。"
+            titleUnits={["この事例が、", "次の一社の参考になる。"]}
           />
           <Reveal className="mt-14">
             <ul className="space-y-6 border-t border-mist-line pt-10">
               {cs.highlights.map((h, i) => (
                 <li key={h} className="flex gap-6">
-                  <span className="font-latin shrink-0 text-sm font-bold text-accent">
+                  <span className="font-latin shrink-0 text-sm font-bold text-accent-600">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <p className="max-w-3xl text-base leading-[1.9] text-slate-600">
