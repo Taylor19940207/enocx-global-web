@@ -49,7 +49,7 @@ EnocX is a Japan-China cross-border professional services firm for business owne
 - Desktop gutter: 40px
 - Mobile gutter: 24px
 - Reading measure: 680-720px
-- Desktop section spacing: 112px
+- Desktop section spacing: 96px (amended 2026-07-16 to match the approved rendered site; see design/CONTRACT.md change note 1)
 - Mobile section spacing: 72px
 - Structural content uses square edges
 - Inputs use 8px radius
