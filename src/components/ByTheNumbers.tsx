@@ -16,7 +16,7 @@ const supportingMetrics = [
 
 export default function ByTheNumbers() {
   return (
-    <section id="numbers" className="border-y border-mist-line bg-paper-2 py-18 md:py-20 lg:py-24">
+    <section id="numbers" className="border-y border-mist-line bg-mist-soft py-18 md:py-20 lg:py-24">
       <div className="mx-auto max-w-[1320px] px-6 md:px-10">
         <Reveal className="max-w-[44rem]">
           <h2 className="max-w-[20ch] text-[clamp(1.9rem,3.8vw,2.65rem)] font-bold leading-[1.32] tracking-[-0.025em] text-ink [text-wrap:balance]">

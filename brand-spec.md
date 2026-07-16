@@ -29,6 +29,7 @@ EnocX is a Japan-China cross-border professional services firm for business owne
 - Ink: `#14181a`
 - Slate: `#58656b`
 - Accent: `#0e8fa8` (working teal derived from the supplied identity assets)
+- Accent deep: `#0b7488` (contrast-adjusted accent for small text on light fields; registered 2026-07-16, see design/CONTRACT.md)
 - Mist: `#c4e0e8`
 - Paper: `#ffffff`
 - Secondary paper: `#f7f9fa`

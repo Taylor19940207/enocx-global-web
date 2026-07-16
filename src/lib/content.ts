@@ -64,7 +64,8 @@ export const footerNav = [
 
 export const hero = {
   eyebrow: "Global Business Hub",
-  title: ["日本進出の意思決定を、", "専門家チームが伴走する。"],
+  // outer array = display lines; inner array = semantic wrap units (line breaks may only occur between units)
+  title: [["日本進出の意思決定を、"], ["専門家チームが", "伴走する。"]],
   lead: "法人設立から会計税務、法務、資産運用、事業拡大まで。日中の越境ビジネスを、一つの専門家チームが支援します。",
   primaryCta: { label: "無料で相談する", href: "/contact" },
   secondaryCta: { label: "サービスを見る", href: "/services" },

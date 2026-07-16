@@ -47,10 +47,14 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto flex min-h-[100dvh] max-w-[1320px] flex-col justify-center px-6 pb-12 pt-24 md:px-10">
         <p className="eyebrow hero-enter hero-enter-1 mb-6 text-mist">{hero.eyebrow}</p>
-        <h1 className="hero-enter hero-enter-2 max-w-[900px] text-[clamp(2.2rem,5vw,3.75rem)] font-bold leading-[1.24] tracking-[-0.035em] text-white [text-wrap:balance] sm:leading-[1.18] lg:leading-[1.14]">
+        <h1 className="hero-enter hero-enter-2 max-w-[900px] text-[clamp(1.85rem,5vw,3.75rem)] font-bold leading-[1.24] tracking-[-0.035em] text-white sm:leading-[1.18] lg:leading-[1.14]">
           {hero.title.map((line, i) => (
             <span key={i} className="block not-last:mb-[0.08em]">
-              {line}
+              {line.map((unit) => (
+                <span key={unit} className="inline-block">
+                  {unit}
+                </span>
+              ))}
             </span>
           ))}
         </h1>
