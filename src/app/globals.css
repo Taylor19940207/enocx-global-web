@@ -199,24 +199,36 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .marquee-track,
-  .hero-route,
-  .hero-route-line,
-  .hero-route-node,
-  .hero-route-corridor,
-  .hero-route-signal,
   .service-detail-enter,
   .network-orbit,
-  .network-pulse {
+  .network-pulse,
+  .hero-corridor-draw,
+  .hero-corridor-fade,
+  .hero-node-pop,
+  .hero-node-label,
+  .hero-comet,
+  .hero-glow-breathe,
+  .hero-future-sweep {
     animation: none !important;
   }
   /* !important: these base rules appear later in the file, and media queries add no specificity. */
-  .hero-route-corridor {
-    stroke-dasharray: none !important;
+  .hero-corridor-draw {
     stroke-dashoffset: 0 !important;
   }
-  /* SMIL animateMotion ignores CSS animation rules; hide the moving signals instead. */
-  .hero-route-signal {
-    display: none;
+  .hero-corridor-fade {
+    opacity: var(--hero-op, 1) !important;
+  }
+  .hero-node-pop,
+  .hero-node-label {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hero-pulse-ring,
+  .hero-comet {
+    display: none !important;
+  }
+  .hero-future-sweep {
+    opacity: 0.5 !important;
   }
   .service-rail,
   .network-parallax {
@@ -272,60 +284,157 @@ body {
   animation: service-detail-enter 300ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* Hero route: CIS-colored movement with real market labels. */
-.hero-route {
-  opacity: 0.72;
-  -webkit-mask-image: linear-gradient(to left, #000 68%, transparent 100%);
-  mask-image: linear-gradient(to left, #000 68%, transparent 100%);
-  animation: route-fade 600ms ease 260ms both;
+/* Hero corridor scene: hub-and-spoke routes to the six real offices, plus three
+   dashed "next markets" lines kept visually distinct from the current network. */
+.hero-scrim {
+  background:
+    linear-gradient(100deg, rgba(20, 24, 26, 0.88) 0%, rgba(20, 24, 26, 0.48) 38%, rgba(20, 24, 26, 0.04) 62%, transparent 74%),
+    linear-gradient(0deg, rgba(20, 24, 26, 0.3), transparent 34%, transparent 70%, rgba(20, 24, 26, 0.22));
 }
 
-.hero-route-line {
-  stroke: var(--color-accent);
-  stroke-width: 1.5;
-  stroke-dasharray: 5 11;
-  opacity: 0.55;
-  animation: route-fade 800ms ease 1250ms both, route-drift 16s linear infinite;
-}
-
-.hero-route-corridor {
-  stroke: rgba(14, 143, 168, 0.08);
-  stroke-width: 26;
-  stroke-linecap: round;
+.hero-corridor-draw {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  animation: route-draw 1500ms cubic-bezier(0.22, 1, 0.36, 1) 420ms forwards;
+  animation: hero-draw-in 1.7s cubic-bezier(0.65, 0, 0.35, 1) forwards;
 }
 
-.hero-route-line-secondary {
-  stroke: var(--color-mist);
-  stroke-width: 0.8;
-  opacity: 0.28;
-  animation: route-fade 800ms ease 1400ms both, route-drift 22s linear reverse infinite;
+.hero-corridor-fade {
+  opacity: 0;
+  animation: hero-fade-to 0.9s ease-out forwards;
 }
 
-.hero-route-node {
-  fill: var(--color-accent);
-  filter: drop-shadow(0 0 10px rgba(14, 143, 168, 0.9));
-  animation: route-fade 700ms ease 1500ms both, node-breathe 3.8s ease-in-out infinite;
+.hero-node-pop {
+  opacity: 0;
+  transform: scale(0.3);
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: hero-pop-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-.hero-route-signal {
-  fill: var(--color-mist);
-  filter: drop-shadow(0 0 7px rgba(196, 224, 232, 0.9));
-  animation: route-fade 700ms ease 1700ms both;
+.hero-pulse-ring {
+  opacity: 0;
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: hero-pulse-ring 2.8s ease-out infinite;
 }
 
-@keyframes route-fade {
-  from {
-    opacity: 0;
-  }
+.hero-comet {
+  animation: hero-comet-travel 3.2s cubic-bezier(0.45, 0, 0.55, 1) 2s infinite;
 }
 
-@keyframes route-draw {
-  to {
-    stroke-dashoffset: 0;
-  }
+.hero-glow-breathe {
+  animation: hero-glow-breathe 8s ease-in-out infinite;
+}
+
+.hero-future-sweep {
+  opacity: 0;
+  animation: hero-future-sweep 6s ease-in-out infinite;
+}
+
+@keyframes hero-draw-in {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes hero-fade-to {
+  to { opacity: var(--hero-op, 1); }
+}
+@keyframes hero-pop-in {
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes hero-pulse-ring {
+  0% { transform: scale(0.6); opacity: 0.95; }
+  100% { transform: scale(3.2); opacity: 0; }
+}
+@keyframes hero-comet-travel {
+  0% { offset-distance: 0%; opacity: 0; }
+  6% { opacity: 1; }
+  92% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+@keyframes hero-glow-breathe {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 0.85; }
+}
+@keyframes hero-future-sweep {
+  0% { opacity: 0; }
+  6% { opacity: 1; }
+  24% { opacity: 1; }
+  34% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.hero-node-label {
+  position: absolute;
+  z-index: 3;
+  font-family: var(--font-latin), "Inter", system-ui, sans-serif;
+  white-space: nowrap;
+  line-height: 1;
+  opacity: 0;
+  animation: hero-fade-in 0.8s ease-out forwards;
+}
+@keyframes hero-fade-in {
+  to { opacity: 1; }
+}
+.hero-node-city {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-mist);
+  font-weight: 500;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75), 0 0 12px rgba(0, 0, 0, 0.5);
+  transition: color 250ms ease;
+}
+.hero-node-label-primary .hero-node-city {
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+.hero-node-coord {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-accent);
+  margin-top: 3px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+}
+.hero-node-label-secondary .hero-node-city {
+  color: var(--color-mist-soft);
+  font-weight: 500;
+}
+.hero-node-label-hub .hero-node-city {
+  font-size: 0.8rem;
+  color: #fff;
+  font-weight: 600;
+}
+.hero-node-label-hub {
+  text-align: center;
+}
+.hero-node-label-secondary {
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  padding: 3px 2px;
+  margin: -3px -2px;
+  border-radius: 3px;
+}
+.hero-node-coord-reveal {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  margin-top: 0;
+  transition: max-height 350ms ease, opacity 300ms ease, margin-top 350ms ease;
+}
+.hero-node-label-secondary:hover .hero-node-city,
+.hero-node-label-secondary:focus-visible .hero-node-city {
+  color: #fff;
+}
+.hero-node-label-secondary:hover .hero-node-coord-reveal,
+.hero-node-label-secondary:focus-visible .hero-node-coord-reveal {
+  max-height: 20px;
+  opacity: 0.95;
+  margin-top: 3px;
+}
+.hero-node-label-secondary:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-accent);
 }
 
 /* Services: single accent rail slides between selected items. */
@@ -344,10 +453,6 @@ body {
   transform: translate3d(calc(var(--px, 0) * 14px), calc(var(--py, 0) * 10px), 0);
   transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
-}
-
-.hero-route-signal-delayed {
-  fill: var(--color-accent);
 }
 
 .hero-enter {
@@ -421,21 +526,8 @@ body {
   transform: scaleY(1);
 }
 
-.hero-route-label {
-  position: absolute;
-  font-family: var(--font-latin), "Inter", system-ui, sans-serif;
-  font-size: 0.55rem;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  color: rgba(255, 255, 255, 0.56);
-}
-
 @keyframes route-drift {
   to { stroke-dashoffset: -160; }
-}
-
-@keyframes node-breathe {
-  50% { opacity: 0.42; }
 }
 
 /* EnocX global presence visual. */
@@ -546,9 +638,6 @@ body {
   .service-detail-enter,
   .hero-enter,
   .page-hero-enter,
-  .hero-route-line,
-  .hero-route-node,
-  .hero-route-signal,
   .network-orbit,
   .network-pulse,
   .network-field::after,
@@ -557,7 +646,6 @@ body {
   .network-city-dot,
   .page-transition-sweep { animation: none; }
   .hero-enter { opacity: 1; transform: none; }
-  .hero-route-signal { display: none; }
   .page-hero-enter { opacity: 1; transform: none; }
   .process-cell::before,
   .timeline-flow::before { transform: scale(1); transition: none; }

@@ -22,6 +22,16 @@ export const presenceCities = [
   "Singapore",
 ];
 
+// Approximate city-center coordinates, used for the hero corridor's coordinate labels.
+export const presenceCoordinates: Record<(typeof presenceCities)[number], string> = {
+  Tokyo: "35.6762° N, 139.6503° E",
+  Fukuoka: "33.5904° N, 130.4017° E",
+  Shanghai: "31.2304° N, 121.4737° E",
+  Beijing: "39.9042° N, 116.4074° E",
+  "Hong Kong": "22.3193° N, 114.1694° E",
+  Singapore: "1.3521° N, 103.8198° E",
+};
+
 export const offices = [
   {
     city: "東京",
