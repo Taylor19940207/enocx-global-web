@@ -1,7 +1,7 @@
 # EnocX Requirement Traceability Matrix
 
 Status: Frontend implementation matrix  
-Updated: 2026-07-16
+Updated: 2026-07-23
 
 ## Status vocabulary
 
@@ -40,6 +40,7 @@ Updated: 2026-07-16
 | LANG-01 | Current interface language is Japanese | Current project implementation | P2 | Japanese routes and labels remain | External input | Do not invent additional language routes | Routing and Header | Route inventory |
 | A11Y-01 | Meet focus, contrast, touch, and reduced-motion presentation requirements | Workflow | P0 | Frontend states and fallbacks implemented | Rendered pass | Recheck affected components after changes | Shared interactions | QA matrix |
 | QA-01 | Cover route x viewport x state x region | Updated workflow and prior QA failure | P0 | Homepage six-width matrix and internal route mobile/desktop regression completed | Rendered pass | Keep evidence section-specific | All changed surfaces | `docs/qa-coverage-matrix.md` |
+| MOTION-01 | Prototype a continuous scroll-linked handoff from Hero through Services into Numbers | Project-owner instruction, 2026-07-23 | P0 | Hero route hands off into a pinned four-service progression and staggered Numbers reveal; mobile keeps the accordion with a lighter route treatment; reduced-motion CSS removes pinning and transforms | Implemented | Preserve brand/content/IA and keep the effect limited to this homepage sequence until owner review | Hero, Services, ByTheNumbers, Homepage | In-app browser review at 390×844 and 1440×900; zero horizontal overflow and no runtime warnings; reduced-motion source audit; lint and production build pass |
 
 ## Current design acceptance status
 

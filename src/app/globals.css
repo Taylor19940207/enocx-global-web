@@ -286,6 +286,49 @@ body {
 
 /* Hero corridor scene: hub-and-spoke routes to the six real offices, plus three
    dashed "next markets" lines kept visually distinct from the current network. */
+.hero-scroll-stage {
+  height: 140svh;
+}
+
+.hero-scroll-sticky {
+  height: 100svh;
+}
+
+.hero-copy,
+.hero-scene,
+.hero-mobile-route {
+  will-change: transform, opacity;
+}
+
+.hero-handoff-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+}
+
+.hero-handoff-node {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.hero-mobile-route {
+  opacity: 0.48;
+  transform-origin: 58% 44%;
+}
+
+.hero-mobile-route-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: hero-draw-in 1.8s cubic-bezier(0.65, 0, 0.35, 1) 180ms forwards;
+}
+
+@media (min-width: 1024px) {
+  .hero-scroll-stage {
+    height: 165svh;
+  }
+}
+
 .hero-scrim {
   background:
     linear-gradient(100deg, rgba(20, 24, 26, 0.88) 0%, rgba(20, 24, 26, 0.48) 38%, rgba(20, 24, 26, 0.04) 62%, transparent 74%),
@@ -438,6 +481,14 @@ body {
 }
 
 /* Services: single accent rail slides between selected items. */
+.service-scroll-stage {
+  height: 270svh;
+}
+
+.service-scroll-sticky {
+  perspective: 1100px;
+}
+
 .service-rail {
   position: absolute;
   left: 0;
@@ -446,6 +497,34 @@ body {
   transition:
     top 420ms cubic-bezier(0.22, 1, 0.36, 1),
     height 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* The Hero route becomes a horizontal structural line as the data band arrives. */
+.numbers-scroll-section::before {
+  content: "";
+  position: absolute;
+  inset: -5rem 0 auto;
+  height: 5.1rem;
+  background: var(--color-mist-soft);
+  clip-path: polygon(0 100%, 0 68%, 42% 18%, 100% 52%, 100% 100%);
+  pointer-events: none;
+}
+
+.numbers-route-entry {
+  position: absolute;
+  z-index: 2;
+  left: max(1.5rem, calc((100vw - 1320px) / 2 + 2.5rem));
+  right: max(1.5rem, calc((100vw - 1320px) / 2 + 2.5rem));
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-mist), transparent 88%);
+  box-shadow: 0 0 18px rgba(14, 143, 168, 0.2);
+  transform-origin: left;
+}
+
+[data-metric-cell] {
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
 }
 
 /* Global Hub: pointer-driven depth on the network scene (desktop pointers only; JS-gated). */
@@ -649,4 +728,25 @@ body {
   .page-hero-enter { opacity: 1; transform: none; }
   .process-cell::before,
   .timeline-flow::before { transform: scale(1); transition: none; }
+  .hero-scroll-stage { height: 100svh; }
+  .hero-copy,
+  .hero-scene,
+  .hero-mobile-route,
+  [data-metric-cell] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hero-handoff-path,
+  .hero-handoff-node {
+    opacity: 0.72 !important;
+    stroke-dashoffset: 0 !important;
+    transform: none !important;
+  }
+  .service-scroll-stage { height: auto; }
+  .service-scroll-sticky {
+    position: relative;
+    top: auto;
+    min-height: auto;
+  }
+  .numbers-route-entry { transform: none !important; }
 }

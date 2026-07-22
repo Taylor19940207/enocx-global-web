@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-type Props = {
+type Props = Omit<React.HTMLAttributes<HTMLElement>, "children"> & {
   children: React.ReactNode;
   className?: string;
   delay?: number;
@@ -14,6 +14,8 @@ export default function Reveal({
   className = "",
   delay = 0,
   as = "div",
+  style,
+  ...htmlProps
 }: Props) {
   const ref = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
@@ -37,9 +39,10 @@ export default function Reveal({
   const Tag = as as React.ElementType;
   return (
     <Tag
+      {...htmlProps}
       ref={ref}
       className={["reveal", visible ? "is-visible" : "", className].filter(Boolean).join(" ")}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ ...style, transitionDelay: `${delay}ms` }}
     >
       {children}
     </Tag>

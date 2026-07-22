@@ -7,7 +7,7 @@ import CTA from "@/components/CTA";
 
 export default function Home() {
   return (
-    <div className="home-page overflow-hidden bg-paper">
+    <div className="home-page overflow-x-clip bg-paper">
       <Hero />
       <Services showExtended={false} moreHref="/services" />
       <ByTheNumbers />

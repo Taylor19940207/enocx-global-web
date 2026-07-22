@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { hero, presenceCoordinates } from "@/lib/content";
 import HeroCorridorScene from "./HeroCorridorScene";
+import HeroScrollDirector from "./HeroScrollDirector";
 
 // Positions a label at fixed viewBox coordinates so it tracks its SVG dot exactly, no
 // matter how the section's actual aspect ratio crops the "slice"-fit corridor scene.
@@ -36,7 +37,9 @@ const futureMarkets = [
 
 export default function Hero() {
   return (
-    <section id="top" className="relative min-h-svh w-full overflow-hidden bg-ink">
+    <section id="top" className="hero-scroll-stage relative w-full bg-ink">
+      <HeroScrollDirector />
+      <div id="hero-viewport" className="hero-scroll-sticky sticky top-0 min-h-svh w-full overflow-hidden bg-ink">
       <HeroCorridorScene className="absolute inset-0 hidden lg:block">
         <svg
           className="h-full w-full"
@@ -131,6 +134,16 @@ export default function Hero() {
             />
           ))}
 
+          <path
+            className="hero-handoff-path"
+            pathLength={1}
+            d="M1238 194C1110 390 660 650 40 810"
+            stroke="url(#heroLineGrad)"
+            strokeWidth={2.2}
+            strokeLinecap="round"
+          />
+          <circle className="hero-handoff-node" cx="40" cy="810" r="5" fill="#eef5f7" />
+
           <g>
             <circle className="hero-node-pop" style={{ animationDelay: "1.3s" }} cx={72} cy={648} r={6} fill="#0e8fa8" />
             {spokes.map((s, i) => (
@@ -171,13 +184,35 @@ export default function Hero() {
           so it is hidden there and this gradient keeps the section reading as "the hub". */}
       <div className="absolute inset-0 bg-gradient-to-b from-ink via-[#0d1416] to-ink lg:hidden" />
 
+      <svg
+        className="hero-mobile-route absolute inset-0 h-full w-full lg:hidden"
+        viewBox="0 0 390 844"
+        preserveAspectRatio="xMidYMid slice"
+        fill="none"
+        aria-hidden
+      >
+        <defs>
+          <linearGradient id="heroMobileRouteGradient" x1="362" y1="92" x2="24" y2="844" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#c4e0e8" stopOpacity="0.12" />
+            <stop offset="0.48" stopColor="#0e8fa8" stopOpacity="0.58" />
+            <stop offset="1" stopColor="#eef5f7" stopOpacity="0.8" />
+          </linearGradient>
+        </defs>
+        <path className="hero-mobile-route-soft" d="M362 92C306 182 302 288 241 367C178 449 87 499 24 626" stroke="#0e8fa8" strokeOpacity="0.18" strokeWidth="18" />
+        <path className="hero-mobile-route-line" pathLength={1} d="M362 92C306 182 302 288 241 367C178 449 87 499 24 626V844" stroke="url(#heroMobileRouteGradient)" strokeWidth="1.6" />
+        <path d="M362 92C302 118 241 124 189 168" stroke="#c4e0e8" strokeOpacity="0.2" strokeWidth="1" strokeDasharray="2 8" />
+        <circle cx="362" cy="92" r="4" fill="#c4e0e8" fillOpacity="0.7" />
+        <circle cx="241" cy="367" r="4" fill="#0e8fa8" />
+        <circle className="hero-handoff-node" cx="24" cy="841" r="5" fill="#eef5f7" />
+      </svg>
+
       <div className="absolute inset-0 bg-gradient-to-b from-ink/0 via-ink/10 to-ink/55 lg:hidden" />
       <div
         className="hero-scrim absolute inset-0 hidden lg:block"
         aria-hidden
       />
 
-      <div className="relative z-10 mx-auto flex min-h-[100dvh] max-w-[1320px] flex-col justify-center px-6 pb-12 pt-24 md:px-10">
+      <div className="hero-copy relative z-10 mx-auto flex min-h-[100dvh] max-w-[1320px] flex-col justify-center px-6 pb-12 pt-24 md:px-10">
         <p className="eyebrow hero-enter hero-enter-1 mb-6 text-mist">{hero.eyebrow}</p>
         <h1 className="hero-enter hero-enter-2 max-w-[900px] text-[clamp(1.85rem,5vw,3.75rem)] font-bold leading-[1.24] tracking-[-0.035em] text-white sm:leading-[1.18] lg:leading-[1.14]">
           {hero.title.map((line, i) => (
@@ -211,6 +246,7 @@ export default function Hero() {
             {hero.secondaryCta.label}
           </Link>
         </div>
+      </div>
       </div>
     </section>
   );

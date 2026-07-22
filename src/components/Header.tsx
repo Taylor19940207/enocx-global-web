@@ -15,7 +15,7 @@ export default function Header() {
 
   useEffect(() => {
     if (!isHome) return;
-    const hero = document.getElementById("top");
+    const hero = document.getElementById("hero-viewport") ?? document.getElementById("top");
     if (!hero) return;
     const observer = new IntersectionObserver(
       ([entry]) => setScrolled(!entry.isIntersecting || entry.intersectionRatio < 0.99),
