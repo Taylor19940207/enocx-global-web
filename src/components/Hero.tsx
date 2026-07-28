@@ -53,6 +53,24 @@ export default function Hero() {
               <stop offset="50%" stopColor="#7dd3e8" />
               <stop offset="100%" stopColor="#3fb8d4" />
             </linearGradient>
+            <linearGradient id="heroQuarterSphereFill" x1="80" y1="450" x2="1260" y2="450" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="#0e8fa8" stopOpacity="0.018" />
+              <stop offset="54%" stopColor="#0e8fa8" stopOpacity="0.045" />
+              <stop offset="82%" stopColor="#0e8fa8" stopOpacity="0.12" />
+              <stop offset="100%" stopColor="#5fb9cc" stopOpacity="0.21" />
+            </linearGradient>
+            <linearGradient id="heroQuarterSphereEdge" x1="40" y1="420" x2="1320" y2="420" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="#0e8fa8" stopOpacity="0.035" />
+              <stop offset="48%" stopColor="#0e8fa8" stopOpacity="0.12" />
+              <stop offset="78%" stopColor="#5fb9cc" stopOpacity="0.34" />
+              <stop offset="91%" stopColor="#c4e0e8" stopOpacity="0.82" />
+              <stop offset="100%" stopColor="#5fb9cc" stopOpacity="0.42" />
+            </linearGradient>
+            <radialGradient id="heroQuarterSphereSheen" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1238 194) rotate(142) scale(625 505)">
+              <stop offset="0%" stopColor="#c4e0e8" stopOpacity="0.14" />
+              <stop offset="34%" stopColor="#5fb9cc" stopOpacity="0.06" />
+              <stop offset="100%" stopColor="#0e8fa8" stopOpacity="0" />
+            </radialGradient>
             <radialGradient id="heroGlowMain" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stopColor="#0e8fa8" stopOpacity="0.5" />
               <stop offset="100%" stopColor="#0e8fa8" stopOpacity="0" />
@@ -85,6 +103,13 @@ export default function Hero() {
             <pattern id="heroGrainPattern" width="140" height="140" patternUnits="userSpaceOnUse">
               <rect width="140" height="140" filter="url(#heroGrainFilter)" />
             </pattern>
+            <clipPath id="heroQuarterSphereClip">
+              <circle cx="630" cy="858" r="900" />
+            </clipPath>
+            <mask id="heroQuarterSphereOutsideMask">
+              <rect x="0" y="0" width="1440" height="810" fill="white" />
+              <circle cx="630" cy="858" r="900" fill="black" />
+            </mask>
             <path id="heroCorridor" d="M72 648Q710 610 1238 194" />
           </defs>
 
@@ -94,6 +119,28 @@ export default function Hero() {
           <ellipse cx="1370" cy="752" rx="480" ry="440" fill="url(#heroGlowDeep)" />
           <ellipse cx="420" cy="139" rx="420" ry="278" fill="url(#heroGlowSoft2)" opacity="0.7" />
           <rect x="0" y="0" width="1440" height="810" fill="url(#heroGrainPattern)" opacity="0.4" />
+          <rect
+            x="0"
+            y="0"
+            width="1440"
+            height="810"
+            fill="#070c0e"
+            opacity="0.24"
+            mask="url(#heroQuarterSphereOutsideMask)"
+          />
+
+          {/* The sphere sits mostly below the viewport. Tokyo touches its upper-right
+              edge while every office and route remains on the visible surface. */}
+          <g className="hero-quarter-sphere">
+            <g clipPath="url(#heroQuarterSphereClip)">
+              <circle cx="630" cy="858" r="900" fill="url(#heroQuarterSphereFill)" />
+              <circle cx="630" cy="858" r="900" fill="url(#heroQuarterSphereSheen)" />
+              <ellipse className="hero-quarter-sphere-contour" cx="630" cy="858" rx="900" ry="460" />
+              <ellipse className="hero-quarter-sphere-contour" cx="630" cy="858" rx="428" ry="900" />
+            </g>
+            <circle className="hero-quarter-sphere-halo" cx="630" cy="858" r="900" stroke="url(#heroQuarterSphereEdge)" />
+            <circle className="hero-quarter-sphere-edge" cx="630" cy="858" r="900" stroke="url(#heroQuarterSphereEdge)" />
+          </g>
 
           {spokes.map((s, i) => (
             <g key={s.city}>
