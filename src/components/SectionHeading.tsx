@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import { cn } from "@/lib/cn";
 import type { ReactNode } from "react";
 
 type Props = {
@@ -21,17 +22,19 @@ export default function SectionHeading({
 }: Props) {
   return (
     <Reveal
-      className={`max-w-[46rem] ${align === "center" ? "mx-auto text-center" : ""}`}
+      className={cn("max-w-[46rem]", align === "center" && "mx-auto text-center")}
     >
       {eyebrow && (
-        <p className={`eyebrow ${invert ? "text-mist" : "text-slate"}`}>
+        <p className={cn("eyebrow", invert ? "text-mist" : "text-slate")}>
           {eyebrow}
         </p>
       )}
       <h2
-        className={`${eyebrow ? "mt-5" : ""} max-w-[22ch] text-[clamp(1.9rem,3.8vw,2.65rem)] font-bold leading-[1.32] tracking-[-0.025em] [text-wrap:balance] ${
+        className={cn(
+          eyebrow && "mt-5",
+          "max-w-[22ch] text-[clamp(1.9rem,3.8vw,2.65rem)] font-bold leading-[1.32] tracking-[-0.025em] [text-wrap:balance]",
           invert ? "text-white" : "text-ink"
-        }`}
+        )}
       >
         {titleUnits
           ? titleUnits.map((unit) => (
@@ -43,9 +46,10 @@ export default function SectionHeading({
       </h2>
       {lead && (
         <p
-          className={`mt-6 max-w-[44rem] text-base leading-[1.85] [text-wrap:pretty] sm:text-[1.05rem] ${
+          className={cn(
+            "mt-6 max-w-[44rem] text-base leading-[1.85] [text-wrap:pretty] sm:text-[1.05rem]",
             invert ? "text-white/70" : "text-slate-600"
-          }`}
+          )}
         >
           {lead}
         </p>

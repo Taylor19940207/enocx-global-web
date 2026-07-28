@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/cn";
 
 type Props = Omit<React.HTMLAttributes<HTMLElement>, "children"> & {
   children: React.ReactNode;
@@ -41,7 +42,7 @@ export default function Reveal({
     <Tag
       {...htmlProps}
       ref={ref}
-      className={["reveal", visible ? "is-visible" : "", className].filter(Boolean).join(" ")}
+      className={cn("reveal", visible && "is-visible", className)}
       style={{ ...style, transitionDelay: `${delay}ms` }}
     >
       {children}
