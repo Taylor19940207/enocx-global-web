@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { cn } from "@/lib/cn";
 
 function Arrow() {
   return (
@@ -27,7 +28,6 @@ export default function ArrowLink({
   variant = "text",
   className = "",
 }: Props) {
-  const base = `link-arrow transition ${variant === "text" ? "" : "pressable"}`;
   const styles = {
     text: "text-sm text-ink hover:text-slate",
     outline:
@@ -39,7 +39,15 @@ export default function ArrowLink({
   }[variant];
 
   return (
-    <Link href={href} className={`${base} ${styles} ${className}`}>
+    <Link
+      href={href}
+      className={cn(
+        "link-arrow transition",
+        variant !== "text" && "pressable",
+        styles,
+        className
+      )}
+    >
       {children}
       <Arrow />
     </Link>

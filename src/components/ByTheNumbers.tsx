@@ -1,5 +1,6 @@
 import CountUp from "./CountUp";
 import Reveal from "./Reveal";
+import NumbersScrollDirector from "./NumbersScrollDirector";
 
 const primaryMetrics = [
   { end: 500, suffix: "+", unit: "件", label: "日本法人の設立ケース" },
@@ -16,7 +17,9 @@ const supportingMetrics = [
 
 export default function ByTheNumbers() {
   return (
-    <section id="numbers" className="border-y border-mist-line bg-mist-soft py-18 md:py-20 lg:py-24">
+    <section id="numbers" className="numbers-scroll-section relative border-y border-mist-line bg-mist-soft py-18 md:py-20 lg:py-24">
+      <NumbersScrollDirector />
+      <span className="numbers-route-entry" aria-hidden />
       <div className="mx-auto max-w-[1320px] px-6 md:px-10">
         <Reveal className="max-w-[44rem]">
           <h2 className="max-w-[20ch] text-[clamp(1.9rem,3.8vw,2.65rem)] font-bold leading-[1.32] tracking-[-0.025em] text-ink [text-wrap:balance]">
@@ -33,6 +36,7 @@ export default function ByTheNumbers() {
               key={metric.label}
               delay={index * 45}
               as="div"
+              data-metric-cell="primary"
               className={`relative border-b border-mist-line py-8 sm:px-7 lg:py-10 ${index % 2 ? "sm:border-l" : ""} ${index > 0 ? "lg:border-l" : "lg:border-l-0"}`}
             >
               <dt className="flex min-w-0 items-baseline gap-1 text-ink">
@@ -51,6 +55,7 @@ export default function ByTheNumbers() {
               key={metric.label}
               delay={index * 45}
               as="div"
+              data-metric-cell="supporting"
               className={`relative border-b border-mist-line py-7 sm:px-7 ${index > 0 ? "sm:border-l" : ""}`}
             >
               <dt className="flex items-baseline gap-2">

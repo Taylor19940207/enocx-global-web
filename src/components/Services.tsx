@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { coreServices, extendedServices } from "@/lib/content";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
@@ -22,6 +22,7 @@ export default function Services({
   const active = coreServices[activeService];
 
   const btnRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const scrollStageRef = useRef<HTMLDivElement>(null);
   const [rail, setRail] = useState<{ top: number; height: number } | null>(null);
 
   useLayoutEffect(() => {
@@ -34,8 +35,53 @@ export default function Services({
     return () => window.removeEventListener("resize", measure);
   }, [activeService]);
 
+  useEffect(() => {
+    const stage = scrollStageRef.current;
+    if (!stage) return;
+
+    let cleanup: (() => void) | undefined;
+    let cancelled = false;
+
+    void (async () => {
+      const [{ gsap }, { ScrollTrigger }] = await Promise.all([
+        import("gsap"),
+        import("gsap/ScrollTrigger"),
+      ]);
+      if (cancelled) return;
+
+      gsap.registerPlugin(ScrollTrigger);
+      const media = gsap.matchMedia();
+      media.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
+        let lastIndex = -1;
+        const progressTrigger = ScrollTrigger.create({
+          trigger: stage,
+          start: "top top+=72",
+          end: "bottom bottom",
+          onUpdate: (self) => {
+            const nextIndex = Math.min(coreServices.length - 1, Math.floor(self.progress * coreServices.length));
+            if (nextIndex !== lastIndex) {
+              lastIndex = nextIndex;
+              setActiveService(nextIndex);
+            }
+          },
+        });
+
+        return () => {
+          progressTrigger.kill();
+        };
+      });
+
+      cleanup = () => media.revert();
+    })();
+
+    return () => {
+      cancelled = true;
+      cleanup?.();
+    };
+  }, []);
+
   return (
-    <section id="services" className="relative bg-paper py-18 md:py-20 lg:py-24">
+    <section id="services" className="services-scroll-section relative bg-paper py-18 md:py-20 lg:py-24">
       <div className="mx-auto max-w-[1320px] px-6 md:px-10">
         {withHeading && (
           <SectionHeading
@@ -52,9 +98,11 @@ export default function Services({
         )}
 
         <div className={withHeading ? "mt-14 lg:mt-16" : ""}>
-          <div className="hidden border-t border-mist-line lg:grid lg:grid-cols-12">
+          <div ref={scrollStageRef} className="service-scroll-stage hidden lg:block">
+            <div className="service-scroll-sticky sticky top-[72px] flex min-h-[calc(100svh-72px)] items-center py-10">
+              <div className="grid w-full grid-cols-12 border-t border-mist-line">
             <Reveal className="col-span-4 border-r border-mist-line pr-10">
-              <div className="relative sticky top-28">
+              <div className="relative">
                 {rail && <span aria-hidden className="service-rail" style={{ top: rail.top, height: rail.height }} />}
                 {coreServices.map((service, index) => {
                   const selected = activeService === index;
@@ -83,10 +131,8 @@ export default function Services({
 
             <Reveal delay={120} className="col-span-8 pl-12 xl:pl-16">
               <div key={active.no} className="service-detail-enter py-12 lg:py-16">
-                <div>
-                  <span className="font-latin text-xs font-semibold tracking-[0.2em] text-accent-600">{active.no}</span>
-                  <h3 className="mt-4 text-3xl font-bold text-ink lg:text-4xl">{active.title}</h3>
-                </div>
+                <span className="font-latin text-xs font-semibold tracking-[0.2em] text-accent-600">{active.no}</span>
+                <h3 className="mt-4 text-3xl font-bold text-ink lg:text-4xl">{active.title}</h3>
                 <p className="mt-8 max-w-2xl text-lg leading-[1.9] text-slate-600">{active.summary}</p>
 
                 <div className="mt-12 border-t border-mist-line">
@@ -102,6 +148,8 @@ export default function Services({
                 </div>
               </div>
             </Reveal>
+              </div>
+            </div>
           </div>
 
           <div className="border-t border-mist-line lg:hidden">

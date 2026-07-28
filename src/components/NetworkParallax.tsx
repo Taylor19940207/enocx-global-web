@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { cn } from "@/lib/cn";
 
 type Props = {
   children: React.ReactNode;
@@ -42,7 +43,7 @@ export default function NetworkParallax({ children, className = "" }: Props) {
   }, []);
 
   return (
-    <div ref={ref} className={`network-parallax ${className}`}>
+    <div ref={ref} className={cn("network-parallax", className)}>
       {children}
     </div>
   );
