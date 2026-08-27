@@ -1,7 +1,7 @@
 # EnocX Requirement Traceability Matrix
 
 Status: Frontend implementation matrix  
-Updated: 2026-07-23
+Updated: 2026-08-27
 
 ## Status vocabulary
 
@@ -33,7 +33,8 @@ Updated: 2026-07-23
 | ADV-01 | Present four core advantages | Supplied content | P1 | Implemented inside Global Hub | Rendered pass | Preserve relationship to network scene | WhyEnocX | Section screenshots |
 | TRUST-01 | Homepage trust/proof placement | Earlier design review | P1 | Proof and compact Hero stats are paused; full Numbers remains | Deferred | Do not change until project owner resumes this decision | Homepage | Deferred by explicit instruction |
 | DATA-01 | Preserve complete supplied outcome figures | Supplied project content | P0 | Full ByTheNumbers band restored between Services and People | Rendered pass | Keep four primary and three supporting metrics | ByTheNumbers, Homepage | Six viewport families, no overflow |
-| CASE-01 | Preserve supplied case route and improve long-form readability | Supplied project content | P0 | Case route remains; long timeline uses desktop split/sticky layout | Rendered pass | Preserve content and responsive sequence | Cases route | 390/1440 section review |
+| CASE-01 | Preserve supplied case content and improve long-form readability | Supplied project content | P0 | Case content preserved verbatim at `/cases/chemical-tokyo-office`; long timeline uses desktop split/sticky layout | Rendered pass | Preserve content and responsive sequence | Cases detail route | 390/1440 section review; rendered string audit |
+| CASE-02 | Hold an unbounded number of cases without duplicating the route | Client-supplied additional cases, owner instruction 2026-08-27 | P0 | `/cases` index lists cases as open editorial rows; `/cases/[slug]` renders one case per file with optional beats | Rendered pass | No cards (§9 whitelist); every case ships its own §9 line plan; anonymity per case | Cases index and detail routes | 390/768/1024/1440/1920 line-budget and overflow check; CONTRACT change note 4 |
 | PEOPLE-01 | Preserve supplied team roster and photos | Supplied project content | P0 | Full roster remains; missing portrait uses branded profile field | Rendered pass | Support variable biography length | People component and route | 390/1440 image and text review |
 | COMPANY-01 | Preserve supplied company, office, history, partner, and client information | Supplied project content | P0 | All surfaces remain; history uses balanced editorial split | Rendered pass | Keep partner content after identity/history/presence | Company, Footer, Contact | Route and section review |
 | BRAND-01 | Present promise, worldview, philosophy, and value | Supplied brand material | P1 | Implemented on About | Rendered pass | Maintain editorial hierarchy | About route | Middle/lower section screenshots |

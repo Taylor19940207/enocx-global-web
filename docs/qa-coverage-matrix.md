@@ -97,3 +97,20 @@ The homepage design geometry gate passed after:
 10. Trailing-slash routes were verified to expose the correct current-page state in desktop and mobile navigation.
 11. The motion pass was rendered at 390, 768, 1440, and 1920; natural mobile scroll order was repeated to verify all seven metrics settle at their supplied values, and the only clipping scan hit was the intentional screen-reader-only Global Hub caption.
 12. A proposed cross-section route was rejected after review because it promoted a Hero-specific geographic motif into the whole-site theme without client evidence. The page returned to compositional coherence through grid, hierarchy, brand allocation, and section rhythm.
+
+## Cases routes — index and detail (2026-08-27)
+
+Measured on the built static export (`out/`) in Chrome at DPR 1, reveals forced visible.
+
+| Check | 390 | 768 | 1024 | 1440 | 1920 | Evidence |
+|---|---:|---:|---:|---:|---:|---|
+| `/cases` h1 within §9 line budget | P (3) | P (2) | P (2) | P (2) | P (2) | Rendered line count of the visible title spans; no particle-initial line (実 / ど / 公) |
+| `/cases` horizontal overflow | P | P | P | P | P | `scrollWidth - clientWidth = 0` |
+| `/cases/[slug]` h1 within §9 line budget | P (3) | P (2) | P (2) | P (2) | P (2) | No particle-initial line (東 / 取 / 権) |
+| `/cases/[slug]` horizontal overflow | P | P | P | P | P | `scrollWidth - clientWidth = 0` |
+| Index row title wrapping | P | P | P | P | P | Row titles carry the case line plan as wrap units after a first pass broke a line on `を、` |
+| Detail section alternation | — | — | — | P | — | ink → paper → paper-2 → paper → paper-2 → paper → mist (highlights) → mist (CTA), matching the pre-split page |
+| Case content preserved | — | — | — | P | — | All 32 body strings in the case data present in the rendered page; the two absent strings are `<head>` metadata |
+| `npm run lint` / `npm run build` | P | | | | | 13 static pages, `/cases/[slug]` prerendered via `generateStaticParams` |
+
+Reusable checks: `scripts/qa-case-routes.mjs` (line budget, overflow, section surfaces) and `scripts/qa-case-content.mjs` (string completeness). Both expect the built export served on `localhost:4321`.
