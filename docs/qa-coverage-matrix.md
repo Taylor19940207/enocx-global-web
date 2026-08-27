@@ -113,4 +113,10 @@ Measured on the built static export (`out/`) in Chrome at DPR 1, reveals forced 
 | Case content preserved | — | — | — | P | — | All 32 body strings in the case data present in the rendered page; the two absent strings are `<head>` metadata |
 | `npm run lint` / `npm run build` | P | | | | | 13 static pages, `/cases/[slug]` prerendered via `generateStaticParams` |
 
+### 2026-08-27 — four further cases added
+
+Dreame Technology Japan (company formation), FJD Japan (licensing), Sigenergy Japan and Ulanzi Japan (HR & tax) added as named cases; The Loneliest and 宝蒂 excluded by owner decision. All five cases plus the index re-checked at 390/768/1024/1440/1920 — 30 cells, all pass: h1 within the §9 line budget with no particle-initial line, index row titles likewise, zero horizontal overflow. String completeness passes for all five cases (32 / 37 / 33 / 49 / 40 strings).
+
+First rendered instances of the new cardinality layouts: 4-item challenges as 2x2 (Dreame), 3-item solutions as 2+1 (Dreame), 2-item metric band (FJD), 2-item challenges (Sigenergy), 4-node timeline (Sigenergy), and timeline entries whose label is a phase rather than a date (Dreame).
+
 Reusable checks: `scripts/qa-case-routes.mjs` (line budget, overflow, section surfaces) and `scripts/qa-case-content.mjs` (string completeness). Both expect the built export served on `localhost:4321`.

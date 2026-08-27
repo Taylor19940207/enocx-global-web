@@ -1,5 +1,9 @@
 import type { CaseStudy } from "./types";
 import chemicalTokyoOffice from "./chemical-tokyo-office";
+import dreameJapanEntry from "./dreame-japan-entry";
+import fjdMetiNotification from "./fjd-meti-notification";
+import sigenergyHrTax from "./sigenergy-hr-tax";
+import ulanziPayrollWithholding from "./ulanzi-payroll-withholding";
 
 /**
  * One file per case. Add the import here and the route, the index listing and
@@ -7,7 +11,13 @@ import chemicalTokyoOffice from "./chemical-tokyo-office";
  *
  * Order is publication order: the list renders top to bottom as written.
  */
-export const caseStudies: CaseStudy[] = [chemicalTokyoOffice];
+export const caseStudies: CaseStudy[] = [
+  chemicalTokyoOffice,
+  dreameJapanEntry,
+  fjdMetiNotification,
+  sigenergyHrTax,
+  ulanziPayrollWithholding,
+];
 
 export const caseSlugs = caseStudies.map((c) => c.slug);
 
