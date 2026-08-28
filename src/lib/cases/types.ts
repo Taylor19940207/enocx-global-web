@@ -15,7 +15,7 @@
 export const caseCategories = {
   "real-estate-odi": { eyebrow: "Real Estate / ODI", label: "不動産・ODI" },
   "company-formation": { eyebrow: "Company Formation", label: "会社設立・進出" },
-  licensing: { eyebrow: "Licensing / Compliance", label: "許認可・法規備案" },
+  licensing: { eyebrow: "Licensing / Compliance", label: "許認可・法令対応" },
   "hr-tax": { eyebrow: "HR & Tax", label: "人事・税務" },
   "tax-filing": { eyebrow: "Tax Filing", label: "税務申告" },
 } as const;

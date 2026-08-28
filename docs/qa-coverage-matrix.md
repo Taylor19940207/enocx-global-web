@@ -133,3 +133,29 @@ Owner review found the five entries reading as one block and no way back to the 
 | Navigation band with no previous case | — | — | — | P | — | Chemical case: index link stays centred, next occupies the right column |
 | Line budgets and overflow, all routes | P | P | P | P | P | 30 cells, all pass |
 
+### 2026-08-28 — owner's Japanese revision, and a checker that was measuring the wrong thing
+
+The project owner revised the Japanese across all five cases for terminological
+precision — 所得税徴収高計算書の提出 rather than 申告 for withholding tax, 雇用保険 rather
+than 労働保険 for employee deductions, 商業登記, 輸入事業届出, 標準報酬月額の決定通知書,
+納期の特例, 所有権移転登記. Three of these corrected substantive errors, not wording.
+
+The longer titles pushed three cases past the §9 heading budget, and the check
+did not catch it: it counted wrap-unit spans, so a planned line that was itself
+too long for the column and wrapped a second time still counted as one. The
+check now walks the rendered text and groups characters by their top edge, so
+it counts the lines a reader sees; it also rejects a line opening on a small
+kana or closing punctuation, not just a particle.
+
+| Check | 390 | 768 | 1024 | 1440 | 1920 | Evidence |
+|---|---:|---:|---:|---:|---:|---|
+| h1 true line count within §9 | P | P | P | P | P | 30 cells; chemical was 4/3 at 390 and 3/2 at 1024 before the fix |
+| No line opens on particle, small kana or closing punctuation | P | P | P | P | P | Chemical broke `オフ / ィスビル` at 390 before the fix |
+| Row and navigation titles | P | P | P | P | P | Same measurement applied to listing rows and the case navigation |
+| Horizontal overflow | P | P | P | P | P | `scrollWidth - clientWidth = 0` |
+
+Fixes: `longTitle` set on the FJD and Ulanzi cases, whose revised titles had
+outgrown the default measure; the chemical title dropped `中国での` (the lead
+states 中国における対外直接投資（ODI）の届出・認可手続き immediately below) and its line
+plan was re-cut so no unit exceeds one line — the desktop plan holds two units
+of at most 18 characters, which is what 1024px fits.
