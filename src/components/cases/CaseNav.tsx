@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { CaseStudy } from "@/lib/cases";
+import { caseCategories, caseStudies, type CaseStudy } from "@/lib/cases";
 
 function Arrow({ direction }: { direction: "prev" | "next" }) {
   return (
@@ -19,7 +19,23 @@ function Arrow({ direction }: { direction: "prev" | "next" }) {
  * End-of-case navigation. Reaching the index previously meant the breadcrumb at
  * the very top of the page or the browser's back button; this also tells a
  * reader who finished one case that there are others.
+ *
+ * The neighbours are identified by position and category rather than by title:
+ * case titles are full sentences, and two of them set three lines deep at each
+ * end left the band reading as a wall of small bold text.
  */
+
+function Neighbour({ caseStudy }: { caseStudy: CaseStudy }) {
+  const position = caseStudies.findIndex((c) => c.slug === caseStudy.slug);
+  return (
+    <span className="mt-2 flex items-baseline gap-3 text-sm font-bold leading-[1.6] text-ink transition-colors group-hover:text-accent-600">
+      <span className="font-latin text-accent-600">
+        {String(position + 1).padStart(2, "0")}
+      </span>
+      {caseCategories[caseStudy.category].label}
+    </span>
+  );
+}
 export default function CaseNav({
   prev,
   next,
@@ -37,13 +53,7 @@ export default function CaseNav({
                 <Arrow direction="prev" />
                 前の事例
               </span>
-              <span className="mt-2 block max-w-[26ch] text-sm font-bold leading-[1.6] text-ink transition-colors group-hover:text-accent-600">
-                {prev.titleLines.mobile.map((unit) => (
-                  <span key={unit} className="inline-block">
-                    {unit}
-                  </span>
-                ))}
-              </span>
+              <Neighbour caseStudy={prev} />
             </Link>
           )}
         </div>
@@ -64,12 +74,8 @@ export default function CaseNav({
                 <Arrow direction="next" />
                 次の事例
               </span>
-              <span className="mt-2 block max-w-[26ch] text-sm font-bold leading-[1.6] text-ink transition-colors group-hover:text-accent-600 md:ml-auto">
-                {next.titleLines.mobile.map((unit) => (
-                  <span key={unit} className="inline-block">
-                    {unit}
-                  </span>
-                ))}
+              <span className="md:flex md:justify-end">
+                <Neighbour caseStudy={next} />
               </span>
             </Link>
           )}

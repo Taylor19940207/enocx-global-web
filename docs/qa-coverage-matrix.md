@@ -129,7 +129,7 @@ Owner review found the five entries reading as one block and no way back to the 
 |---|---:|---:|---:|---:|---:|---|
 | Listing: one horizontal rule per case | — | — | — | P | — | Only the row separator remains; metric rows are spaced, not ruled |
 | Listing: ordinals 01-05 present | — | — | — | P | — | Rendered listing capture |
-| Navigation band titles wrap on plan | P | P | P | P | P | Line starts asserted in `scripts/qa-case-routes.mjs`; first pass broke `を、` and was fixed |
+| Navigation band neighbour labels stay on one line | P | P | P | P | P | Neighbours identified by ordinal + category after full titles set three lines deep at each end; line starts still asserted in `scripts/qa-case-routes.mjs` |
 | Navigation band with no previous case | — | — | — | P | — | Chemical case: index link stays centred, next occupies the right column |
 | Line budgets and overflow, all routes | P | P | P | P | P | 30 cells, all pass |
 
