@@ -129,6 +129,11 @@ body {
 .link-arrow:hover svg {
   transform: translateX(0.35rem);
 }
+/* Same affordance, mirrored: a back-pointing arrow nudges backwards. */
+.link-arrow-back:hover svg,
+.group:hover .link-arrow-back svg {
+  transform: translateX(-0.35rem);
+}
 
 .pressable {
   transition-property: color, background-color, border-color, opacity, transform;
@@ -149,7 +154,17 @@ body {
   will-change: opacity, transform;
 }
 
-.home-page :where(h1, h2, h3, p, li, a, button) {
+/*
+  Japanese line-breaking, site-wide. `strict` is what stops a small kana
+  (ぁぃゃゅょ / ァィャュョ) from opening a line — Chrome already refuses to
+  start one on 、。）」 under the default, so that is the whole practical
+  difference. Set on `body` because all three inherit: the earlier rule listed
+  elements and was scoped to the homepage, which left every other route on the
+  default and missed `dt`/`dd` entirely.
+  `overflow-wrap` is unrelated to 禁則 — it lets an unbreakable run (a long
+  Latin word, a URL) wrap instead of overflowing the column.
+*/
+body {
   line-break: strict;
   overflow-wrap: break-word;
   word-break: normal;

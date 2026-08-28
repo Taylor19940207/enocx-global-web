@@ -88,13 +88,27 @@ Brand role: supporting through active navigation and service indices. Verify eve
 
 Brand role: supporting through numbered process structure and restrained CIS accents.
 
-### `/cases`
+### `/cases` (index)
 
-1. Page Hero: result framing.
-2. Client profile and transaction metrics.
-3. Challenges and two-part response.
-4. Nine-month timeline.
-5. Results, reusable highlights, and CTA.
+1. Page Hero: what the route publishes and on what basis.
+2. Case list: one open editorial row per case — ordinal marker, eyebrow (category), title, lead, and up to three metrics. Rows, not cards. The rule between two cases is the only horizontal rule in the section, so each entry reads as one block.
+3. CTA.
+
+Brand role: restrained and evidence-led. The row composition is the same editorial split used elsewhere; coherence comes from the shared rule work, not from a new device.
+
+### `/cases/[slug]` (detail template)
+
+1. Page Hero: result framing, with the category as eyebrow.
+2. Client designation, publication basis, profile rows and the metric band.
+3. Challenges.
+4. Response.
+5. Timeline.
+6. Results.
+7. Reusable highlights.
+8. Case navigation: previous case, index, next case.
+9. CTA.
+
+Beats 2-6 are **skippable**: cases arrive at different depths, and a beat with no content is omitted rather than rendered empty. The paper / paper-2 alternation runs over the beats a case actually carries, so a short case still alternates correctly. Highlights always close on the mist field before the CTA.
 
 Brand role: evidence-led and restrained. The long timeline uses a sticky editorial split on desktop and a single rail on mobile.
 

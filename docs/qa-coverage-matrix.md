@@ -97,3 +97,65 @@ The homepage design geometry gate passed after:
 10. Trailing-slash routes were verified to expose the correct current-page state in desktop and mobile navigation.
 11. The motion pass was rendered at 390, 768, 1440, and 1920; natural mobile scroll order was repeated to verify all seven metrics settle at their supplied values, and the only clipping scan hit was the intentional screen-reader-only Global Hub caption.
 12. A proposed cross-section route was rejected after review because it promoted a Hero-specific geographic motif into the whole-site theme without client evidence. The page returned to compositional coherence through grid, hierarchy, brand allocation, and section rhythm.
+
+## Cases routes — index and detail (2026-08-27)
+
+Measured on the built static export (`out/`) in Chrome at DPR 1, reveals forced visible.
+
+| Check | 390 | 768 | 1024 | 1440 | 1920 | Evidence |
+|---|---:|---:|---:|---:|---:|---|
+| `/cases` h1 within §9 line budget | P (3) | P (2) | P (2) | P (2) | P (2) | Rendered line count of the visible title spans; no particle-initial line (実 / ど / 公) |
+| `/cases` horizontal overflow | P | P | P | P | P | `scrollWidth - clientWidth = 0` |
+| `/cases/[slug]` h1 within §9 line budget | P (3) | P (2) | P (2) | P (2) | P (2) | No particle-initial line (東 / 取 / 権) |
+| `/cases/[slug]` horizontal overflow | P | P | P | P | P | `scrollWidth - clientWidth = 0` |
+| Index row title wrapping | P | P | P | P | P | Row titles carry the case line plan as wrap units after a first pass broke a line on `を、` |
+| Detail section alternation | — | — | — | P | — | ink → paper → paper-2 → paper → paper-2 → paper → mist (highlights) → mist (CTA), matching the pre-split page |
+| Case content preserved | — | — | — | P | — | All 32 body strings in the case data present in the rendered page; the two absent strings are `<head>` metadata |
+| `npm run lint` / `npm run build` | P | | | | | 13 static pages, `/cases/[slug]` prerendered via `generateStaticParams` |
+
+### 2026-08-27 — four further cases added
+
+Dreame Technology Japan (company formation), FJD Japan (licensing), Sigenergy Japan and Ulanzi Japan (HR & tax) added as named cases; The Loneliest and 宝蒂 excluded by owner decision. All five cases plus the index re-checked at 390/768/1024/1440/1920 — 30 cells, all pass: h1 within the §9 line budget with no particle-initial line, index row titles likewise, zero horizontal overflow. String completeness passes for all five cases (32 / 37 / 33 / 49 / 40 strings).
+
+First rendered instances of the new cardinality layouts: 4-item challenges as 2x2 (Dreame), 3-item solutions as 2+1 (Dreame), 2-item metric band (FJD), 2-item challenges (Sigenergy), 4-node timeline (Sigenergy), and timeline entries whose label is a phase rather than a date (Dreame).
+
+Reusable checks: `scripts/qa-case-routes.mjs` (line budget, overflow, section surfaces) and `scripts/qa-case-content.mjs` (string completeness). Both expect the built export served on `localhost:4321`.
+
+### 2026-08-28 — listing legibility and case navigation
+
+Owner review found the five entries reading as one block and no way back to the index short of the browser's back button. Listing rows now carry an ordinal and the metric column's rules are gone; each case ends with a previous / index / next band.
+
+| Check | 390 | 768 | 1024 | 1440 | 1920 | Evidence |
+|---|---:|---:|---:|---:|---:|---|
+| Listing: one horizontal rule per case | — | — | — | P | — | Only the row separator remains; metric rows are spaced, not ruled |
+| Listing: ordinals 01-05 present | — | — | — | P | — | Rendered listing capture |
+| Navigation band neighbour labels stay on one line | P | P | P | P | P | Neighbours identified by ordinal + category after full titles set three lines deep at each end; line starts still asserted in `scripts/qa-case-routes.mjs` |
+| Navigation band with no previous case | — | — | — | P | — | Chemical case: index link stays centred, next occupies the right column |
+| Line budgets and overflow, all routes | P | P | P | P | P | 30 cells, all pass |
+
+### 2026-08-28 — owner's Japanese revision, and a checker that was measuring the wrong thing
+
+The project owner revised the Japanese across all five cases for terminological
+precision — 所得税徴収高計算書の提出 rather than 申告 for withholding tax, 雇用保険 rather
+than 労働保険 for employee deductions, 商業登記, 輸入事業届出, 標準報酬月額の決定通知書,
+納期の特例, 所有権移転登記. Three of these corrected substantive errors, not wording.
+
+The longer titles pushed three cases past the §9 heading budget, and the check
+did not catch it: it counted wrap-unit spans, so a planned line that was itself
+too long for the column and wrapped a second time still counted as one. The
+check now walks the rendered text and groups characters by their top edge, so
+it counts the lines a reader sees; it also rejects a line opening on a small
+kana or closing punctuation, not just a particle.
+
+| Check | 390 | 768 | 1024 | 1440 | 1920 | Evidence |
+|---|---:|---:|---:|---:|---:|---|
+| h1 true line count within §9 | P | P | P | P | P | 30 cells; chemical was 4/3 at 390 and 3/2 at 1024 before the fix |
+| No line opens on particle, small kana or closing punctuation | P | P | P | P | P | Chemical broke `オフ / ィスビル` at 390 before the fix |
+| Row and navigation titles | P | P | P | P | P | Same measurement applied to listing rows and the case navigation |
+| Horizontal overflow | P | P | P | P | P | `scrollWidth - clientWidth = 0` |
+
+Fixes: `longTitle` set on the FJD and Ulanzi cases, whose revised titles had
+outgrown the default measure; the chemical title dropped `中国での` (the lead
+states 中国における対外直接投資（ODI）の届出・認可手続き immediately below) and its line
+plan was re-cut so no unit exceeds one line — the desktop plan holds two units
+of at most 18 characters, which is what 1024px fits.
