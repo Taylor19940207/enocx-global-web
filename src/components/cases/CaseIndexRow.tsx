@@ -25,7 +25,10 @@ export default function CaseIndexRow({
       <Link href={`/cases/${caseStudy.slug}`} className="group block py-14 lg:py-18">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <div className="flex items-baseline gap-4">
+            {/* Centre-aligned, not baseline: `.eyebrow` is an inline-flex whose
+                first child is its 1px rule, so its baseline is that rule's
+                bottom edge and the ordinal rides high against it. */}
+            <div className="flex items-center gap-4">
               <span className="font-latin text-lg font-bold leading-none tracking-[-0.02em] text-accent-600">
                 {String(index + 1).padStart(2, "0")}
               </span>
