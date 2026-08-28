@@ -120,3 +120,16 @@ Dreame Technology Japan (company formation), FJD Japan (licensing), Sigenergy Ja
 First rendered instances of the new cardinality layouts: 4-item challenges as 2x2 (Dreame), 3-item solutions as 2+1 (Dreame), 2-item metric band (FJD), 2-item challenges (Sigenergy), 4-node timeline (Sigenergy), and timeline entries whose label is a phase rather than a date (Dreame).
 
 Reusable checks: `scripts/qa-case-routes.mjs` (line budget, overflow, section surfaces) and `scripts/qa-case-content.mjs` (string completeness). Both expect the built export served on `localhost:4321`.
+
+### 2026-08-28 — listing legibility and case navigation
+
+Owner review found the five entries reading as one block and no way back to the index short of the browser's back button. Listing rows now carry an ordinal and the metric column's rules are gone; each case ends with a previous / index / next band.
+
+| Check | 390 | 768 | 1024 | 1440 | 1920 | Evidence |
+|---|---:|---:|---:|---:|---:|---|
+| Listing: one horizontal rule per case | — | — | — | P | — | Only the row separator remains; metric rows are spaced, not ruled |
+| Listing: ordinals 01-05 present | — | — | — | P | — | Rendered listing capture |
+| Navigation band titles wrap on plan | P | P | P | P | P | Line starts asserted in `scripts/qa-case-routes.mjs`; first pass broke `を、` and was fixed |
+| Navigation band with no previous case | — | — | — | P | — | Chemical case: index link stays centred, next occupies the right column |
+| Line budgets and overflow, all routes | P | P | P | P | P | 30 cells, all pass |
+

@@ -129,6 +129,11 @@ body {
 .link-arrow:hover svg {
   transform: translateX(0.35rem);
 }
+/* Same affordance, mirrored: a back-pointing arrow nudges backwards. */
+.link-arrow-back:hover svg,
+.group:hover .link-arrow-back svg {
+  transform: translateX(-0.35rem);
+}
 
 .pressable {
   transition-property: color, background-color, border-color, opacity, transform;

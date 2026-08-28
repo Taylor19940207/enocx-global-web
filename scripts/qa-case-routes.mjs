@@ -41,9 +41,14 @@ for (const p of paths) {
       };
       const h1 = document.querySelector("h1");
       const rows = [...document.querySelectorAll("ul > li h2")].map(lineStarts);
+      // End-of-case navigation carries case titles too.
+      const navTitles = [
+        ...document.querySelectorAll("nav[aria-label] a > span:last-child"),
+      ].map(lineStarts);
       return {
         h1Lines: lineStarts(h1),
         rows,
+        navTitles,
         overflow:
           document.documentElement.scrollWidth - document.documentElement.clientWidth,
       };
@@ -57,12 +62,15 @@ for (const p of paths) {
     if (m.h1Lines.some((c) => PARTICLES.has(c))) bad.push(`h1 particle-initial: ${m.h1Lines.join("|")}`);
     for (const [i, starts] of m.rows.entries())
       if (starts.some((c) => PARTICLES.has(c))) bad.push(`row ${i} particle-initial: ${starts.join("|")}`);
+    for (const [i, starts] of m.navTitles.entries())
+      if (starts.some((c) => PARTICLES.has(c)))
+        bad.push(`nav ${i} particle-initial: ${starts.join("|")}`);
     if (m.overflow !== 0) bad.push(`overflowX=${m.overflow}`);
     if (bad.length) failures++;
 
     console.log(
       `${bad.length ? "FAIL" : "ok  "} ${p.padEnd(34)} ${String(width).padStart(4)}  ` +
-        `h1=${m.h1Lines.length}(${m.h1Lines.join("|")})  rows=${m.rows.length}  ovf=${m.overflow}` +
+        `h1=${m.h1Lines.length}(${m.h1Lines.join("|")})  rows=${m.rows.length}  nav=${m.navTitles.length}  ovf=${m.overflow}` +
         (bad.length ? `\n       ${bad.join("; ")}` : "")
     );
   }

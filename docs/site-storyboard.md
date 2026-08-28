@@ -91,7 +91,7 @@ Brand role: supporting through numbered process structure and restrained CIS acc
 ### `/cases` (index)
 
 1. Page Hero: what the route publishes and on what basis.
-2. Case list: one open editorial row per case — eyebrow (category), title, lead, and up to three metrics behind a hairline rule. Rows, not cards.
+2. Case list: one open editorial row per case — ordinal marker, eyebrow (category), title, lead, and up to three metrics. Rows, not cards. The rule between two cases is the only horizontal rule in the section, so each entry reads as one block.
 3. CTA.
 
 Brand role: restrained and evidence-led. The row composition is the same editorial split used elsewhere; coherence comes from the shared rule work, not from a new device.
@@ -104,7 +104,9 @@ Brand role: restrained and evidence-led. The row composition is the same editori
 4. Response.
 5. Timeline.
 6. Results.
-7. Reusable highlights, and CTA.
+7. Reusable highlights.
+8. Case navigation: previous case, index, next case.
+9. CTA.
 
 Beats 2-6 are **skippable**: cases arrive at different depths, and a beat with no content is omitted rather than rendered empty. The paper / paper-2 alternation runs over the beats a case actually carries, so a short case still alternates correctly. Highlights always close on the mist field before the CTA.
 

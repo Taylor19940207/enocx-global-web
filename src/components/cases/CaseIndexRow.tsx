@@ -3,9 +3,12 @@ import Reveal from "../Reveal";
 import { caseCategories, type CaseStudy } from "@/lib/cases";
 
 /**
- * One case as an open editorial row: hairline rules, no card. Mirrors the
- * composition already approved for the homepage case block (eyebrow, title,
- * lead on the left; a metric column on the right).
+ * One case as an open editorial row: hairline rules, no card.
+ *
+ * The separator between two cases is the only horizontal rule in the listing.
+ * An earlier version gave the metric column its own rules at the same weight,
+ * which left five equal hairlines per row and no way to see where one case
+ * ended — hence the ordinal marker and the rule-free metric list here.
  */
 export default function CaseIndexRow({
   caseStudy,
@@ -19,14 +22,19 @@ export default function CaseIndexRow({
 
   return (
     <Reveal as="li" delay={index * 90} className="border-b border-mist-line">
-      <Link href={`/cases/${caseStudy.slug}`} className="group block py-12 lg:py-14">
+      <Link href={`/cases/${caseStudy.slug}`} className="group block py-14 lg:py-18">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <p className="eyebrow text-slate">{category.eyebrow}</p>
-            {/* The finest-grained line plan doubles as wrap units here: the row
-                column is narrower than the page hero, so an unplanned break
-                would otherwise start a line on a particle. */}
+            <div className="flex items-baseline gap-4">
+              <span className="font-latin text-lg font-bold leading-none tracking-[-0.02em] text-accent-600">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <p className="eyebrow text-slate">{category.eyebrow}</p>
+            </div>
             <h2 className="mt-5 max-w-[24ch] text-[clamp(1.6rem,3vw,2.25rem)] font-bold leading-[1.35] tracking-[-0.028em] text-ink transition-colors [text-wrap:balance] group-hover:text-accent-600">
+              {/* The finest-grained line plan doubles as wrap units here: the row
+                  column is narrower than the page hero, so an unplanned break
+                  would otherwise start a line on a particle. */}
               {caseStudy.titleLines.mobile.map((unit) => (
                 <span key={unit} className="inline-block">
                   {unit}
@@ -46,11 +54,11 @@ export default function CaseIndexRow({
 
           {metrics.length > 0 && (
             <div className="lg:col-span-5 lg:border-l lg:border-mist-line lg:pl-10">
-              <dl className="border-t border-mist-line">
+              <dl className="space-y-6">
                 {metrics.map((metric) => (
                   <div
                     key={metric.label}
-                    className="grid grid-cols-[minmax(6rem,0.7fr)_1.4fr] gap-6 border-b border-mist-line py-5"
+                    className="grid grid-cols-[minmax(6rem,0.7fr)_1.4fr] items-baseline gap-6"
                   >
                     <dt className="font-latin flex items-baseline gap-1 text-ink">
                       <span className="text-[clamp(1.5rem,3vw,2.25rem)] font-bold leading-none tracking-[-0.05em]">

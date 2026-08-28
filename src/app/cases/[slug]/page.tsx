@@ -8,6 +8,7 @@ import CaseSolutions from "@/components/cases/CaseSolutions";
 import CaseTimeline from "@/components/cases/CaseTimeline";
 import CaseResults from "@/components/cases/CaseResults";
 import CaseHighlights from "@/components/cases/CaseHighlights";
+import CaseNav from "@/components/cases/CaseNav";
 import { caseCategories, caseStudies, getCaseStudy } from "@/lib/cases";
 import { cn } from "@/lib/cn";
 
@@ -51,6 +52,7 @@ export default async function CasePage({ params }: PageProps<"/cases/[slug]">) {
   if (!caseStudy) notFound();
 
   const category = caseCategories[caseStudy.category];
+  const position = caseStudies.findIndex((c) => c.slug === caseStudy.slug);
   const beats = presentBeats(caseStudy);
   // Cases carry different beats, so the paper / paper-2 alternation is counted
   // over the beats this case actually has — never over the full template.
@@ -125,6 +127,13 @@ export default async function CasePage({ params }: PageProps<"/cases/[slug]">) {
           />
         </section>
       )}
+
+      <section className="bg-paper py-16 lg:py-20">
+        <CaseNav
+          prev={caseStudies[position - 1]}
+          next={caseStudies[position + 1]}
+        />
+      </section>
 
       <CTA />
     </>
