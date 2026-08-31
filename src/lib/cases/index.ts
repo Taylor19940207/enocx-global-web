@@ -1,9 +1,9 @@
 import type { CaseStudy } from "./types";
 import chemicalTokyoOffice from "./chemical-tokyo-office";
-import dreameJapanEntry from "./dreame-japan-entry";
-import fjdMetiNotification from "./fjd-meti-notification";
-import sigenergyHrTax from "./sigenergy-hr-tax";
-import ulanziPayrollWithholding from "./ulanzi-payroll-withholding";
+import smartApplianceJapanEntry from "./smart-appliance-japan-entry";
+import electronicsImportNotification from "./electronics-import-notification";
+import energyStorageHrTax from "./energy-storage-hr-tax";
+import imagingGearPayrollWithholding from "./imaging-gear-payroll-withholding";
 
 /**
  * One file per case. Add the import here and the route, the index listing and
@@ -13,10 +13,10 @@ import ulanziPayrollWithholding from "./ulanzi-payroll-withholding";
  */
 export const caseStudies: CaseStudy[] = [
   chemicalTokyoOffice,
-  dreameJapanEntry,
-  fjdMetiNotification,
-  sigenergyHrTax,
-  ulanziPayrollWithholding,
+  smartApplianceJapanEntry,
+  electronicsImportNotification,
+  energyStorageHrTax,
+  imagingGearPayrollWithholding,
 ];
 
 export const caseSlugs = caseStudies.map((c) => c.slug);

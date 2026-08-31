@@ -1,7 +1,7 @@
 import type { CaseStudy } from "./types";
 
 const caseStudy: CaseStudy = {
-  slug: "fjd-meti-notification",
+  slug: "electronics-import-notification",
   category: "licensing",
   title: "電気用品7製品の輸入事業届出を、補正対応まで一貫支援。",
   titleLines: {
@@ -10,12 +10,12 @@ const caseStudy: CaseStudy = {
   },
   longTitle: true,
   lead: "越境ECで充電器・リチウムイオン蓄電池を販売するため、電気用品安全法に基づく輸入事業届出に対応。届出システムのアカウント復旧から製品資料の整備、経済産業省への届出、税関に登録されている輸入者情報との照合までを約2か月半で完了しました。",
-  clientLabel: "FJD Japan株式会社",
+  clientLabel: "電気製品の輸入・販売会社",
   disclosure:
-    "本事例は、お客様の許諾を得て社名および内容を掲載しています。記載の時期・件数は、お客様の確認を経たものです。",
-  metaTitle: "FJD Japan 電気用品輸入事業届出の支援事例",
+    "本事例は、お客様のご意向により企業名を伏せて掲載しています。記載の数値・時期は、お客様の許諾を得て公開しているものです。",
+  metaTitle: "電気用品の輸入事業届出 支援事例",
   metaDescription:
-    "越境ECで充電器・リチウムイオン蓄電池を販売するFJD Japan株式会社の、電気用品安全法に基づく輸入事業届出の支援事例。届出システムのアカウント復旧から製品資料の整備、補正対応、税関登録情報との照合までをご紹介します。",
+    "越境ECで充電器・リチウムイオン蓄電池を販売する事業者の、電気用品安全法に基づく輸入事業届出の支援事例。届出システムのアカウント復旧から製品資料の整備、補正対応、税関登録情報との照合までをご紹介します。",
   profile: [
     { k: "業種", v: "電気製品の輸入・販売" },
     { k: "販売チャネル", v: "越境EC" },
