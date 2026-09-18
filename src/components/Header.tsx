@@ -6,8 +6,10 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { nav } from "@/lib/content";
 import { cn } from "@/lib/cn";
+import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
 
-export default function Header() {
+export default function Header({ locale = defaultLocale }: { locale?: Locale }) {
+  const t = getDictionary(locale);
   const pathname = usePathname();
   const currentPath = pathname !== "/" ? pathname.replace(/\/$/, "") : pathname;
   const isHome = currentPath === "/";
@@ -103,11 +105,11 @@ export default function Header() {
               currentPath === "/contact" && "ring-2 ring-accent ring-offset-2"
             )}
           >
-            相談する
+            {t.common.consult}
           </Link>
           <button
             type="button"
-            aria-label={open ? "メニューを閉じる" : "メニューを開く"}
+            aria-label={open ? t.common.closeMenu : t.common.openMenu}
             aria-expanded={open}
             aria-controls="mobile-navigation"
             onClick={() => setOpen((v) => !v)}
@@ -136,7 +138,7 @@ export default function Header() {
 
       {open && (
         <div id="mobile-navigation" className="border-t border-mist-line bg-paper px-6 py-4 lg:hidden">
-          <nav aria-label="モバイルナビゲーション" className="flex flex-col gap-4">
+          <nav aria-label={t.common.mobileNav} className="flex flex-col gap-4">
             {nav.map((n) => {
               const active = currentPath === n.href;
               return (
@@ -165,7 +167,7 @@ export default function Header() {
                 currentPath === "/contact" && "ring-2 ring-accent ring-offset-2"
               )}
             >
-              相談する
+              {t.common.consult}
             </Link>
           </nav>
         </div>

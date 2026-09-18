@@ -3,6 +3,7 @@ import { Noto_Sans_JP, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { defaultLocale, getDictionary, localeTags } from "@/lib/i18n";
 
 const notoJP = Noto_Sans_JP({
   variable: "--font-noto-jp",
@@ -20,28 +21,22 @@ const inter = Inter({
   display: "swap",
 });
 
+const t = getDictionary(defaultLocale);
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.enocx.co.jp"),
   title: {
-    default: "EnocX｜日本進出・法人運営・会計税務のワンストップ支援",
-    template: "%s｜EnocX",
+    default: t.meta.titleDefault,
+    template: t.meta.titleTemplate,
   },
-  description:
-    "中国・海外企業の日本市場進出を、法人設立から会計税務・法務・事業拡大まで一気通貫で支援。有資格の専門家チームが越境ビジネスの意思決定を伴走します。",
-  keywords: [
-    "日本法人設立",
-    "外国企業 日本進出",
-    "会計税務 中国語対応",
-    "Japan market entry",
-    "越境ビジネス コンサルティング",
-  ],
+  description: t.meta.description,
+  keywords: [...t.meta.keywords],
   openGraph: {
     type: "website",
     siteName: "EnocX",
-    title: "EnocX｜日本進出・法人運営・会計税務のワンストップ支援",
-    description:
-      "中国・海外企業の日本市場進出を、法人設立から会計税務・法務・事業拡大まで一気通貫で支援。",
-    locale: "ja_JP",
+    title: t.meta.ogTitle,
+    description: t.meta.ogDescription,
+    locale: localeTags[defaultLocale].openGraph,
   },
 };
 
@@ -51,9 +46,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className={`${notoJP.variable} ${inter.variable} h-full`}>
+    <html
+      lang={localeTags[defaultLocale].html}
+      className={`${notoJP.variable} ${inter.variable} h-full`}
+    >
       <body className="min-h-full flex flex-col bg-paper text-ink">
-        <a href="#main-content" className="skip-link">本文へ移動</a>
+        <a href="#main-content" className="skip-link">{t.common.skipToContent}</a>
         <Header />
         <main id="main-content" className="relative z-10 flex-1">{children}</main>
         <Footer />

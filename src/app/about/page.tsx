@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
+import { defaultLocale, getDictionary } from "@/lib/i18n";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import CTA from "@/components/CTA";
 import { about } from "@/lib/content";
 
+const t = getDictionary(defaultLocale).routes.about;
+const common = getDictionary(defaultLocale).common;
+
 export const metadata: Metadata = {
-  title: "EnocXについて",
-  description:
-    "中国系の投資家・企業の日本進出を後押しし、アジア全域のリソース統合で資産を最適化する。EnocXのブランド確約・世界観・理念・価値をご紹介します。",
+  title: t.metaTitle,
+  description: t.metaDescription,
 };
 
 export default function AboutPage() {
@@ -16,11 +19,11 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="About EnocX"
-        title="日中をつなぎ、アジアへ。"
-        mobileTitleLines={["日中をつなぎ、", "アジアへ。"]}
-        desktopTitleLines={["日中をつなぎ、アジアへ。"]}
+        title={t.heroTitle}
+        mobileTitleLines={[...t.heroLines.mobile]}
+        desktopTitleLines={[...t.heroLines.desktop]}
         lead={about.promise.lead}
-        crumbs={[{ label: "Home", href: "/" }, { label: "EnocXについて" }]}
+        crumbs={[{ label: common.home, href: "/" }, { label: t.crumb }]}
       />
 
       {/* Promise */}
@@ -68,7 +71,7 @@ export default function AboutPage() {
           <div className="mt-14 grid grid-cols-1 gap-12 lg:grid-cols-2">
             <Reveal>
               <p className="text-sm font-semibold text-slate">
-                専念すること
+                {t.focus}
               </p>
               <ul className="mt-6 space-y-4">
                 {about.philosophy.commit.map((c) => (
@@ -80,7 +83,7 @@ export default function AboutPage() {
             </Reveal>
             <Reveal delay={120}>
               <p className="text-sm font-semibold text-slate">
-                私たちの約束
+                {t.promise}
               </p>
               <ul className="mt-6 space-y-4">
                 {about.philosophy.never.map((c) => (

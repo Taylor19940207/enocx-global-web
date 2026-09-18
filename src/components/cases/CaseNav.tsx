@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { caseCategories, caseStudies, type CaseStudy } from "@/lib/cases";
+import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
 
 function Arrow({ direction }: { direction: "prev" | "next" }) {
   return (
@@ -39,19 +40,22 @@ function Neighbour({ caseStudy }: { caseStudy: CaseStudy }) {
 export default function CaseNav({
   prev,
   next,
+  locale = defaultLocale,
 }: {
   prev?: CaseStudy;
   next?: CaseStudy;
+  locale?: Locale;
 }) {
+  const t = getDictionary(locale);
   return (
-    <nav aria-label="支援事例の移動" className="mx-auto max-w-[1320px] px-6 md:px-10">
+    <nav aria-label={t.caseNav.label} className="mx-auto max-w-[1320px] px-6 md:px-10">
       <div className="grid gap-8 border-t border-mist-line pt-10 md:grid-cols-3 md:items-start md:gap-10">
         <div>
           {prev && (
             <Link href={`/cases/${prev.slug}`} className="group block">
               <span className="link-arrow link-arrow-back text-xs text-slate transition-colors group-hover:text-accent-600">
                 <Arrow direction="prev" />
-                前の事例
+                {t.caseNav.previous}
               </span>
               <Neighbour caseStudy={prev} />
             </Link>
@@ -63,7 +67,7 @@ export default function CaseNav({
             href="/cases"
             className="link-arrow inline-flex min-h-11 items-center text-sm text-ink underline decoration-mist-line underline-offset-8 transition-colors hover:text-accent-600"
           >
-            支援事例の一覧へ
+            {t.caseNav.index}
           </Link>
         </div>
 
@@ -72,7 +76,7 @@ export default function CaseNav({
             <Link href={`/cases/${next.slug}`} className="group block">
               <span className="link-arrow text-xs text-slate flex-row-reverse transition-colors group-hover:text-accent-600">
                 <Arrow direction="next" />
-                次の事例
+                {t.caseNav.next}
               </span>
               <span className="md:flex md:justify-end">
                 <Neighbour caseStudy={next} />

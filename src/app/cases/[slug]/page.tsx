@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { defaultLocale, getDictionary } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import PageHero from "@/components/PageHero";
 import CTA from "@/components/CTA";
@@ -11,6 +12,9 @@ import CaseHighlights from "@/components/cases/CaseHighlights";
 import CaseNav from "@/components/cases/CaseNav";
 import { caseCategories, caseStudies, getCaseStudy } from "@/lib/cases";
 import { cn } from "@/lib/cn";
+
+const t = getDictionary(defaultLocale).routes.cases;
+const common = getDictionary(defaultLocale).common;
 
 // Static export: only the slugs listed below are built, and an unknown slug is
 // a 404 rather than a runtime render (`dynamicParams: true` is unsupported).
@@ -30,7 +34,7 @@ export async function generateMetadata({
   return {
     title:
       caseStudy.metaTitle ??
-      `${caseCategories[caseStudy.category].label}の支援事例`,
+      `${caseCategories[caseStudy.category].label}${t.detailTitleSuffix}`,
     description: caseStudy.metaDescription,
   };
 }
@@ -69,8 +73,8 @@ export default async function CasePage({ params }: PageProps<"/cases/[slug]">) {
         longTitle={caseStudy.longTitle}
         lead={caseStudy.lead}
         crumbs={[
-          { label: "Home", href: "/" },
-          { label: "支援事例", href: "/cases" },
+          { label: common.home, href: "/" },
+          { label: t.crumb, href: "/cases" },
           { label: category.label },
         ]}
       />

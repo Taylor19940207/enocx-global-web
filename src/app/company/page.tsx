@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { defaultLocale, getDictionary } from "@/lib/i18n";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
@@ -6,10 +7,12 @@ import Proof from "@/components/Proof";
 import CTA from "@/components/CTA";
 import { company, offices, presenceCities } from "@/lib/content";
 
+const t = getDictionary(defaultLocale).routes.company;
+const common = getDictionary(defaultLocale).common;
+
 export const metadata: Metadata = {
-  title: "会社概要",
-  description:
-    "EnocX株式会社の会社概要・沿革・拠点。会計税務事務所を母体に、東京と上海を拠点として日中の越境ビジネスを支援しています。",
+  title: t.metaTitle,
+  description: t.metaDescription,
 };
 
 export default function CompanyPage() {
@@ -17,17 +20,17 @@ export default function CompanyPage() {
     <>
       <PageHero
         eyebrow="Company"
-        title="アジアを結ぶ、グローバルビジネスハブ。"
-        mobileTitleLines={["アジアを結ぶ、", "グローバル", "ビジネスハブ。"]}
-        desktopTitleLines={["アジアを結ぶ、", "グローバルビジネスハブ。"]}
-        lead="会計税務事務所を前身とし、東京・福岡・上海・北京・香港・シンガポールの6拠点で越境ビジネスを支援しています。"
-        crumbs={[{ label: "Home", href: "/" }, { label: "会社概要" }]}
+        title={t.heroTitle}
+        mobileTitleLines={[...t.heroLines.mobile]}
+        desktopTitleLines={[...t.heroLines.desktop]}
+        lead={t.heroLead}
+        crumbs={[{ label: common.home, href: "/" }, { label: t.crumb }]}
         image="/media/inside-bg.png"
       />
 
       <section className="bg-paper py-24 lg:py-section">
         <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-16 px-6 md:px-10 lg:grid-cols-[0.8fr_1.2fr]">
-          <SectionHeading title="企業情報" />
+          <SectionHeading title={t.profileHeading} />
           <Reveal>
             <dl className="divide-y divide-mist-line border-t border-mist-line">
               {company.rows.map((r) => (
@@ -47,8 +50,8 @@ export default function CompanyPage() {
       <section className="bg-paper-2 py-24 lg:py-section">
         <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-16 px-6 md:px-10 lg:grid-cols-[0.68fr_1.32fr] lg:gap-24">
           <SectionHeading
-            title="沿革"
-            lead="会計税務事務所から、グローバルビジネスハブへ。"
+            title={t.historyHeading}
+            lead={t.historyLead}
           />
           <div className="relative pl-1 md:pl-0">
             {/* decorative vertical rail with gradient fade */}
@@ -101,8 +104,8 @@ export default function CompanyPage() {
       <section className="bg-paper py-24 lg:py-section">
         <div className="mx-auto max-w-[1320px] px-6 md:px-10">
           <SectionHeading
-            title="アジアをまたぐ6拠点体制。"
-            lead="東京・福岡・上海・北京・香港・シンガポールを結び、越境案件をシームレスに支援します。"
+            title={t.officesHeading}
+            lead={t.officesLead}
           />
 
           <Reveal className="mt-14">

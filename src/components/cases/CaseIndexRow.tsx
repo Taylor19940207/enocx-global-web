@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Reveal from "../Reveal";
 import { caseCategories, type CaseStudy } from "@/lib/cases";
+import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
 
 /**
  * One case as an open editorial row: hairline rules, no card.
@@ -13,10 +14,13 @@ import { caseCategories, type CaseStudy } from "@/lib/cases";
 export default function CaseIndexRow({
   caseStudy,
   index,
+  locale = defaultLocale,
 }: {
   caseStudy: CaseStudy;
   index: number;
+  locale?: Locale;
 }) {
+  const t = getDictionary(locale);
   const category = caseCategories[caseStudy.category];
   const metrics = caseStudy.metrics?.slice(0, 3) ?? [];
 
@@ -58,7 +62,7 @@ export default function CaseIndexRow({
               {caseStudy.lead}
             </p>
             <span className="link-arrow mt-8 inline-flex min-h-11 items-center text-sm text-ink transition-colors group-hover:text-accent-600">
-              事例を読む
+              {t.routes.cases.read}
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>

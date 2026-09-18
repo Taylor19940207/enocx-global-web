@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
 
 const field =
   "w-full rounded-lg border border-mist-line bg-paper px-4 py-3 text-base text-ink outline-none transition focus:border-slate focus:ring-2 focus:ring-slate/15";
 const label = "block text-sm font-medium text-ink";
 
-export default function ContactForm() {
+export default function ContactForm({ locale = defaultLocale }: { locale?: Locale }) {
+  const t = getDictionary(locale);
   const [sent, setSent] = useState(false);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -19,10 +21,10 @@ export default function ContactForm() {
     return (
       <div className="rounded-lg border border-mist-line bg-mist-soft p-10 text-center">
         <h3 className="text-xl font-bold text-ink">
-          お問い合わせありがとうございます。
+          {t.contactForm.thanksTitle}
         </h3>
         <p className="mt-3 text-sm leading-relaxed text-slate-600">
-          内容を確認のうえ、担当者よりご連絡いたします。
+          {t.contactForm.thanksBody}
         </p>
       </div>
     );
@@ -33,13 +35,13 @@ export default function ContactForm() {
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
           <label className={label} htmlFor="name">
-            お名前 <span className="text-slate">*</span>
+            {t.contactForm.name}<span className="text-slate"> *</span>
           </label>
           <input id="name" name="name" required className={`mt-2 ${field}`} />
         </div>
         <div>
           <label className={label} htmlFor="company">
-            会社名
+            {t.contactForm.company}
           </label>
           <input id="company" name="company" className={`mt-2 ${field}`} />
         </div>
@@ -47,7 +49,7 @@ export default function ContactForm() {
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
           <label className={label} htmlFor="email">
-            メールアドレス <span className="text-slate">*</span>
+            {t.contactForm.email}<span className="text-slate"> *</span>
           </label>
           <input
             id="email"
@@ -59,20 +61,18 @@ export default function ContactForm() {
         </div>
         <div>
           <label className={label} htmlFor="topic">
-            ご相談分野
+            {t.contactForm.topic}
           </label>
           <select id="topic" name="topic" className={`mt-2 ${field}`}>
-            <option>日本法人設立</option>
-            <option>会計税務</option>
-            <option>不動産・資産金融</option>
-            <option>事業経営サポート</option>
-            <option>その他</option>
+            {t.contactForm.topicOptions.map((o) => (
+              <option key={o}>{o}</option>
+            ))}
           </select>
         </div>
       </div>
       <div>
         <label className={label} htmlFor="message">
-          お問い合わせ内容 <span className="text-slate">*</span>
+          {t.contactForm.message}<span className="text-slate"> *</span>
         </label>
         <textarea
           id="message"
@@ -86,7 +86,7 @@ export default function ContactForm() {
         type="submit"
         className="w-full rounded-full bg-ink px-8 py-4 text-sm font-semibold text-white transition hover:bg-slate-dark sm:w-auto"
       >
-        送信する
+        {t.contactForm.submit}
       </button>
     </form>
   );

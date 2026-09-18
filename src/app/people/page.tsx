@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
+import { defaultLocale, getDictionary } from "@/lib/i18n";
 import PageHero from "@/components/PageHero";
 import People from "@/components/People";
 import CTA from "@/components/CTA";
 
+const t = getDictionary(defaultLocale).routes.people;
+const common = getDictionary(defaultLocale).common;
+
 export const metadata: Metadata = {
-  title: "専門家チーム",
-  description:
-    "税理士・国税OB税理士・司法書士・社会保険労務士・行政書士・弁護士など、有資格の実務家がチームとして日中の越境案件を支援します。",
+  title: t.metaTitle,
+  description: t.metaDescription,
 };
 
 export default function PeoplePage() {
@@ -14,11 +17,11 @@ export default function PeoplePage() {
     <>
       <PageHero
         eyebrow="People"
-        title="有資格の専門家が、直接あなたの課題に向き合う。"
-        mobileTitleLines={["有資格の専門家が、", "直接あなたの課題に", "向き合う。"]}
-        desktopTitleLines={["有資格の専門家が、", "直接あなたの課題に向き合う。"]}
-        lead="税理士・国税OB・司法書士・弁護士など、各分野の実務家がチームとして越境案件を支えます。"
-        crumbs={[{ label: "Home", href: "/" }, { label: "専門家" }]}
+        title={t.heroTitle}
+        mobileTitleLines={[...t.heroLines.mobile]}
+        desktopTitleLines={[...t.heroLines.desktop]}
+        lead={t.heroLead}
+        crumbs={[{ label: common.home, href: "/" }, { label: t.crumb }]}
       />
       <People withHeading={false} bg="bg-paper" />
       <CTA />

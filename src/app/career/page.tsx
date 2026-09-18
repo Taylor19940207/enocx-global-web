@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
+import { defaultLocale, getDictionary } from "@/lib/i18n";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import { careers, careerContact } from "@/lib/content";
 
+const t = getDictionary(defaultLocale).routes.career;
+const common = getDictionary(defaultLocale).common;
+
 export const metadata: Metadata = {
-  title: "採用情報",
-  description:
-    "EnocXの採用情報。東京・上海の拠点で、日中の越境ビジネスを支えるメンバーを募集しています。",
+  title: t.metaTitle,
+  description: t.metaDescription,
 };
 
 export default function CareerPage() {
@@ -15,18 +18,18 @@ export default function CareerPage() {
     <>
       <PageHero
         eyebrow="Career"
-        title="日中をつなぐ仕事を、一緒に。"
-        mobileTitleLines={["日中をつなぐ", "仕事を、", "一緒に。"]}
-        desktopTitleLines={["日中をつなぐ仕事を、", "一緒に。"]}
-        lead="東京と上海の拠点で、越境ビジネスの実務を支えるメンバーを募集しています。"
-        crumbs={[{ label: "Home", href: "/" }, { label: "採用情報" }]}
+        title={t.heroTitle}
+        mobileTitleLines={[...t.heroLines.mobile]}
+        desktopTitleLines={[...t.heroLines.desktop]}
+        lead={t.heroLead}
+        crumbs={[{ label: common.home, href: "/" }, { label: t.crumb }]}
       />
 
       <section className="bg-paper py-24 lg:py-section">
         <div className="mx-auto max-w-[1320px] px-6 md:px-10">
           <SectionHeading
-            title="募集職種"
-            lead="ご応募・お問い合わせは、履歴書を下記メールアドレスまでお送りください。"
+            title={t.openingsHeading}
+            lead={t.openingsLead}
           />
 
           <div className="mt-16 divide-y divide-mist-line border-y border-mist-line">
@@ -57,7 +60,7 @@ export default function CareerPage() {
                 <div className="mt-6 grid grid-cols-1 gap-8 md:grid-cols-2">
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-widest text-slate">
-                      仕事内容
+                      {t.duties}
                     </p>
                     <ul className="mt-3 space-y-2">
                       {c.duties.map((d) => (
@@ -74,7 +77,7 @@ export default function CareerPage() {
                   {c.requirements && (
                     <div>
                       <p className="text-xs font-semibold uppercase tracking-widest text-slate">
-                        応募条件
+                        {t.requirements}
                       </p>
                       <ul className="mt-3 space-y-2">
                         {c.requirements.map((r) => (
@@ -101,7 +104,7 @@ export default function CareerPage() {
           </div>
 
           <Reveal className="mt-12 border-y border-mist-line bg-mist-soft p-8 text-center">
-            <p className="text-sm text-slate-600">履歴書送付先</p>
+            <p className="text-sm text-slate-600">{t.applyTo}</p>
             <a
               href={`mailto:${careerContact}`}
               className="mt-2 inline-block text-lg font-bold text-ink transition hover:text-slate"

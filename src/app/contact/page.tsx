@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
+import { defaultLocale, getDictionary } from "@/lib/i18n";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
 import { offices, presenceCities } from "@/lib/content";
 
+const t = getDictionary(defaultLocale).routes.contact;
+const common = getDictionary(defaultLocale).common;
+
 export const metadata: Metadata = {
-  title: "お問い合わせ",
-  description:
-    "日本進出・法人運営に関するご相談はこちら。先行相談料はいただきません。日本語・中国語・英語で対応いたします。",
+  title: t.metaTitle,
+  description: t.metaDescription,
 };
 
 export default function ContactPage() {
@@ -15,11 +18,11 @@ export default function ContactPage() {
     <>
       <PageHero
         eyebrow="Contact"
-        title="日本進出の第一歩を、まずは相談から。"
-        mobileTitleLines={["日本進出の", "第一歩を、", "まずは相談から。"]}
-        desktopTitleLines={["日本進出の第一歩を、", "まずは相談から。"]}
-        lead="先行相談料はいただきません。日本語・中国語・英語のいずれでも、御社の状況に合わせてご相談いただけます。"
-        crumbs={[{ label: "Home", href: "/" }, { label: "お問い合わせ" }]}
+        title={t.heroTitle}
+        mobileTitleLines={[...t.heroLines.mobile]}
+        desktopTitleLines={[...t.heroLines.desktop]}
+        lead={t.heroLead}
+        crumbs={[{ label: common.home, href: "/" }, { label: t.crumb }]}
       />
 
       <section className="bg-paper py-24 lg:py-section">

@@ -1,4 +1,5 @@
 import { advantages, presenceCities } from "@/lib/content";
+import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
 import NetworkParallax from "./NetworkParallax";
 import Reveal from "./Reveal";
 
@@ -11,7 +12,8 @@ const cityPositions = [
   "left-[8%] top-[25%]",
 ];
 
-export default function WhyEnocX() {
+export default function WhyEnocX({ locale = defaultLocale }: { locale?: Locale }) {
+  const t = getDictionary(locale);
   return (
     <section id="why" className="relative overflow-hidden bg-ink py-18 md:py-20 lg:py-24">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_44%,rgba(14,143,168,0.12),transparent_38%)]" aria-hidden />
@@ -20,15 +22,19 @@ export default function WhyEnocX() {
           <div className="max-w-[35rem] lg:py-8">
             <p className="eyebrow text-mist">Why EnocX</p>
             <h2 className="mt-6 text-[clamp(2.15rem,4vw,3.55rem)] font-bold leading-[1.26] tracking-[-0.035em] text-white">
-              <span className="block lg:hidden">翻訳ではなく、</span>
-              <span className="block lg:hidden">両国の商習慣を</span>
-              <span className="block lg:hidden">理解した伴走を。</span>
-              <span className="hidden lg:block">翻訳ではなく、</span>
-              <span className="hidden lg:block">両国の商習慣を</span>
-              <span className="hidden lg:block">理解した伴走を。</span>
+              {t.whyEnocX.headingLines.mobile.map((line) => (
+                <span key={line} className="block lg:hidden">
+                  {line}
+                </span>
+              ))}
+              {t.whyEnocX.headingLines.desktop.map((line) => (
+                <span key={line} className="hidden lg:block">
+                  {line}
+                </span>
+              ))}
             </h2>
             <p className="mt-7 max-w-[32rem] text-base leading-[1.9] text-white/68 [text-wrap:pretty] lg:text-lg">
-              言語・制度・商習慣のギャップを埋め、意思決定に必要な情報を、日本の現地目線で提供します。
+              {t.whyEnocX.lead}
             </p>
           </div>
 
@@ -62,7 +68,7 @@ export default function WhyEnocX() {
                 </div>
               ))}
               <figcaption id="network-caption" className="sr-only">
-                東京、福岡、上海、北京、香港、シンガポールを結ぶEnocXのアジアネットワーク
+                {t.whyEnocX.networkAlt}
               </figcaption>
             </figure>
             </NetworkParallax>

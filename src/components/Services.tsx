@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
 import { coreServices, extendedServices } from "@/lib/content";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 import ArrowLink from "./ArrowLink";
 
 type Props = {
+  locale?: Locale;
   withHeading?: boolean;
   showExtended?: boolean;
   moreHref?: string;
@@ -16,7 +18,9 @@ export default function Services({
   withHeading = true,
   showExtended = true,
   moreHref,
+  locale = defaultLocale,
 }: Props) {
+  const t = getDictionary(locale);
   const [activeService, setActiveService] = useState(0);
   const [openMobile, setOpenMobile] = useState<number | null>(0);
   const active = coreServices[activeService];
@@ -87,13 +91,19 @@ export default function Services({
           <SectionHeading
             title={
               <>
-                <span className="block md:hidden">日本進出のすべての</span>
-                <span className="block md:hidden">工程を、一つの窓口で。</span>
-                <span className="hidden md:block">日本進出のすべての工程を、</span>
-                <span className="hidden md:block">一つの窓口で。</span>
+                {t.services.headingLines.mobile.map((line) => (
+                  <span key={line} className="block md:hidden">
+                    {line}
+                  </span>
+                ))}
+                {t.services.headingLines.desktop.map((line) => (
+                  <span key={line} className="hidden md:block">
+                    {line}
+                  </span>
+                ))}
               </>
             }
-            lead="設立・会計税務・資産金融・事業運営という4つの核を軸に、進出から成長までを分野横断で支援します。"
+            lead={t.services.lead}
           />
         )}
 
@@ -136,7 +146,7 @@ export default function Services({
                 <p className="mt-8 max-w-2xl text-lg leading-[1.9] text-slate-600">{active.summary}</p>
 
                 <div className="mt-12 border-t border-mist-line">
-                  <p className="py-5 text-xs font-semibold tracking-[0.14em] text-slate">主要サポート内容</p>
+                  <p className="py-5 text-xs font-semibold tracking-[0.14em] text-slate">{t.services.supportLabel}</p>
                   <ul className="grid grid-cols-2 gap-x-10">
                     {active.points.map((point) => (
                       <li key={point} className="grid grid-cols-[2rem_1fr] gap-3 border-t border-mist-line py-5 text-sm leading-relaxed text-ink">
@@ -188,8 +198,8 @@ export default function Services({
         {showExtended && (
           <Reveal className="mt-24">
             <div className="max-w-2xl">
-              <h3 className="text-2xl font-bold text-ink lg:text-3xl">専門分野を超えた、総合的なサポート</h3>
-              <p className="mt-4 text-sm leading-relaxed text-slate-600">事業の成長段階に合わせ、専門領域を横断して必要な実務をつなぎます。</p>
+              <h3 className="text-2xl font-bold text-ink lg:text-3xl">{t.services.extendedTitle}</h3>
+              <p className="mt-4 text-sm leading-relaxed text-slate-600">{t.services.extendedLead}</p>
             </div>
             <div className="mt-10 grid border-t border-mist-line sm:grid-cols-2 lg:grid-cols-3">
               {extendedServices.map((service, index) => (
@@ -211,7 +221,7 @@ export default function Services({
 
         {moreHref && (
           <Reveal className="mt-14 flex justify-center">
-            <ArrowLink href={moreHref} variant="outline">サービスの詳細を見る</ArrowLink>
+            <ArrowLink href={moreHref} variant="outline">{t.services.more}</ArrowLink>
           </Reveal>
         )}
       </div>

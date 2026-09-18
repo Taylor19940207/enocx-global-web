@@ -1,8 +1,10 @@
 import Image from "next/image";
+import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
 import Link from "next/link";
 import { footerNav, presenceCities, site } from "@/lib/content";
 
-export default function Footer() {
+export default function Footer({ locale = defaultLocale }: { locale?: Locale }) {
+  const t = getDictionary(locale);
   return (
     <footer className="border-t border-mist-line bg-paper-2">
       <div className="mx-auto max-w-[1320px] px-6 py-16 md:px-10">
@@ -16,7 +18,7 @@ export default function Footer() {
               className="h-12 w-auto"
             />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-slate-600">
-              中国・海外企業の日本市場進出を、法人設立から会計税務・法務・事業拡大まで一気通貫で支援する日中ビジネスハブ。
+              {t.footer.description}
             </p>
           </div>
 
@@ -43,7 +45,7 @@ export default function Footer() {
               ))}
             </ul>
             <div className="mt-2">
-              <p className="text-sm font-semibold text-ink">本社 / Tokyo</p>
+              <p className="text-sm font-semibold text-ink">{t.footer.headquarters}</p>
               <p className="mt-1 text-sm leading-relaxed text-slate-600">
                 {site.offices.tokyo}
               </p>

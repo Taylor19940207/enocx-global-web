@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
+import { defaultLocale, getDictionary } from "@/lib/i18n";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import CTA from "@/components/CTA";
 import { marketEntry } from "@/lib/content";
 
+const t = getDictionary(defaultLocale).routes.marketEntry;
+const common = getDictionary(defaultLocale).common;
+
 export const metadata: Metadata = {
-  title: "日本進出支援",
-  description:
-    "外国企業の日本市場進出を、戦略設計・法人設立・口座と許認可・運営と成長の4ステップで支援。口座開設や税務設計などの典型的なリスクにも事前に対応します。",
+  title: t.metaTitle,
+  description: t.metaDescription,
 };
 
 export default function MarketEntryPage() {
@@ -16,19 +19,19 @@ export default function MarketEntryPage() {
     <>
       <PageHero
         eyebrow="Market Entry"
-        title="日本進出は、点ではなく一連のプロセス。"
-        mobileTitleLines={["日本進出は、", "点ではなく一連の", "プロセス。"]}
-        desktopTitleLines={["日本進出は、点ではなく", "一連のプロセス。"]}
+        title={t.heroTitle}
+        mobileTitleLines={[...t.heroLines.mobile]}
+        desktopTitleLines={[...t.heroLines.desktop]}
         lead={marketEntry.intro}
-        crumbs={[{ label: "Home", href: "/" }, { label: "日本進出" }]}
+        crumbs={[{ label: common.home, href: "/" }, { label: t.crumb }]}
       />
 
       <section className="bg-paper py-24 lg:py-section">
         <div className="mx-auto max-w-[1320px] px-6 md:px-10">
           <SectionHeading
-            title="戦略設計から運営まで、4つのステップ。"
-            titleUnits={["戦略設計から", "運営まで、", "4つのステップ。"]}
-            lead="各工程の判断を、日本の現地目線で伴走します。"
+            title={t.stepsHeading}
+            titleUnits={[...t.stepsUnits]}
+            lead={t.stepsLead}
           />
 
           <div className="mt-16 grid grid-cols-1 border-t border-mist-line md:grid-cols-2">
@@ -65,7 +68,7 @@ export default function MarketEntryPage() {
       <section className="bg-paper-2 py-24 lg:py-section">
         <div className="mx-auto max-w-[1320px] px-6 md:px-10">
           <SectionHeading
-            title="進出でつまずきやすいポイントを、先回りで。"
+            title={t.risksHeading}
           />
           <div className="mt-14 grid grid-cols-1 border-t border-mist-line md:grid-cols-3">
             {marketEntry.risks.map((r, i) => (
