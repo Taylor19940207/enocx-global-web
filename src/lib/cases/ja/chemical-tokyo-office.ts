@@ -1,4 +1,4 @@
-import type { CaseStudy } from "./types";
+import type { CaseStudy } from "../types";
 
 /**
  * 掲載可否はお客様の意向に従う。企業名を伏せる案件は匿名表記を厳守すること。

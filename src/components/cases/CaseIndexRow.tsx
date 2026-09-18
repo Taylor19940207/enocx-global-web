@@ -43,20 +43,26 @@ export default function CaseIndexRow({
                 Switched by breakpoint like PageHero: the three-unit mobile plan
                 forced three half-empty lines once the row had a wide column. */}
             <h2 className="mt-5 max-w-[44rem] text-[clamp(1.6rem,3vw,2.25rem)] font-bold leading-[1.35] tracking-[-0.028em] text-ink transition-colors [text-wrap:balance] group-hover:text-accent-600">
-              <span className="md:hidden">
-                {caseStudy.titleLines.mobile.map((unit) => (
-                  <span key={unit} className="inline-block">
-                    {unit}
+              {caseStudy.titleLines ? (
+                <>
+                  <span className="md:hidden">
+                    {caseStudy.titleLines.mobile.map((unit) => (
+                      <span key={unit} className="inline-block">
+                        {unit}
+                      </span>
+                    ))}
                   </span>
-                ))}
-              </span>
-              <span className="hidden md:inline">
-                {caseStudy.titleLines.desktop.map((unit) => (
-                  <span key={unit} className="inline-block">
-                    {unit}
+                  <span className="hidden md:inline">
+                    {caseStudy.titleLines.desktop.map((unit) => (
+                      <span key={unit} className="inline-block">
+                        {unit}
+                      </span>
+                    ))}
                   </span>
-                ))}
-              </span>
+                </>
+              ) : (
+                caseStudy.title
+              )}
             </h2>
             <p className="mt-5 max-w-[44rem] text-base leading-[1.85] text-slate-600 [text-wrap:pretty]">
               {caseStudy.lead}

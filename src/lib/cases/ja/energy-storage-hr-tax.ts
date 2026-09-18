@@ -1,4 +1,4 @@
-import type { CaseStudy } from "./types";
+import type { CaseStudy } from "../types";
 
 const caseStudy: CaseStudy = {
   slug: "energy-storage-hr-tax",

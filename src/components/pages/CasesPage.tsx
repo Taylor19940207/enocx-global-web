@@ -1,12 +1,13 @@
 import PageHero from "@/components/PageHero";
 import CTA from "@/components/CTA";
 import CaseIndexRow from "@/components/cases/CaseIndexRow";
-import { caseStudies } from "@/lib/cases";
+import { getCaseStudies } from "@/lib/cases";
 import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
 
 export default function CasesPage({ locale = defaultLocale }: { locale?: Locale }) {
   const t = getDictionary(locale).routes.cases;
   const common = getDictionary(locale).common;
+  const caseStudies = getCaseStudies(locale);
 
   return (
     <>

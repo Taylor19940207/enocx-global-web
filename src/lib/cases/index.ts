@@ -1,28 +1,27 @@
+import { defaultLocale, type Locale } from "@/lib/i18n";
 import type { CaseStudy } from "./types";
-import chemicalTokyoOffice from "./chemical-tokyo-office";
-import smartApplianceJapanEntry from "./smart-appliance-japan-entry";
-import electronicsImportNotification from "./electronics-import-notification";
-import energyStorageHrTax from "./energy-storage-hr-tax";
-import imagingGearPayrollWithholding from "./imaging-gear-payroll-withholding";
+import ja from "./ja";
+import en from "./en";
 
 /**
- * One file per case. Add the import here and the route, the index listing and
- * the static params all follow — nothing else needs touching.
+ * One file per case, per locale. Slugs are identical across locales so a page
+ * maps to its counterpart by prefix alone.
  *
- * Order is publication order: the list renders top to bottom as written.
+ * Figures live in the locale's own file rather than being formatted at render
+ * time: 3.48億円 is 348 million yen, not 3.48 of anything, and 420万米ドル is
+ * US$4.2 million. A shared numeral with a translated unit cannot express that.
  */
-export const caseStudies: CaseStudy[] = [
-  chemicalTokyoOffice,
-  smartApplianceJapanEntry,
-  electronicsImportNotification,
-  energyStorageHrTax,
-  imagingGearPayrollWithholding,
-];
+const bundles: Record<Locale, CaseStudy[]> = { ja, en };
 
-export const caseSlugs = caseStudies.map((c) => c.slug);
-
-export function getCaseStudy(slug: string): CaseStudy | undefined {
-  return caseStudies.find((c) => c.slug === slug);
+export function getCaseStudies(locale: Locale = defaultLocale): CaseStudy[] {
+  return bundles[locale];
 }
+
+export function getCaseStudy(slug: string, locale: Locale = defaultLocale) {
+  return bundles[locale].find((c) => c.slug === slug);
+}
+
+/** Slugs are locale-independent, so static params come from the default. */
+export const caseSlugs = bundles[defaultLocale].map((c) => c.slug);
 
 export * from "./types";

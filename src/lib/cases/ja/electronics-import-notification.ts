@@ -1,4 +1,4 @@
-import type { CaseStudy } from "./types";
+import type { CaseStudy } from "../types";
 
 const caseStudy: CaseStudy = {
   slug: "electronics-import-notification",

@@ -8,12 +8,12 @@ import CaseTimeline from "@/components/cases/CaseTimeline";
 import CaseResults from "@/components/cases/CaseResults";
 import CaseHighlights from "@/components/cases/CaseHighlights";
 import CaseNav from "@/components/cases/CaseNav";
-import { caseCategories, caseStudies, getCaseStudy } from "@/lib/cases";
+import { caseCategories, getCaseStudies } from "@/lib/cases";
 import { cn } from "@/lib/cn";
 import type { CaseStudy } from "@/lib/cases";
 
 /** Beats present on this case, in page order. */
-function presentBeats(caseStudy: NonNullable<ReturnType<typeof getCaseStudy>>) {
+function presentBeats(caseStudy: CaseStudy) {
   return [
     caseStudy.profile || caseStudy.metrics ? "identity" : null,
     caseStudy.challenges ? "challenges" : null,
@@ -34,7 +34,8 @@ export default function CaseDetailPage({
   const common = getDictionary(locale).common;
 
   const category = caseCategories[caseStudy.category];
-  const position = caseStudies.findIndex((c) => c.slug === caseStudy.slug);
+  const all = getCaseStudies(locale);
+  const position = all.findIndex((c) => c.slug === caseStudy.slug);
   const beats = presentBeats(caseStudy);
   // Cases carry different beats, so the paper / paper-2 alternation is counted
   // over the beats this case actually has — never over the full template.
@@ -111,8 +112,8 @@ export default function CaseDetailPage({
 
       <section className="bg-paper py-16 lg:py-20">
         <CaseNav
-          prev={caseStudies[position - 1]}
-          next={caseStudies[position + 1]}
+          prev={all[position - 1]}
+          next={all[position + 1]}
           locale={locale}
         />
       </section>

@@ -6,10 +6,13 @@
  * engagement may have four nodes and no metric band), and a missing beat must
  * drop out of the page rather than render an empty frame.
  *
- * `titleLines` is required on purpose — CONTRACT §9 caps h1 at 2 lines from
- * 1024px and 3 lines at 390px with no particle-initial line, so every new case
- * has to ship its own line plan. Making it required means TypeScript, not a
- * later rendered audit, is what catches an omission.
+ * `titleLines` carries a manual per-breakpoint line plan (CONTRACT §9, which
+ * caps h1 at 2 lines from 1024px and 3 at 390px, with no particle-initial
+ * line). It is optional because it is a property of the language rather than
+ * of the layout: Japanese has no spaces and breaks display headings by hand,
+ * while a locale that wraps on spaces must omit it. `scripts/qa-case-routes.mjs`
+ * measures the rendered line count, so an omission where one is needed fails
+ * the check rather than passing silently.
  */
 
 export const caseCategories = {
@@ -56,7 +59,7 @@ export type CaseStudy = {
   slug: string;
   category: CaseCategoryKey;
   title: string;
-  titleLines: CaseTitleLines;
+  titleLines?: CaseTitleLines;
   /** Widens the desktop measure for titles whose planned lines run long. */
   longTitle?: boolean;
   lead: string;

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CaseDetailPage from "@/components/pages/CaseDetailPage";
-import { caseCategories, caseStudies, getCaseStudy } from "@/lib/cases";
+import { caseCategories, caseSlugs, getCaseStudy } from "@/lib/cases";
 import { alternates, defaultLocale, getDictionary } from "@/lib/i18n";
 
 const locale = "ja" as const;
@@ -12,14 +12,14 @@ const t = getDictionary(locale).routes.cases;
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return caseStudies.map((caseStudy) => ({ slug: caseStudy.slug }));
+  return caseSlugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
   params,
 }: PageProps<"/cases/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const caseStudy = getCaseStudy(slug);
+  const caseStudy = getCaseStudy(slug, defaultLocale);
   if (!caseStudy) return {};
 
   return {
@@ -33,7 +33,7 @@ export async function generateMetadata({
 
 export default async function Page({ params }: PageProps<"/cases/[slug]">) {
   const { slug } = await params;
-  const caseStudy = getCaseStudy(slug);
+  const caseStudy = getCaseStudy(slug, defaultLocale);
   if (!caseStudy) notFound();
   return <CaseDetailPage caseStudy={caseStudy} locale={locale} />;
 }

@@ -14,12 +14,17 @@ const BAD_INITIAL = new Set([
   ..."。、」）",                     // closing punctuation
 ]);
 
-const barrel = readFileSync("src/lib/cases/index.ts", "utf8");
+const barrel = readFileSync("src/lib/cases/ja/index.ts", "utf8");
 // Only default-imported case modules — not ./types or ./layout.
 const slugs = [...barrel.matchAll(/^import (\w+) from "\.\/([a-z0-9-]+)";$/gm)].map(
   (m) => m[2]
 );
-const paths = ["/cases/", ...slugs.map((s) => `/cases/${s}/`)];
+// Japanese occupies the root path; other locales are prefixed.
+const LOCALE_PREFIXES = ["", "/en"];
+const paths = LOCALE_PREFIXES.flatMap((prefix) => [
+  `${prefix}/cases/`,
+  ...slugs.map((s) => `${prefix}/cases/${s}/`),
+]);
 
 const browser = await puppeteer.launch({ executablePath: CHROME, headless: "new" });
 const page = await browser.newPage();
@@ -80,21 +85,26 @@ for (const p of paths) {
     });
 
     const bad = [];
+    // §9's line budget and the particle rule describe Japanese typesetting.
+    // English wraps on spaces and carries no line plan, so neither applies.
+    const isJapanese = !p.startsWith("/en/");
     const cap = LINE_CAP(width);
-    if (m.h1.length > cap) bad.push(`h1 ${m.h1.length} lines > ${cap}`);
+    if (isJapanese && m.h1.length > cap) bad.push(`h1 ${m.h1.length} lines > ${cap}`);
     const check = (label, starts) => {
       const offender = starts.find((c) => BAD_INITIAL.has(c));
       if (offender) bad.push(`${label} line opens on "${offender}": ${starts.join("|")}`);
     };
-    check("h1", m.h1);
-    m.rows.forEach((s, i) => check(`row ${i}`, s));
-    m.navTitles.forEach((s, i) => check(`nav ${i}`, s));
+    if (isJapanese) {
+      check("h1", m.h1);
+      m.rows.forEach((s, i) => check(`row ${i}`, s));
+      m.navTitles.forEach((s, i) => check(`nav ${i}`, s));
+    }
     if (m.overflow !== 0) bad.push(`overflowX=${m.overflow}`);
     if (bad.length) failures++;
 
     console.log(
       `${bad.length ? "FAIL" : "ok  "} ${p.padEnd(34)} ${String(width).padStart(4)}  ` +
-        `h1=${m.h1.length}/${cap}(${m.h1.join("|")})  rows=${m.rows.length}  nav=${m.navTitles.length}  ovf=${m.overflow}` +
+        `h1=${m.h1.length}/${isJapanese ? cap : "-"}(${m.h1.join("|")})  rows=${m.rows.length}  nav=${m.navTitles.length}  ovf=${m.overflow}` +
         (bad.length ? `\n       ${bad.join("; ")}` : "")
     );
   }

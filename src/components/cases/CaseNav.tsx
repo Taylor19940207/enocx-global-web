@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { caseCategories, caseStudies, type CaseStudy } from "@/lib/cases";
+import { caseCategories, getCaseStudies, type CaseStudy } from "@/lib/cases";
 import { defaultLocale, getDictionary, href, type Locale } from "@/lib/i18n";
 
 function Arrow({ direction }: { direction: "prev" | "next" }) {
@@ -26,8 +26,8 @@ function Arrow({ direction }: { direction: "prev" | "next" }) {
  * end left the band reading as a wall of small bold text.
  */
 
-function Neighbour({ caseStudy }: { caseStudy: CaseStudy }) {
-  const position = caseStudies.findIndex((c) => c.slug === caseStudy.slug);
+function Neighbour({ caseStudy, locale }: { caseStudy: CaseStudy; locale: Locale }) {
+  const position = getCaseStudies(locale).findIndex((c) => c.slug === caseStudy.slug);
   return (
     <span className="mt-2 flex items-baseline gap-3 text-sm font-bold leading-[1.6] text-ink transition-colors group-hover:text-accent-600">
       <span className="font-latin text-accent-600">
@@ -57,7 +57,7 @@ export default function CaseNav({
                 <Arrow direction="prev" />
                 {t.caseNav.previous}
               </span>
-              <Neighbour caseStudy={prev} />
+              <Neighbour caseStudy={prev} locale={locale} />
             </Link>
           )}
         </div>
@@ -79,7 +79,7 @@ export default function CaseNav({
                 {t.caseNav.next}
               </span>
               <span className="md:flex md:justify-end">
-                <Neighbour caseStudy={next} />
+                <Neighbour caseStudy={next} locale={locale} />
               </span>
             </Link>
           )}
