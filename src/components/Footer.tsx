@@ -1,10 +1,11 @@
 import Image from "next/image";
 import { defaultLocale, getDictionary, href, type Locale } from "@/lib/i18n";
 import Link from "next/link";
-import { footerNav, presenceCities, site } from "@/lib/content";
+import { getContent } from "@/lib/content";
 
 export default function Footer({ locale = defaultLocale }: { locale?: Locale }) {
   const t = getDictionary(locale);
+  const { footerNav, presenceCities, site } = getContent(locale);
   return (
     <footer className="border-t border-mist-line bg-paper-2">
       <div className="mx-auto max-w-[1320px] px-6 py-16 md:px-10">

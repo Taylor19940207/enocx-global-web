@@ -1,11 +1,12 @@
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
-import { careers, careerContact } from "@/lib/content";
+import { getContent } from "@/lib/content";
 import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
 
 export default function CareerPage({ locale = defaultLocale }: { locale?: Locale }) {
   const t = getDictionary(locale).routes.career;
+  const { careers, careerContact } = getContent(locale);
   const common = getDictionary(locale).common;
 
   return (

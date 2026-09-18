@@ -1,4 +1,4 @@
-import { clients, strategicPartners } from "@/lib/content";
+import { getContent } from "@/lib/content";
 import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
@@ -11,6 +11,7 @@ type Props = {
 
 export default function Proof({ showClientList = false, locale = defaultLocale }: Props) {
   const t = getDictionary(locale);
+  const { clients, strategicPartners } = getContent(locale);
   return (
     <section id="partners" className="scroll-mt-24 bg-paper py-16 md:py-18 lg:py-20">
       <div className="mx-auto max-w-[1320px] px-6 md:px-10">
@@ -36,7 +37,7 @@ export default function Proof({ showClientList = false, locale = defaultLocale }
         <Reveal className="mt-10">
           <p className="text-sm font-semibold text-ink">Clients &amp; Business Partners</p>
           <div className="mt-7">
-            <LogoMarquee />
+            <LogoMarquee locale={locale} />
           </div>
         </Reveal>
 

@@ -1,3 +1,5 @@
+import type { Service, Expert, Career } from "./types";
+
 // Content model for the EnocX site.
 // Copy is lightly rewritten toward natural Japanese business tone,
 // based on the existing site's information architecture.
@@ -10,7 +12,7 @@ export const site = {
     tokyo: "東京都港区芝五丁目30番1-606号",
     shanghai: "上海市浦東新区江耀路28号 晶耀前灘T2棟1306号室",
   },
-} as const;
+};
 
 // グローバル拠点（PDF 紹介資料に基づく）
 export const presenceCities = [
@@ -63,14 +65,14 @@ export const nav = [
   { label: "支援事例", href: "/cases" },
   { label: "専門家", href: "/people" },
   { label: "会社概要", href: "/company" },
-] as const;
+];
 
 export const footerNav = [
   ...nav,
   { label: "パートナー", href: "/company#partners" },
   { label: "採用情報", href: "/career" },
   { label: "お問い合わせ", href: "/contact" },
-] as const;
+];
 
 export const hero = {
   eyebrow: "Global Business Hub",
@@ -84,15 +86,8 @@ export const hero = {
     { value: "380", suffix: "社+", label: "設立後の運営・管理を支援中" },
     { value: "6", suffix: "拠点", label: "東京・福岡・上海・北京・香港・新加坡" },
   ],
-} as const;
-
-export type Service = {
-  no: string;
-  title: string;
-  summary: string;
-  points: string[];
-  icon: string;
 };
+
 
 export const coreServices: Service[] = [
   {
@@ -199,12 +194,6 @@ export const advantages = [
   },
 ];
 
-export type Expert = {
-  name: string;
-  role: string;
-  bio: string;
-  photo?: string;
-};
 
 export const experts: Expert[] = [
   {
@@ -361,15 +350,6 @@ export const clients = [
   "广州扬天下知识产权服务有限公司",
 ];
 
-export type Career = {
-  title: string;
-  location: string;
-  salary: string;
-  language: string;
-  duties: string[];
-  requirements?: string[];
-  note?: string;
-};
 
 export const careers: Career[] = [
   {
@@ -501,3 +481,27 @@ export const marketEntry = {
     { title: "言語・商習慣のギャップ", desc: "書類・交渉・行政対応の摩擦を、日中英対応の現地チームが吸収します。" },
   ],
 };
+
+const ja = {
+  site,
+  presenceCities,
+  presenceCoordinates,
+  offices,
+  nav,
+  footerNav,
+  hero,
+  coreServices,
+  extendedServices,
+  advantages,
+  experts,
+  about,
+  strategicPartners,
+  clients,
+  careers,
+  careerContact,
+  partnerLogos,
+  company,
+  marketEntry,
+};
+
+export default ja;

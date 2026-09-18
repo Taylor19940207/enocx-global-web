@@ -9,7 +9,7 @@ import { defaultLocale, href, type Locale } from "@/lib/i18n";
 export default function HomePage({ locale = defaultLocale }: { locale?: Locale }) {
   return (
     <div className="home-page overflow-x-clip bg-paper">
-      <Hero />
+      <Hero locale={locale} />
       <Services showExtended={false} moreHref={href("/services", locale)} locale={locale} />
       <ByTheNumbers locale={locale} />
       <People limit={3} moreHref={href("/people", locale)} bg="bg-paper" locale={locale} />

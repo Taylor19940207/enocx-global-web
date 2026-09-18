@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { hero, presenceCoordinates } from "@/lib/content";
+import { defaultLocale, type Locale } from "@/lib/i18n";
+import { getContent } from "@/lib/content";
 import HeroCorridorScene from "./HeroCorridorScene";
 import HeroScrollDirector from "./HeroScrollDirector";
 
@@ -35,7 +36,8 @@ const futureMarkets = [
   { d: "M1430 692Q1340 440 1238 194", cx: 1430, cy: 692, delay: "4s" },
 ] as const;
 
-export default function Hero() {
+export default function Hero({ locale = defaultLocale }: { locale?: Locale }) {
+  const { hero, presenceCoordinates } = getContent(locale);
   return (
     <section id="top" className="hero-scroll-stage relative w-full bg-ink">
       <HeroScrollDirector />

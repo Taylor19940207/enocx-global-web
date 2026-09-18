@@ -1,11 +1,12 @@
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
-import { offices, presenceCities } from "@/lib/content";
+import { getContent } from "@/lib/content";
 import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
 
 export default function ContactPage({ locale = defaultLocale }: { locale?: Locale }) {
   const t = getDictionary(locale).routes.contact;
+  const { offices, presenceCities } = getContent(locale);
   const common = getDictionary(locale).common;
 
   return (

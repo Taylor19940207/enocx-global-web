@@ -2,7 +2,7 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
-import { coreServices, extendedServices } from "@/lib/content";
+import { getContent } from "@/lib/content";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 import ArrowLink from "./ArrowLink";
@@ -21,6 +21,8 @@ export default function Services({
   locale = defaultLocale,
 }: Props) {
   const t = getDictionary(locale);
+  const { coreServices, extendedServices } = getContent(locale);
+  const serviceCount = coreServices.length;
   const [activeService, setActiveService] = useState(0);
   const [openMobile, setOpenMobile] = useState<number | null>(0);
   const active = coreServices[activeService];
@@ -62,7 +64,7 @@ export default function Services({
           start: "top top+=72",
           end: "bottom bottom",
           onUpdate: (self) => {
-            const nextIndex = Math.min(coreServices.length - 1, Math.floor(self.progress * coreServices.length));
+            const nextIndex = Math.min(serviceCount - 1, Math.floor(self.progress * serviceCount));
             if (nextIndex !== lastIndex) {
               lastIndex = nextIndex;
               setActiveService(nextIndex);
@@ -82,7 +84,7 @@ export default function Services({
       cancelled = true;
       cleanup?.();
     };
-  }, []);
+  }, [serviceCount]);
 
   return (
     <section id="services" className="services-scroll-section relative bg-paper py-18 md:py-20 lg:py-24">

@@ -3,11 +3,12 @@ import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import Proof from "@/components/Proof";
 import CTA from "@/components/CTA";
-import { company, offices, presenceCities } from "@/lib/content";
+import { getContent } from "@/lib/content";
 import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
 
 export default function CompanyPage({ locale = defaultLocale }: { locale?: Locale }) {
   const t = getDictionary(locale).routes.company;
+  const { company, offices, presenceCities } = getContent(locale);
   const common = getDictionary(locale).common;
 
   return (

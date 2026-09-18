@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
-import { experts } from "@/lib/content";
+import { getContent } from "@/lib/content";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 import ArrowLink from "./ArrowLink";
@@ -21,6 +21,7 @@ export default function People({
   locale = defaultLocale,
 }: Props) {
   const t = getDictionary(locale);
+  const { experts } = getContent(locale);
   // Full page keeps leadership order; the limited (home) view prioritises
   // members with photos for a stronger visual.
   const list = limit

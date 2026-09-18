@@ -2,11 +2,12 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import CTA from "@/components/CTA";
-import { about } from "@/lib/content";
+import { getContent } from "@/lib/content";
 import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
 
 export default function AboutPage({ locale = defaultLocale }: { locale?: Locale }) {
   const t = getDictionary(locale).routes.about;
+  const { about } = getContent(locale);
   const common = getDictionary(locale).common;
 
   return (

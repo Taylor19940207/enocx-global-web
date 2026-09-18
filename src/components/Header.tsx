@@ -4,13 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { nav } from "@/lib/content";
+import { getContent } from "@/lib/content";
 import { cn } from "@/lib/cn";
 import LocaleSwitcher from "./LocaleSwitcher";
 import { defaultLocale, getDictionary, href, stripLocale, type Locale } from "@/lib/i18n";
 
 export default function Header({ locale = defaultLocale }: { locale?: Locale }) {
   const t = getDictionary(locale);
+  const { nav } = getContent(locale);
   const pathname = usePathname();
   // Compare against the locale-stripped path, so /en/about matches the /about
   // nav item; `startsWith` so a nested route (/cases/<slug>) still marks its

@@ -1,4 +1,4 @@
-import { advantages, presenceCities } from "@/lib/content";
+import { getContent } from "@/lib/content";
 import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
 import NetworkParallax from "./NetworkParallax";
 import Reveal from "./Reveal";
@@ -14,6 +14,7 @@ const cityPositions = [
 
 export default function WhyEnocX({ locale = defaultLocale }: { locale?: Locale }) {
   const t = getDictionary(locale);
+  const { advantages, presenceCities } = getContent(locale);
   return (
     <section id="why" className="relative overflow-hidden bg-ink py-18 md:py-20 lg:py-24">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_44%,rgba(14,143,168,0.12),transparent_38%)]" aria-hidden />
