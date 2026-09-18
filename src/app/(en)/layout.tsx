@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import LocaleShell from "@/components/LocaleShell";
-import { getDictionary, localeTags } from "@/lib/i18n";
+import { getDictionary, localeTags, OG_IMAGE } from "@/lib/i18n";
 
 const locale = "en" as const;
 const t = getDictionary(locale);
@@ -19,7 +19,9 @@ export const metadata: Metadata = {
     title: t.meta.ogTitle,
     description: t.meta.ogDescription,
     locale: localeTags[locale].openGraph,
+    images: [OG_IMAGE],
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

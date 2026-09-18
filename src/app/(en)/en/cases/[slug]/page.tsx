@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CaseDetailPage from "@/components/pages/CaseDetailPage";
 import { caseSlugs, getCaseStudy } from "@/lib/cases";
-import { alternates, getDictionary } from "@/lib/i18n";
+import { alternates, getDictionary, openGraphFor } from "@/lib/i18n";
 
 const locale = "en" as const;
 const t = getDictionary(locale).routes.cases;
@@ -28,6 +28,7 @@ export async function generateMetadata({
       `${getDictionary(locale).caseCategories[caseStudy.category]}${t.detailTitleSuffix}`,
     description: caseStudy.metaDescription,
     alternates: alternates(`/cases/${slug}`, locale),
+    openGraph: openGraphFor(`/cases/${slug}`, locale),
   };
 }
 

@@ -1,3 +1,6 @@
+/** Canonical origin. Shared by metadata, the sitemap and robots.txt. */
+export const SITE_URL = "https://www.enocx.co.jp";
+
 /**
  * Locale registry.
  *
@@ -73,4 +76,38 @@ export function alternates(path: string, locale: Locale) {
   // Canonical is this page, not the default locale's: pointing a translation
   // at its source tells search engines to drop the translation.
   return { canonical: href(path, locale), languages };
+}
+
+/**
+ * The absolute URL a page is canonically served at.
+ *
+ * `trailingSlash: true` in `next.config.ts` means the canonical the page emits
+ * ends in a slash. Next applies that to metadata but not to sitemap entries,
+ * so without this the sitemap would list URLs that are not the canonical ones.
+ */
+export function canonicalUrl(path: string, locale: Locale): string {
+  const p = href(path, locale);
+  return SITE_URL + (p.endsWith("/") ? p : `${p}/`);
+}
+
+/** Shared card image. Without one, a link shared to LinkedIn or Slack renders
+ *  as a bare text row. 1200x630 is the ratio every major platform crops to. */
+export const OG_IMAGE = { url: "/media/og-default.jpg", width: 1200, height: 630 };
+
+/**
+ * Open Graph fields for a page.
+ *
+ * A page's `openGraph` replaces the layout's rather than merging into it, so
+ * the image has to be repeated here — omitting it silently drops the card
+ * image on every page that sets any Open Graph field of its own.
+ */
+export function openGraphFor(path: string, locale: Locale) {
+  return {
+    url: canonicalUrl(path, locale),
+    locale: localeTags[locale].openGraph,
+    alternateLocale: locales
+      .filter((l) => l !== locale)
+      .map((l) => localeTags[l].openGraph),
+    images: [OG_IMAGE],
+  };
 }
