@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { caseCategories, caseStudies, type CaseStudy } from "@/lib/cases";
-import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
+import { defaultLocale, getDictionary, href, type Locale } from "@/lib/i18n";
 
 function Arrow({ direction }: { direction: "prev" | "next" }) {
   return (
@@ -64,7 +64,7 @@ export default function CaseNav({
 
         <div className="md:text-center">
           <Link
-            href="/cases"
+            href={href("/cases", locale)}
             className="link-arrow inline-flex min-h-11 items-center text-sm text-ink underline decoration-mist-line underline-offset-8 transition-colors hover:text-accent-600"
           >
             {t.caseNav.index}

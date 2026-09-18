@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
+import { defaultLocale, getDictionary, href, type Locale } from "@/lib/i18n";
 import Link from "next/link";
 import { footerNav, presenceCities, site } from "@/lib/content";
 
@@ -28,7 +28,7 @@ export default function Footer({ locale = defaultLocale }: { locale?: Locale }) 
               {footerNav.map((n) => (
                 <Link
                   key={n.href}
-                  href={n.href}
+                  href={href(n.href, locale)}
                   className="flex min-h-11 items-center text-sm text-ink transition hover:text-slate"
                 >
                   {n.label}

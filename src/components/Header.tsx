@@ -6,12 +6,19 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { nav } from "@/lib/content";
 import { cn } from "@/lib/cn";
-import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
+import LocaleSwitcher from "./LocaleSwitcher";
+import { defaultLocale, getDictionary, href, stripLocale, type Locale } from "@/lib/i18n";
 
 export default function Header({ locale = defaultLocale }: { locale?: Locale }) {
   const t = getDictionary(locale);
   const pathname = usePathname();
-  const currentPath = pathname !== "/" ? pathname.replace(/\/$/, "") : pathname;
+  // Compare against the locale-stripped path, so /en/about matches the /about
+  // nav item; `startsWith` so a nested route (/cases/<slug>) still marks its
+  // section active, which an exact match did not.
+  const bare = stripLocale(pathname).replace(/\/$/, "") || "/";
+  const currentPath = bare;
+  const isCurrent = (target: string) =>
+    currentPath === target || currentPath.startsWith(`${target}/`);
   const isHome = currentPath === "/";
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -42,7 +49,7 @@ export default function Header({ locale = defaultLocale }: { locale?: Locale }) 
     >
       <div className="mx-auto flex h-[72px] max-w-[1320px] items-center justify-between px-6 md:px-10">
         <Link
-          href="/"
+          href={href("/", locale)}
           className="relative block h-11 w-[9.5rem] shrink-0"
           aria-label="EnocX home"
         >
@@ -73,11 +80,11 @@ export default function Header({ locale = defaultLocale }: { locale?: Locale }) 
 
         <nav className="hidden items-center gap-8 lg:flex">
           {nav.map((n) => {
-            const active = currentPath === n.href;
+            const active = isCurrent(n.href);
             return (
               <Link
                 key={n.href}
-                href={n.href}
+                href={href(n.href, locale)}
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "flex min-h-11 items-center text-sm font-medium transition hover:opacity-60",
@@ -94,15 +101,20 @@ export default function Header({ locale = defaultLocale }: { locale?: Locale }) 
         </nav>
 
         <div className="flex items-center gap-4">
+          <LocaleSwitcher
+            locale={locale}
+            invert={!solid}
+            className="hidden md:flex"
+          />
           <Link
-            href="/contact"
-            aria-current={currentPath === "/contact" ? "page" : undefined}
+            href={href("/contact", locale)}
+            aria-current={isCurrent("/contact") ? "page" : undefined}
             className={cn(
               "pressable hidden min-h-11 items-center rounded-full px-5 py-2.5 text-sm font-semibold transition md:inline-flex",
               solid
                 ? "bg-ink text-white hover:bg-slate-dark"
                 : "bg-white text-ink hover:bg-mist",
-              currentPath === "/contact" && "ring-2 ring-accent ring-offset-2"
+              isCurrent("/contact") && "ring-2 ring-accent ring-offset-2"
             )}
           >
             {t.common.consult}
@@ -140,11 +152,11 @@ export default function Header({ locale = defaultLocale }: { locale?: Locale }) 
         <div id="mobile-navigation" className="border-t border-mist-line bg-paper px-6 py-4 lg:hidden">
           <nav aria-label={t.common.mobileNav} className="flex flex-col gap-4">
             {nav.map((n) => {
-              const active = currentPath === n.href;
+              const active = isCurrent(n.href);
               return (
                 <Link
                   key={n.href}
-                  href={n.href}
+                  href={href(n.href, locale)}
                   aria-current={active ? "page" : undefined}
                   onClick={() => setOpen(false)}
                   className={cn(
@@ -158,13 +170,14 @@ export default function Header({ locale = defaultLocale }: { locale?: Locale }) 
                 </Link>
               );
             })}
+            <LocaleSwitcher locale={locale} className="mt-2 pl-4" />
             <Link
-              href="/contact"
-              aria-current={currentPath === "/contact" ? "page" : undefined}
+              href={href("/contact", locale)}
+              aria-current={isCurrent("/contact") ? "page" : undefined}
               onClick={() => setOpen(false)}
               className={cn(
                 "pressable mt-2 rounded-full bg-ink px-5 py-3 text-center text-sm font-semibold text-white",
-                currentPath === "/contact" && "ring-2 ring-accent ring-offset-2"
+                isCurrent("/contact") && "ring-2 ring-accent ring-offset-2"
               )}
             >
               {t.common.consult}
