@@ -137,6 +137,14 @@ const en: Dictionary = {
     lead: "The firm began as an accounting and tax practice and now operates as a hub for cross-border business.",
   },
 
+  caseCategories: {
+    "real-estate-odi": "Real estate and ODI",
+    "company-formation": "Company formation",
+    licensing: "Licensing and compliance",
+    "hr-tax": "HR and tax",
+    "tax-filing": "Tax filing",
+  },
+
   caseNav: {
     label: "Case study navigation",
     previous: "Previous case",

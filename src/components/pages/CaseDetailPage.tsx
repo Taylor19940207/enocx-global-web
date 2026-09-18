@@ -8,7 +8,7 @@ import CaseTimeline from "@/components/cases/CaseTimeline";
 import CaseResults from "@/components/cases/CaseResults";
 import CaseHighlights from "@/components/cases/CaseHighlights";
 import CaseNav from "@/components/cases/CaseNav";
-import { caseCategories, getCaseStudies } from "@/lib/cases";
+import { caseCategoryEyebrows, getCaseStudies } from "@/lib/cases";
 import { cn } from "@/lib/cn";
 import type { CaseStudy } from "@/lib/cases";
 
@@ -33,7 +33,8 @@ export default function CaseDetailPage({
   const t = getDictionary(locale).routes.cases;
   const common = getDictionary(locale).common;
 
-  const category = caseCategories[caseStudy.category];
+  const eyebrow = caseCategoryEyebrows[caseStudy.category];
+  const categoryLabel = getDictionary(locale).caseCategories[caseStudy.category];
   const all = getCaseStudies(locale);
   const position = all.findIndex((c) => c.slug === caseStudy.slug);
   const beats = presentBeats(caseStudy);
@@ -45,7 +46,7 @@ export default function CaseDetailPage({
   return (
     <>
       <PageHero
-        eyebrow={category.eyebrow}
+        eyebrow={eyebrow}
         title={caseStudy.title}
         titleLines={caseStudy.titleLines}
         longTitle={caseStudy.longTitle}
@@ -53,7 +54,7 @@ export default function CaseDetailPage({
         crumbs={[
           { label: common.home, href: href("/", locale) },
           { label: t.crumb, href: href("/cases", locale) },
-          { label: category.label },
+          { label: categoryLabel },
         ]}
       />
 

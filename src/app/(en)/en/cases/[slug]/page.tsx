@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CaseDetailPage from "@/components/pages/CaseDetailPage";
-import { caseCategories, caseSlugs, getCaseStudy } from "@/lib/cases";
+import { caseSlugs, getCaseStudy } from "@/lib/cases";
 import { alternates, getDictionary } from "@/lib/i18n";
 
 const locale = "en" as const;
@@ -25,7 +25,7 @@ export async function generateMetadata({
   return {
     title:
       caseStudy.metaTitle ??
-      `${caseCategories[caseStudy.category].label}${t.detailTitleSuffix}`,
+      `${getDictionary(locale).caseCategories[caseStudy.category]}${t.detailTitleSuffix}`,
     description: caseStudy.metaDescription,
     alternates: alternates(`/cases/${slug}`, locale),
   };

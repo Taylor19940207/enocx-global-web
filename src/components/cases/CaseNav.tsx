@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { caseCategories, getCaseStudies, type CaseStudy } from "@/lib/cases";
+import { getCaseStudies, type CaseStudy } from "@/lib/cases";
 import { defaultLocale, getDictionary, href, type Locale } from "@/lib/i18n";
 
 function Arrow({ direction }: { direction: "prev" | "next" }) {
@@ -33,7 +33,7 @@ function Neighbour({ caseStudy, locale }: { caseStudy: CaseStudy; locale: Locale
       <span className="font-latin text-accent-600">
         {String(position + 1).padStart(2, "0")}
       </span>
-      {caseCategories[caseStudy.category].label}
+      {getDictionary(locale).caseCategories[caseStudy.category]}
     </span>
   );
 }

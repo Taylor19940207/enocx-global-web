@@ -15,15 +15,30 @@
  * the check rather than passing silently.
  */
 
-export const caseCategories = {
-  "real-estate-odi": { eyebrow: "Real Estate / ODI", label: "不動産・ODI" },
-  "company-formation": { eyebrow: "Company Formation", label: "会社設立・進出" },
-  licensing: { eyebrow: "Licensing / Compliance", label: "許認可・法令対応" },
-  "hr-tax": { eyebrow: "HR & Tax", label: "人事・税務" },
-  "tax-filing": { eyebrow: "Tax Filing", label: "税務申告" },
-} as const;
+/**
+ * The eyebrow is English on both sides — it is set in Latin type as a label,
+ * the way the rest of the site's eyebrows are. Only the prose label, used in
+ * breadcrumbs and in the case navigation, is translated.
+ */
+export const caseCategoryKeys = [
+  "real-estate-odi",
+  "company-formation",
+  "licensing",
+  "hr-tax",
+  "tax-filing",
+] as const;
 
-export type CaseCategoryKey = keyof typeof caseCategories;
+export type CaseCategoryKey = (typeof caseCategoryKeys)[number];
+
+export const caseCategoryEyebrows: Record<CaseCategoryKey, string> = {
+  "real-estate-odi": "Real Estate / ODI",
+  "company-formation": "Company Formation",
+  licensing: "Licensing / Compliance",
+  "hr-tax": "HR & Tax",
+  "tax-filing": "Tax Filing",
+};
+
+export type CaseCategoryLabels = Record<CaseCategoryKey, string>;
 
 /** Per-breakpoint line plan for the case title (CONTRACT §9). */
 export type CaseTitleLines = {

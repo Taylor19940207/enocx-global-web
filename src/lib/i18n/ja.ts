@@ -144,6 +144,14 @@ const ja = {
     lead: "会計税務事務所を前身とし、越境ビジネスのハブとして事業を展開しています。",
   },
 
+  caseCategories: {
+    "real-estate-odi": "不動産・ODI",
+    "company-formation": "会社設立・進出",
+    licensing: "許認可・法令対応",
+    "hr-tax": "人事・税務",
+    "tax-filing": "税務申告",
+  },
+
   caseNav: {
     label: "支援事例の移動",
     previous: "前の事例",

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Reveal from "../Reveal";
-import { caseCategories, type CaseStudy } from "@/lib/cases";
+import { caseCategoryEyebrows, type CaseStudy } from "@/lib/cases";
 import { defaultLocale, getDictionary, href, type Locale } from "@/lib/i18n";
 
 /**
@@ -21,7 +21,7 @@ export default function CaseIndexRow({
   locale?: Locale;
 }) {
   const t = getDictionary(locale);
-  const category = caseCategories[caseStudy.category];
+  const eyebrow = caseCategoryEyebrows[caseStudy.category];
   const metrics = caseStudy.metrics?.slice(0, 3) ?? [];
 
   return (
@@ -36,7 +36,7 @@ export default function CaseIndexRow({
               <span className="font-latin text-lg font-bold leading-none tracking-[-0.02em] text-accent-600">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <p className="eyebrow text-slate">{category.eyebrow}</p>
+              <p className="eyebrow text-slate">{eyebrow}</p>
             </div>
             {/* The case's own line plans double as wrap units — an unplanned
                 break in this narrower column would start a line on a particle.
