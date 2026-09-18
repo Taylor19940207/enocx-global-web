@@ -36,7 +36,10 @@ export default function LocaleSwitcher({
           {l === locale ? (
             <span
               aria-current="true"
-              className={cn("font-semibold", invert ? "text-white" : "text-ink")}
+              className={cn(
+                "inline-flex min-h-11 items-center font-semibold",
+                invert ? "text-white" : "text-ink"
+              )}
             >
               {localeNames[l]}
             </span>
@@ -45,7 +48,10 @@ export default function LocaleSwitcher({
               href={localePath(pathname, l)}
               hrefLang={l}
               className={cn(
-                "min-h-11 transition-colors",
+                // inline-flex so the 44px touch target centres its label:
+                // min-height alone left the text sitting at the top of the box,
+                // a line above the current locale's.
+                "inline-flex min-h-11 items-center transition-colors",
                 invert ? "text-white/60 hover:text-white" : "text-slate hover:text-accent-600"
               )}
             >
