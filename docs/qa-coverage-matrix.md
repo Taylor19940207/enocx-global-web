@@ -175,7 +175,7 @@ chrome it lost when the root layout split per locale.
 | No in-site link crosses locales | `scripts/qa-locale-links.mjs`, 30 pages; the switcher is the one exception and identifies itself by `hrefLang` | Pass |
 | Heading line budgets | `scripts/qa-case-routes.mjs`, 60 cells across both locales; §9's budget and the particle rule are applied to Japanese only | Pass |
 | Case content reaches the page | `scripts/qa-case-content.mjs` on all ten case files, both locales | Pass |
-| Canonical, hreflang, Open Graph, sitemap | `scripts/qa-seo.mjs`, 28 pages: every canonical appears in the sitemap and every sitemap entry is claimed by a page | Pass |
+| Canonical, hreflang, Open Graph, sitemap, JSON-LD | `scripts/qa-seo.mjs`, 28 pages: every canonical appears in the sitemap, every sitemap entry is claimed by a page, and the structured data parses | Pass |
 | `npm run lint` / `npx tsc --noEmit` / `npm run build` | 33 static routes generated | Pass |
 
 Three defects were found by these checks rather than by review, and are worth

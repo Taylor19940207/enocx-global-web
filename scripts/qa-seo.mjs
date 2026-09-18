@@ -40,6 +40,19 @@ for (const file of pages) {
   }
   const ogUrl = html.match(/<meta property="og:url" content="([^"]+)"/)?.[1];
   if (ogUrl && ogUrl !== canonical) fail(`${route}: og:url ${ogUrl} != canonical ${canonical}`);
+
+  // Structured data must parse: a malformed block is worse than none, since
+  // search engines drop the whole record rather than the bad field.
+  const ld = html.match(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/)?.[1];
+  if (!ld) fail(`${route}: no JSON-LD`);
+  else {
+    try {
+      const data = JSON.parse(ld.replace(/\\u003c/g, "<"));
+      if (!data["@type"]) fail(`${route}: JSON-LD has no @type`);
+    } catch {
+      fail(`${route}: JSON-LD does not parse`);
+    }
+  }
 }
 
 for (const orphan of listed) fail(`sitemap lists ${orphan}, which no page claims as canonical`);

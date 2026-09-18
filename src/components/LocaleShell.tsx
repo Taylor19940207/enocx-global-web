@@ -2,6 +2,7 @@ import { Noto_Sans_JP, Inter } from "next/font/google";
 import "@/app/globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import StructuredData from "@/components/StructuredData";
 import { getDictionary, localeTags, type Locale } from "@/lib/i18n";
 
 const notoJP = Noto_Sans_JP({
@@ -44,6 +45,7 @@ export default function LocaleShell({
     >
       <body className="min-h-full flex flex-col bg-paper text-ink">
         <a href="#main-content" className="skip-link">{t.common.skipToContent}</a>
+        <StructuredData locale={locale} />
         <Header locale={locale} />
         <main id="main-content" className="relative z-10 flex-1">{children}</main>
         <Footer locale={locale} />
