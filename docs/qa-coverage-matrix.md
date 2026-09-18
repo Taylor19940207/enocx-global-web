@@ -159,3 +159,33 @@ outgrown the default measure; the chemical title dropped `中国での` (the lea
 states 中国における対外直接投資（ODI）の届出・認可手続き immediately below) and its line
 plan was re-cut so no unit exceeds one line — the desktop plan holds two units
 of at most 18 characters, which is what 1024px fits.
+
+## 2026-09-18 — English version under /en
+
+Japanese is unchanged throughout: visible text compares byte-for-byte against
+the pre-i18n build across all 16 pages, the only addition being the language
+switcher's own label. Two Japanese-side behaviours did change, both fixes —
+the nav marks a section active on nested routes, and the 404 regained the site
+chrome it lost when the root layout split per locale.
+
+| Check | Evidence | Result |
+|---|---|---|
+| Japanese pages unchanged | Rendered text diff against the pre-i18n build, 16 pages | Pass |
+| No Japanese text on an English page | `scripts/qa-locale-text.mjs`; partner and client names exempt as proper nouns, read from the content file | Pass |
+| No in-site link crosses locales | `scripts/qa-locale-links.mjs`, 30 pages; the switcher is the one exception and identifies itself by `hrefLang` | Pass |
+| Heading line budgets | `scripts/qa-case-routes.mjs`, 60 cells across both locales; §9's budget and the particle rule are applied to Japanese only | Pass |
+| Case content reaches the page | `scripts/qa-case-content.mjs` on all ten case files, both locales | Pass |
+| Canonical, hreflang, Open Graph, sitemap | `scripts/qa-seo.mjs`, 28 pages: every canonical appears in the sitemap and every sitemap entry is claimed by a page | Pass |
+| `npm run lint` / `npx tsc --noEmit` / `npm run build` | 33 static routes generated | Pass |
+
+Three defects were found by these checks rather than by review, and are worth
+recording as the classes to watch. Three case links were built from template
+literals, so a sweep for `href="/` missed them and clicking a case from
+/en/cases landed in Japanese. The case category labels sat outside both
+dictionaries and stayed Japanese in the navigation and breadcrumbs, which an
+earlier scan missed because it required a leading kana and 不動産・ODI starts
+with a kanji. And the sitemap disagreed with the page canonicals about the
+trailing slash.
+
+Not covered: the 404 answers in Japanese for every locale, since a static
+export emits a single `404.html`.
