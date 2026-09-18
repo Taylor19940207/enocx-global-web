@@ -2,7 +2,7 @@ import PageHero from "@/components/PageHero";
 import CTA from "@/components/CTA";
 import CaseIndexRow from "@/components/cases/CaseIndexRow";
 import { getCaseStudies } from "@/lib/cases";
-import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
+import { defaultLocale, getDictionary, href, type Locale } from "@/lib/i18n";
 
 export default function CasesPage({ locale = defaultLocale }: { locale?: Locale }) {
   const t = getDictionary(locale).routes.cases;
@@ -16,7 +16,7 @@ export default function CasesPage({ locale = defaultLocale }: { locale?: Locale 
         title={t.heroTitle}
         titleLines={t.heroLines}
         lead={t.heroLead}
-        crumbs={[{ label: common.home, href: "/" }, { label: t.crumb }]}
+        crumbs={[{ label: common.home, href: href("/", locale) }, { label: t.crumb }]}
       />
 
       <section className="bg-paper py-24 lg:py-section">

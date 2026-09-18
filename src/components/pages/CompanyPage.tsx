@@ -4,7 +4,7 @@ import SectionHeading from "@/components/SectionHeading";
 import Proof from "@/components/Proof";
 import CTA from "@/components/CTA";
 import { getContent } from "@/lib/content";
-import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
+import { defaultLocale, getDictionary, href, type Locale } from "@/lib/i18n";
 
 export default function CompanyPage({ locale = defaultLocale }: { locale?: Locale }) {
   const t = getDictionary(locale).routes.company;
@@ -18,7 +18,7 @@ export default function CompanyPage({ locale = defaultLocale }: { locale?: Local
         title={t.heroTitle}
         titleLines={t.heroLines}
         lead={t.heroLead}
-        crumbs={[{ label: common.home, href: "/" }, { label: t.crumb }]}
+        crumbs={[{ label: common.home, href: href("/", locale) }, { label: t.crumb }]}
         image="/media/inside-bg.png"
       />
 

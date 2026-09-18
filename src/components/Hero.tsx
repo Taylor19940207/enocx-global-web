@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { defaultLocale, type Locale } from "@/lib/i18n";
+import { defaultLocale, href, type Locale } from "@/lib/i18n";
 import { getContent } from "@/lib/content";
 import HeroCorridorScene from "./HeroCorridorScene";
 import HeroScrollDirector from "./HeroScrollDirector";
@@ -280,7 +280,7 @@ export default function Hero({ locale = defaultLocale }: { locale?: Locale }) {
 
         <div className="hero-enter hero-enter-4 mt-8 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap">
           <Link
-            href={hero.primaryCta.href}
+            href={href(hero.primaryCta.href, locale)}
             className="link-arrow pressable min-h-12 whitespace-nowrap rounded-full bg-white px-7 py-3.5 text-sm text-ink transition hover:bg-mist"
           >
             {hero.primaryCta.label}
@@ -289,7 +289,7 @@ export default function Hero({ locale = defaultLocale }: { locale?: Locale }) {
             </svg>
           </Link>
           <Link
-            href={hero.secondaryCta.href}
+            href={href(hero.secondaryCta.href, locale)}
             className="pressable min-h-12 whitespace-nowrap rounded-full border border-white/40 px-7 py-3.5 text-sm text-white transition hover:bg-white/10"
           >
             {hero.secondaryCta.label}

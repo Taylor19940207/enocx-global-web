@@ -2,7 +2,7 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import { getContent } from "@/lib/content";
-import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
+import { defaultLocale, getDictionary, href, type Locale } from "@/lib/i18n";
 
 export default function CareerPage({ locale = defaultLocale }: { locale?: Locale }) {
   const t = getDictionary(locale).routes.career;
@@ -16,7 +16,7 @@ export default function CareerPage({ locale = defaultLocale }: { locale?: Locale
         title={t.heroTitle}
         titleLines={t.heroLines}
         lead={t.heroLead}
-        crumbs={[{ label: common.home, href: "/" }, { label: t.crumb }]}
+        crumbs={[{ label: common.home, href: href("/", locale) }, { label: t.crumb }]}
       />
 
       <section className="bg-paper py-24 lg:py-section">

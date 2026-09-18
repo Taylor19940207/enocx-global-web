@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Reveal from "../Reveal";
 import { caseCategories, type CaseStudy } from "@/lib/cases";
-import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
+import { defaultLocale, getDictionary, href, type Locale } from "@/lib/i18n";
 
 /**
  * One case as an open editorial row: hairline rules, no card.
@@ -26,7 +26,7 @@ export default function CaseIndexRow({
 
   return (
     <Reveal as="li" delay={index * 90} className="border-b border-mist-line">
-      <Link href={`/cases/${caseStudy.slug}`} className="group block py-14 lg:py-18">
+      <Link href={href(`/cases/${caseStudy.slug}`, locale)} className="group block py-14 lg:py-18">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
             {/* Centre-aligned, not baseline: `.eyebrow` is an inline-flex whose

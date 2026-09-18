@@ -3,7 +3,7 @@ import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import CTA from "@/components/CTA";
 import { getContent } from "@/lib/content";
-import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
+import { defaultLocale, getDictionary, href, type Locale } from "@/lib/i18n";
 
 export default function MarketEntryPage({ locale = defaultLocale }: { locale?: Locale }) {
   const t = getDictionary(locale).routes.marketEntry;
@@ -17,7 +17,7 @@ export default function MarketEntryPage({ locale = defaultLocale }: { locale?: L
         title={t.heroTitle}
         titleLines={t.heroLines}
         lead={marketEntry.intro}
-        crumbs={[{ label: common.home, href: "/" }, { label: t.crumb }]}
+        crumbs={[{ label: common.home, href: href("/", locale) }, { label: t.crumb }]}
       />
 
       <section className="bg-paper py-24 lg:py-section">

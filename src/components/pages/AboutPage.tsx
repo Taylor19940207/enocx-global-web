@@ -3,7 +3,7 @@ import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import CTA from "@/components/CTA";
 import { getContent } from "@/lib/content";
-import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
+import { defaultLocale, getDictionary, href, type Locale } from "@/lib/i18n";
 
 export default function AboutPage({ locale = defaultLocale }: { locale?: Locale }) {
   const t = getDictionary(locale).routes.about;
@@ -17,7 +17,7 @@ export default function AboutPage({ locale = defaultLocale }: { locale?: Locale 
         title={t.heroTitle}
         titleLines={t.heroLines}
         lead={about.promise.lead}
-        crumbs={[{ label: common.home, href: "/" }, { label: t.crumb }]}
+        crumbs={[{ label: common.home, href: href("/", locale) }, { label: t.crumb }]}
       />
 
       {/* Promise */}

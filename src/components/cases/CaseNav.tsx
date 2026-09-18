@@ -52,7 +52,7 @@ export default function CaseNav({
       <div className="grid gap-8 border-t border-mist-line pt-10 md:grid-cols-3 md:items-start md:gap-10">
         <div>
           {prev && (
-            <Link href={`/cases/${prev.slug}`} className="group block">
+            <Link href={href(`/cases/${prev.slug}`, locale)} className="group block">
               <span className="link-arrow link-arrow-back text-xs text-slate transition-colors group-hover:text-accent-600">
                 <Arrow direction="prev" />
                 {t.caseNav.previous}
@@ -73,7 +73,7 @@ export default function CaseNav({
 
         <div className="md:text-right">
           {next && (
-            <Link href={`/cases/${next.slug}`} className="group block">
+            <Link href={href(`/cases/${next.slug}`, locale)} className="group block">
               <span className="link-arrow text-xs text-slate flex-row-reverse transition-colors group-hover:text-accent-600">
                 <Arrow direction="next" />
                 {t.caseNav.next}
