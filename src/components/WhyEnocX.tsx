@@ -22,16 +22,22 @@ export default function WhyEnocX({ locale = defaultLocale }: { locale?: Locale }
           <div className="max-w-[35rem] lg:py-8">
             <p className="eyebrow text-mist">Why EnocX</p>
             <h2 className="mt-6 text-[clamp(2.15rem,4vw,3.55rem)] font-bold leading-[1.26] tracking-[-0.035em] text-white">
-              {t.whyEnocX.headingLines.mobile.map((line) => (
-                <span key={line} className="block lg:hidden">
-                  {line}
-                </span>
-              ))}
-              {t.whyEnocX.headingLines.desktop.map((line) => (
-                <span key={line} className="hidden lg:block">
-                  {line}
-                </span>
-              ))}
+              {t.whyEnocX.headingLines ? (
+                <>
+                  {t.whyEnocX.headingLines.mobile.map((line) => (
+                    <span key={line} className="block lg:hidden">
+                      {line}
+                    </span>
+                  ))}
+                  {t.whyEnocX.headingLines.desktop.map((line) => (
+                    <span key={line} className="hidden lg:block">
+                      {line}
+                    </span>
+                  ))}
+                </>
+              ) : (
+                t.whyEnocX.heading
+              )}
             </h2>
             <p className="mt-7 max-w-[32rem] text-base leading-[1.9] text-white/68 [text-wrap:pretty] lg:text-lg">
               {t.whyEnocX.lead}

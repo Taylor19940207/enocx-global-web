@@ -13,8 +13,7 @@ export default function ContactPage({ locale = defaultLocale }: { locale?: Local
       <PageHero
         eyebrow="Contact"
         title={t.heroTitle}
-        mobileTitleLines={[...t.heroLines.mobile]}
-        desktopTitleLines={[...t.heroLines.desktop]}
+        titleLines={t.heroLines}
         lead={t.heroLead}
         crumbs={[{ label: common.home, href: "/" }, { label: t.crumb }]}
       />

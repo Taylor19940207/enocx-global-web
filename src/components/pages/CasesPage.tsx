@@ -13,8 +13,7 @@ export default function CasesPage({ locale = defaultLocale }: { locale?: Locale 
       <PageHero
         eyebrow="Case Study"
         title={t.heroTitle}
-        mobileTitleLines={[...t.heroLines.mobile]}
-        desktopTitleLines={[...t.heroLines.desktop]}
+        titleLines={t.heroLines}
         lead={t.heroLead}
         crumbs={[{ label: common.home, href: "/" }, { label: t.crumb }]}
       />

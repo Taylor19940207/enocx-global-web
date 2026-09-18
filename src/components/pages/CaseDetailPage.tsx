@@ -46,8 +46,7 @@ export default function CaseDetailPage({
       <PageHero
         eyebrow={category.eyebrow}
         title={caseStudy.title}
-        mobileTitleLines={caseStudy.titleLines.mobile}
-        desktopTitleLines={caseStudy.titleLines.desktop}
+        titleLines={caseStudy.titleLines}
         longTitle={caseStudy.longTitle}
         lead={caseStudy.lead}
         crumbs={[

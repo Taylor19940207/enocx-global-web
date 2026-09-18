@@ -91,16 +91,22 @@ export default function Services({
           <SectionHeading
             title={
               <>
-                {t.services.headingLines.mobile.map((line) => (
-                  <span key={line} className="block md:hidden">
-                    {line}
-                  </span>
-                ))}
-                {t.services.headingLines.desktop.map((line) => (
-                  <span key={line} className="hidden md:block">
-                    {line}
-                  </span>
-                ))}
+                {t.services.headingLines ? (
+                  <>
+                    {t.services.headingLines.mobile.map((line) => (
+                      <span key={line} className="block md:hidden">
+                        {line}
+                      </span>
+                    ))}
+                    {t.services.headingLines.desktop.map((line) => (
+                      <span key={line} className="hidden md:block">
+                        {line}
+                      </span>
+                    ))}
+                  </>
+                ) : (
+                  t.services.heading
+                )}
               </>
             }
             lead={t.services.lead}

@@ -11,8 +11,13 @@ import type { LinePlan, WrapUnits } from "./types";
  * `undefined` rather than translating the fragments.
  */
 
-const lines = (mobile: string[], desktop: string[]): LinePlan => ({ mobile, desktop });
-const units = (...u: string[]): WrapUnits => u;
+// Typed as optionally absent so a locale that wraps on spaces can pass
+// `undefined` — the components fall back to letting the browser wrap.
+const lines = (mobile: string[], desktop: string[]): LinePlan | undefined => ({
+  mobile,
+  desktop,
+});
+const units = (...u: string[]): WrapUnits | undefined => u;
 
 const ja = {
   meta: {
@@ -98,6 +103,7 @@ const ja = {
   },
 
   services: {
+    heading: "日本進出のすべての工程を、一つの窓口で。",
     headingLines: lines(
       ["日本進出のすべての", "工程を、一つの窓口で。"],
       ["日本進出のすべての工程を、", "一つの窓口で。"]
@@ -110,6 +116,7 @@ const ja = {
   },
 
   whyEnocX: {
+    heading: "翻訳ではなく、両国の商習慣を理解した伴走を。",
     headingLines: lines(
       ["翻訳ではなく、", "両国の商習慣を", "理解した伴走を。"],
       ["翻訳ではなく、", "両国の商習慣を", "理解した伴走を。"]
@@ -272,6 +279,6 @@ const ja = {
         "先行相談料はいただきません。日本語・中国語・英語のいずれでも、御社の状況に合わせてご相談いただけます。",
     },
   },
-} as const;
+};
 
 export default ja;

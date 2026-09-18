@@ -14,8 +14,7 @@ export default function MarketEntryPage({ locale = defaultLocale }: { locale?: L
       <PageHero
         eyebrow="Market Entry"
         title={t.heroTitle}
-        mobileTitleLines={[...t.heroLines.mobile]}
-        desktopTitleLines={[...t.heroLines.desktop]}
+        titleLines={t.heroLines}
         lead={marketEntry.intro}
         crumbs={[{ label: common.home, href: "/" }, { label: t.crumb }]}
       />
@@ -24,7 +23,7 @@ export default function MarketEntryPage({ locale = defaultLocale }: { locale?: L
         <div className="mx-auto max-w-[1320px] px-6 md:px-10">
           <SectionHeading
             title={t.stepsHeading}
-            titleUnits={[...t.stepsUnits]}
+            titleUnits={t.stepsUnits}
             lead={t.stepsLead}
           />
 

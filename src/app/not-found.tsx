@@ -26,7 +26,7 @@ export default function NotFound() {
         <div className="mt-8">
           <SectionHeading
             title={t.heading}
-            titleUnits={[...t.headingUnits]}
+            titleUnits={t.headingUnits}
             lead={t.lead}
           />
         </div>

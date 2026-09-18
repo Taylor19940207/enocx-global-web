@@ -6,7 +6,8 @@ type Props = {
   eyebrow?: string;
   title: ReactNode;
   /** Semantic wrap units: line breaks may only occur between units. */
-  titleUnits?: string[];
+  /** Semantic wrap units; absent for locales that wrap on spaces. */
+  titleUnits?: readonly string[];
   lead?: string;
   align?: "left" | "center";
   invert?: boolean;

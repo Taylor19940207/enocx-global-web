@@ -1,13 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { LinePlan } from "@/lib/i18n";
 
 type Crumb = { label: string; href?: string };
 
 type Props = {
   eyebrow: string;
   title: string;
-  mobileTitleLines?: string[];
-  desktopTitleLines?: string[];
+  /** Manual per-breakpoint line plan; absent for locales that wrap on spaces. */
+  titleLines?: LinePlan;
   /** For titles whose planned lines exceed the default measure: widens the
       desktop measure and lowers the mobile clamp floor so the per-breakpoint
       line plans stay within the §9 line budget. */
@@ -20,8 +21,7 @@ type Props = {
 export default function PageHero({
   eyebrow,
   title,
-  mobileTitleLines,
-  desktopTitleLines,
+  titleLines,
   longTitle = false,
   lead,
   crumbs,
@@ -60,15 +60,15 @@ export default function PageHero({
             ? "text-[clamp(1.85rem,5vw,3.75rem)] md:max-w-none"
             : "text-[clamp(2.35rem,5vw,3.75rem)] md:max-w-[14em]"
         }`}>
-          {mobileTitleLines || desktopTitleLines ? (
+          {titleLines ? (
             <>
-              {mobileTitleLines && <span className="md:hidden">
-                {mobileTitleLines.map((line) => (
+              <span className="md:hidden">
+                {titleLines.mobile.map((line) => (
                   <span key={line} className="block">{line}</span>
                 ))}
-              </span>}
-              <span className={mobileTitleLines ? "hidden md:block" : "block"}>
-                {(desktopTitleLines ?? [title]).map((line) => (
+              </span>
+              <span className="hidden md:block">
+                {titleLines.desktop.map((line) => (
                   <span key={line} className="block">{line}</span>
                 ))}
               </span>

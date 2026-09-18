@@ -14,8 +14,7 @@ export default function AboutPage({ locale = defaultLocale }: { locale?: Locale 
       <PageHero
         eyebrow="About EnocX"
         title={t.heroTitle}
-        mobileTitleLines={[...t.heroLines.mobile]}
-        desktopTitleLines={[...t.heroLines.desktop]}
+        titleLines={t.heroLines}
         lead={about.promise.lead}
         crumbs={[{ label: common.home, href: "/" }, { label: t.crumb }]}
       />

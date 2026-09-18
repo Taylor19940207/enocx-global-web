@@ -15,8 +15,7 @@ export default function CompanyPage({ locale = defaultLocale }: { locale?: Local
       <PageHero
         eyebrow="Company"
         title={t.heroTitle}
-        mobileTitleLines={[...t.heroLines.mobile]}
-        desktopTitleLines={[...t.heroLines.desktop]}
+        titleLines={t.heroLines}
         lead={t.heroLead}
         crumbs={[{ label: common.home, href: "/" }, { label: t.crumb }]}
         image="/media/inside-bg.png"
