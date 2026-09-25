@@ -20,8 +20,16 @@ const listOf = (name) => {
   const block = properNouns.match(new RegExp(`export const ${name} = \\[([\\s\\S]*?)\\n\\];`));
   return block ? [...block[1].matchAll(/"([^"]+)"/g)].map((m) => m[1]) : [];
 };
+/**
+ * An official Japanese form or statute name glossed on first mention is not a
+ * translation leak — an English reader dealing with the form will meet it in
+ * Japanese. Each one is listed deliberately rather than allowing any gloss.
+ */
+const GLOSSES = ["所得税徴収高計算書"];
+
 const ALLOWED = new Set([
   "日本語",
+  ...GLOSSES,
   ...listOf("strategicPartners"),
   ...listOf("clients"),
 ]);

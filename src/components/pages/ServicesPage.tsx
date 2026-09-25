@@ -10,7 +10,7 @@ export default function ServicesPage({ locale = defaultLocale }: { locale?: Loca
   return (
     <>
       <PageHero
-        eyebrow="Services"
+        eyebrow={t.eyebrow}
         title={t.heroTitle}
         titleLines={t.heroLines}
         lead={t.heroLead}

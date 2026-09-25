@@ -11,7 +11,7 @@ const caseStudy: CaseStudy = {
   title: "Checking the payroll before paying the withholding tax",
   titleLines: undefined,
   longTitle: true,
-  lead: "The Japanese sales subsidiary of a Chinese manufacturer. Taking on HR and tax meant first checking and correcting the May and June payroll against each scheme in turn, then completing the withholding tax payment for January to June 2026 within the statutory deadline, under the special provision for semi-annual payment.",
+  lead: "The Japanese sales subsidiary of a Chinese manufacturer. Taking on HR and tax meant first checking and correcting the May and June payroll against each scheme in turn, then completing the withholding tax payment for January to June 2026 within the statutory deadline, under the special provision for due dates for withholding income tax.",
   clientLabel: "The Japanese entity of an imaging equipment manufacturer",
   disclosure:
     "Published without the client's name at their request. The figures and dates shown are published with their permission.",
@@ -23,11 +23,11 @@ const caseStudy: CaseStudy = {
     { k: "Business in Japan", v: "Market operations, channel development and local sales" },
     {
       k: "Scope",
-      v: "Reviewing payroll calculations and proposing corrections; submitting the withholding tax payment statement and remitting the tax",
+      v: "Reviewing payroll calculations and proposing corrections; submitting the Statement of Collected Income Tax (所得税徴収高計算書) and remitting the tax",
     },
     {
       k: "Period",
-      v: "May and June 2026 payroll; withholding tax for January to June 2026 under the special provision",
+      v: "May and June 2026 payroll; withholding tax for January to June 2026 under the special provision for due dates",
     },
   ],
   metrics: [
@@ -116,12 +116,12 @@ const caseStudy: CaseStudy = {
       {
         date: "8 July 2026",
         title: "June closed",
-        desc: "Both months now complete, and the payment ready to prepare.",
+        desc: "Both months complete, and the statement ready to prepare.",
       },
       {
         date: "9 July 2026",
-        title: "Payment statement submitted and tax paid",
-        desc: "The withholding tax payment statement for January to June 2026 submitted, and the tax remitted on the client's behalf.",
+        title: "Statement submitted and tax paid",
+        desc: "The Statement of Collected Income Tax for January to June 2026 submitted, and the tax remitted on the client's behalf.",
       },
     ],
   },
@@ -135,7 +135,7 @@ const caseStudy: CaseStudy = {
       },
       {
         title: "Paid within the deadline",
-        desc: "On those figures, the withholding tax payment statement for January to June 2026 was submitted and the tax remitted within the statutory deadline.",
+        desc: "On those figures, the Statement of Collected Income Tax for January to June 2026 was submitted and the tax remitted within the statutory deadline.",
       },
       {
         title: "A standard for the months that follow",

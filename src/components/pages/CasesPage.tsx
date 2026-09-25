@@ -12,7 +12,7 @@ export default function CasesPage({ locale = defaultLocale }: { locale?: Locale 
   return (
     <>
       <PageHero
-        eyebrow="Case Study"
+        eyebrow={t.eyebrow}
         title={t.heroTitle}
         titleLines={t.heroLines}
         lead={t.heroLead}

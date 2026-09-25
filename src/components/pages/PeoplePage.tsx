@@ -10,7 +10,7 @@ export default function PeoplePage({ locale = defaultLocale }: { locale?: Locale
   return (
     <>
       <PageHero
-        eyebrow="People"
+        eyebrow={t.eyebrow}
         title={t.heroTitle}
         titleLines={t.heroLines}
         lead={t.heroLead}

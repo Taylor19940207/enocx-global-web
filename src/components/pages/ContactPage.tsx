@@ -12,7 +12,7 @@ export default function ContactPage({ locale = defaultLocale }: { locale?: Local
   return (
     <>
       <PageHero
-        eyebrow="Contact"
+        eyebrow={t.eyebrow}
         title={t.heroTitle}
         titleLines={t.heroLines}
         lead={t.heroLead}

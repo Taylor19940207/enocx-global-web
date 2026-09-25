@@ -13,7 +13,7 @@ export default function MarketEntryPage({ locale = defaultLocale }: { locale?: L
   return (
     <>
       <PageHero
-        eyebrow="Market Entry"
+        eyebrow={t.eyebrow}
         title={t.heroTitle}
         titleLines={t.heroLines}
         lead={marketEntry.intro}

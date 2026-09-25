@@ -22,9 +22,19 @@ export const localeNames: Record<Locale, string> = {
 };
 
 /** `lang` attribute and Open Graph locale, which use different formats. */
+/**
+ * `html` is the `lang` attribute; `openGraph` the og:locale.
+ *
+ * The English copy is written in British spelling throughout — labour,
+ * finalised, licence, per cent — so the Open Graph locale says en_GB. It said
+ * en_US while the copy said otherwise. The one exception is the official
+ * English names of Japanese qualifications, which keep whatever spelling their
+ * governing body publishes (Labor and Social Security Attorney); those are
+ * names, not prose.
+ */
 export const localeTags: Record<Locale, { html: string; openGraph: string }> = {
   ja: { html: "ja", openGraph: "ja_JP" },
-  en: { html: "en", openGraph: "en_US" },
+  en: { html: "en", openGraph: "en_GB" },
 };
 
 /** Prefix for a locale's routes: "" for the default, "/en" otherwise. */

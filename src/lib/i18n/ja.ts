@@ -163,6 +163,7 @@ const ja = {
     home: { crumb: "Home" },
 
     about: {
+      eyebrow: "About EnocX",
       metaTitle: "EnocXについて",
       metaDescription:
         "中国系の投資家・企業の日本進出を後押しし、アジア全域のリソース統合で資産を最適化する。EnocXのブランド確約・世界観・理念・価値をご紹介します。",
@@ -174,6 +175,7 @@ const ja = {
     },
 
     services: {
+      eyebrow: "Services",
       metaTitle: "サービス",
       metaDescription:
         "日本法人設立・会計税務・不動産資産金融・事業経営サポートを核に、法律・金融・医療・物流・教育・ECまで。日本進出のすべての工程をワンストップで支援します。",
@@ -188,6 +190,7 @@ const ja = {
     },
 
     marketEntry: {
+      eyebrow: "Market Entry",
       metaTitle: "日本進出支援",
       metaDescription:
         "外国企業の日本市場進出を、戦略設計・法人設立・口座と許認可・運営と成長の4ステップで支援。口座開設や税務設計などの典型的なリスクにも事前に対応します。",
@@ -204,6 +207,7 @@ const ja = {
     },
 
     cases: {
+      eyebrow: "Case Study",
       metaTitle: "支援事例",
       metaDescription:
         "日本進出・法人設立・許認可・会計税務の実際の案件を、進め方と期日、結果まで公開しています。掲載はお客様の許諾を得た範囲に限っています。",
@@ -221,6 +225,7 @@ const ja = {
     },
 
     people: {
+      eyebrow: "People",
       metaTitle: "専門家チーム",
       metaDescription:
         "税理士・国税OB税理士・司法書士・社会保険労務士・行政書士・弁護士など、有資格の実務家がチームとして日中の越境案件を支援します。",
@@ -235,6 +240,7 @@ const ja = {
     },
 
     company: {
+      eyebrow: "Company",
       metaTitle: "会社概要",
       metaDescription:
         "EnocX株式会社の会社概要・沿革・拠点。会計税務事務所を母体に、東京と上海を拠点として日中の越境ビジネスを支援しています。",
@@ -255,6 +261,7 @@ const ja = {
     },
 
     career: {
+      eyebrow: "Career",
       metaTitle: "採用情報",
       metaDescription:
         "EnocXの採用情報。東京・上海の拠点で、日中の越境ビジネスを支えるメンバーを募集しています。",
@@ -265,6 +272,7 @@ const ja = {
         ["日中をつなぐ仕事を、", "一緒に。"]
       ),
       heroLead: "東京と上海の拠点で、越境ビジネスの実務を支えるメンバーを募集しています。",
+      note: "※",
       openingsHeading: "募集職種",
       openingsLead:
         "ご応募・お問い合わせは、履歴書を下記メールアドレスまでお送りください。",
@@ -274,6 +282,7 @@ const ja = {
     },
 
     contact: {
+      eyebrow: "Contact",
       metaTitle: "お問い合わせ",
       metaDescription:
         "日本進出・法人運営に関するご相談はこちら。先行相談料はいただきません。日本語・中国語・英語で対応いたします。",

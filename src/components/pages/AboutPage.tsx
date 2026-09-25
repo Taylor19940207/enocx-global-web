@@ -13,7 +13,7 @@ export default function AboutPage({ locale = defaultLocale }: { locale?: Locale 
   return (
     <>
       <PageHero
-        eyebrow="About EnocX"
+        eyebrow={t.eyebrow}
         title={t.heroTitle}
         titleLines={t.heroLines}
         lead={about.promise.lead}

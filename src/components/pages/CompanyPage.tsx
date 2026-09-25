@@ -14,7 +14,7 @@ export default function CompanyPage({ locale = defaultLocale }: { locale?: Local
   return (
     <>
       <PageHero
-        eyebrow="Company"
+        eyebrow={t.eyebrow}
         title={t.heroTitle}
         titleLines={t.heroLines}
         lead={t.heroLead}

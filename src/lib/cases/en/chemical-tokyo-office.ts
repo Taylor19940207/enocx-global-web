@@ -30,7 +30,7 @@ const caseStudy: CaseStudy = {
   ],
   metrics: [
     { value: "348", unit: "million yen", label: "Price of the central Tokyo office building" },
-    { value: "4.2", unit: "million US$", label: "Remitted in full under the ODI filing" },
+    { value: "4.2", unit: "million USD", label: "Remitted in full under the ODI filing" },
     { value: "6", unit: "months", label: "From shortlisting to transfer of ownership" },
   ],
   challenges: {

@@ -4,10 +4,9 @@ import ja from "./ja";
 /**
  * English business content.
  *
- * Written as English rather than rendered from the Japanese. Where a term has
- * an official English name it is used — 税理士 is a Certified Public Tax
- * Accountant, 司法書士 a judicial scrivener, 社会保険労務士 a certified social
- * insurance and labour consultant — rather than a nearer-sounding profession.
+ * Written as English rather than rendered from the Japanese. Professional
+ * titles use the English names their own governing bodies publish — see the
+ * note in `@/lib/i18n/en.ts`.
  *
  * Addresses follow English convention (smallest unit first). Partner and
  * client company names are proper nouns and stay in their registered form;
@@ -210,19 +209,19 @@ const experts: Expert[] = [
   },
   {
     name: "Mizuhiro Kasahara",
-    role: "Certified Public Tax Accountant, former National Tax Agency",
+    role: "Certified Public Tax Accountant / Former National Tax Agency Official",
     bio: "Thirty-six years with tax offices, the Regional Taxation Bureau and the National Tax Agency, working on tax audits and on planning and operations. Now advises a wide range of clients, listed companies among them.",
     photo: "/media/st-02a.jpg",
   },
   {
     name: "Makoto Kasahara",
     role: "Certified Public Tax Accountant",
-    bio: "Member of the Tokyo Certified Public Tax Accountants' Association and the Japan Fiscal Association (registration 93849). Has provided tax services to more than 500 Japanese companies.",
+    bio: "Member of the Tokyo Certified Public Tax Accountants' Association and the Japan Fiscal Association (registration no. 93849). Has provided tax services to more than 500 Japanese companies.",
     photo: "/media/st-03.jpg",
   },
   {
     name: "Eiji Tsuchida",
-    role: "Judicial Scrivener, Certified Social Insurance and Labour Consultant, Administrative Scrivener",
+    role: "Judicial Scrivener / Labor and Social Security Attorney / Certified Administrative Procedures Legal Specialist",
     bio: "Registered as a judicial scrivener in 2006. Head of En Legal Affairs Office for more than fifteen years, working across registration, licensing and labour matters.",
     photo: "/media/st-231107.jpg",
   },
@@ -234,8 +233,8 @@ const experts: Expert[] = [
   },
   {
     name: "Saori Matsumoto",
-    role: "Administrative Scrivener",
-    bio: "Member of the Tokyo Administrative Scriveners' Association. Graduated from the Faculty of Education, Waseda University. Joined ORIX's finance department in 2002, working on capital allocation, investor relations and corporate finance. Established her own practice in 2012, handling residence status and licence applications.",
+    role: "Certified Administrative Procedures Legal Specialist",
+    bio: "Member of the Tokyo Association of Certified Administrative Procedures Legal Specialists. Graduated from the Faculty of Education, Waseda University. Joined ORIX's finance department in 2002, working on capital allocation, investor relations and corporate finance. Established her own practice in 2012, handling residence status and licence applications.",
     photo: "/media/matsumoto-saori.jpg",
   },
   {
@@ -305,7 +304,7 @@ const careers: Career[] = [
     title: "Accounting and Tax — Bookkeeper / Administrative Assistant",
     location: "Tokyo (Akihabara)",
     salary: "¥230,000 per month",
-    language: "Japanese, JLPT N1",
+    language: "Japanese: JLPT N1",
     duties: ["Company bookkeeping and cash management"],
     requirements: ["Hours 9:30–18:30", "Commuting allowance"],
     note: "Health insurance, employees' pension and employment insurance provided. Public holidays off.",
@@ -366,7 +365,7 @@ const company = {
     {
       year: "2004",
       title: "The accounting and tax practice opens",
-      desc: "Akihiro Ishiyama's tax accounting office, the practice EnocX grew out of, begins work with Japanese small and mid-sized companies.",
+      desc: "Akihiro Ishiyama's Certified Public Tax Accountant office, the practice EnocX grew out of, begins work with Japanese small and mid-sized companies.",
     },
     {
       year: "2019",
@@ -376,7 +375,7 @@ const company = {
     {
       year: "2020",
       title: "Move to Minato-ku, Tokyo; trademark registered",
-      desc: "The head office moves to 5-30-1-606 Shiba, Minato-ku, Tokyo in February. The EnocX trademark application completes in October.",
+      desc: "The head office moves to 5-30-1-606 Shiba, Minato-ku, Tokyo in February. The EnocX trademark application was filed in October.",
     },
     {
       year: "2021",

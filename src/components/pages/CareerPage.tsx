@@ -12,7 +12,7 @@ export default function CareerPage({ locale = defaultLocale }: { locale?: Locale
   return (
     <>
       <PageHero
-        eyebrow="Career"
+        eyebrow={t.eyebrow}
         title={t.heroTitle}
         titleLines={t.heroLines}
         lead={t.heroLead}
@@ -90,7 +90,7 @@ export default function CareerPage({ locale = defaultLocale }: { locale?: Locale
 
                 {c.note && (
                   <p className="mt-6 border-t border-mist-line pt-4 text-xs leading-relaxed text-slate-600">
-                    ※ {c.note}
+                    {t.note} {c.note}
                   </p>
                 )}
               </Reveal>

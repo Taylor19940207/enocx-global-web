@@ -12,9 +12,13 @@ import type { Dictionary } from "./types";
  * spaces, so translating the fragments would break headings at the Japanese
  * plan's boundaries instead of where the words allow.
  *
- * Professional titles use the holders' official English names — 税理士 is a
- * Certified Public Tax Accountant, 司法書士 a judicial scrivener — rather than
- * an approximation from a nearer-sounding profession.
+ * Professional titles use the English names their own governing bodies use:
+ * 税理士 is a Certified Public Tax Accountant, 司法書士 a judicial scrivener
+ * (Ministry of Justice), 社会保険労務士 a Labor and Social Security Attorney
+ * (全国社会保険労務士会連合会) and 行政書士 a Certified Administrative Procedures
+ * Legal Specialist (日本行政書士会連合会). Those last two read as ordinary
+ * consultants under any looser rendering, which understates a national
+ * qualification. They keep the American spelling their official names use.
  */
 
 const en: Dictionary = {
@@ -156,6 +160,7 @@ const en: Dictionary = {
     home: { crumb: "Home" },
 
     about: {
+      eyebrow: "About EnocX",
       metaTitle: "About EnocX",
       metaDescription:
         "EnocX helps investors and companies from China and beyond establish themselves in Japan, and puts resources across Asia to work on their behalf. Our promise, outlook, principles and values.",
@@ -167,6 +172,7 @@ const en: Dictionary = {
     },
 
     services: {
+      eyebrow: "Services",
       metaTitle: "Services",
       metaDescription:
         "Company formation, accounting and tax, real estate and asset finance, and business operations support — extending to legal, financial, medical, logistics, education and e-commerce. Every stage of entering Japan, handled by one firm.",
@@ -178,6 +184,7 @@ const en: Dictionary = {
     },
 
     marketEntry: {
+      eyebrow: "Market Entry",
       metaTitle: "Entering the Japanese market",
       metaDescription:
         "Support for overseas companies entering Japan across four stages: strategy, company formation, banking and licensing, and operations and growth. The predictable obstacles — opening an account, structuring for tax — are handled before they bite.",
@@ -191,6 +198,7 @@ const en: Dictionary = {
     },
 
     cases: {
+      eyebrow: "Case Study",
       metaTitle: "Case studies",
       metaDescription:
         "Real engagements in market entry, company formation, licensing and tax — how the work was run, the dates it hit, and what it produced. Published only as far as our clients have agreed.",
@@ -204,9 +212,10 @@ const en: Dictionary = {
     },
 
     people: {
+      eyebrow: "People",
       metaTitle: "Our team",
       metaDescription:
-        "Certified public tax accountants, former National Tax Agency officials, judicial scriveners, certified social insurance and labour consultants, administrative scriveners and attorneys — licensed practitioners handling cross-border work as one team.",
+        "Certified Public Tax Accountants, former National Tax Agency officials, judicial scriveners, Labor and Social Security Attorneys, Certified Administrative Procedures Legal Specialists and attorneys — licensed practitioners handling cross-border work as one team.",
       crumb: "Team",
       heroTitle: "Licensed professionals working directly on your case",
       heroLines: undefined,
@@ -215,6 +224,7 @@ const en: Dictionary = {
     },
 
     company: {
+      eyebrow: "Company",
       metaTitle: "Company",
       metaDescription:
         "EnocX Inc. — company profile, history and offices. Founded as an accounting and tax practice, now supporting cross-border business from Tokyo and Shanghai.",
@@ -232,6 +242,7 @@ const en: Dictionary = {
     },
 
     career: {
+      eyebrow: "Careers",
       metaTitle: "Careers",
       metaDescription:
         "Careers at EnocX. We are hiring in Tokyo and Shanghai for the people who keep cross-border work between Japan and China running.",
@@ -240,6 +251,7 @@ const en: Dictionary = {
       heroLines: undefined,
       heroLead:
         "We are hiring in Tokyo and Shanghai for the people who handle the day-to-day of cross-border business.",
+      note: "Note:",
       openingsHeading: "Open roles",
       openingsLead:
         "To apply, or to ask about a role, send your CV to the address below.",
@@ -249,6 +261,7 @@ const en: Dictionary = {
     },
 
     contact: {
+      eyebrow: "Contact",
       metaTitle: "Contact",
       metaDescription:
         "Talk to us about entering the Japanese market or running a company there. There is no charge for an initial consultation, and we can work in English, Japanese or Chinese.",
