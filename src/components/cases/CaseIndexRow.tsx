@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Reveal from "../Reveal";
-import { caseCategories, type CaseStudy } from "@/lib/cases";
+import { caseCategoryEyebrows, type CaseStudy } from "@/lib/cases";
+import { defaultLocale, getDictionary, href, type Locale } from "@/lib/i18n";
 
 /**
  * One case as an open editorial row: hairline rules, no card.
@@ -13,16 +14,19 @@ import { caseCategories, type CaseStudy } from "@/lib/cases";
 export default function CaseIndexRow({
   caseStudy,
   index,
+  locale = defaultLocale,
 }: {
   caseStudy: CaseStudy;
   index: number;
+  locale?: Locale;
 }) {
-  const category = caseCategories[caseStudy.category];
+  const t = getDictionary(locale);
+  const eyebrow = caseCategoryEyebrows[caseStudy.category];
   const metrics = caseStudy.metrics?.slice(0, 3) ?? [];
 
   return (
     <Reveal as="li" delay={index * 90} className="border-b border-mist-line">
-      <Link href={`/cases/${caseStudy.slug}`} className="group block py-14 lg:py-18">
+      <Link href={href(`/cases/${caseStudy.slug}`, locale)} className="group block py-14 lg:py-18">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
             {/* Centre-aligned, not baseline: `.eyebrow` is an inline-flex whose
@@ -32,33 +36,39 @@ export default function CaseIndexRow({
               <span className="font-latin text-lg font-bold leading-none tracking-[-0.02em] text-accent-600">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <p className="eyebrow text-slate">{category.eyebrow}</p>
+              <p className="eyebrow text-slate">{eyebrow}</p>
             </div>
             {/* The case's own line plans double as wrap units — an unplanned
                 break in this narrower column would start a line on a particle.
                 Switched by breakpoint like PageHero: the three-unit mobile plan
                 forced three half-empty lines once the row had a wide column. */}
             <h2 className="mt-5 max-w-[44rem] text-[clamp(1.6rem,3vw,2.25rem)] font-bold leading-[1.35] tracking-[-0.028em] text-ink transition-colors [text-wrap:balance] group-hover:text-accent-600">
-              <span className="md:hidden">
-                {caseStudy.titleLines.mobile.map((unit) => (
-                  <span key={unit} className="inline-block">
-                    {unit}
+              {caseStudy.titleLines ? (
+                <>
+                  <span className="md:hidden">
+                    {caseStudy.titleLines.mobile.map((unit) => (
+                      <span key={unit} className="inline-block">
+                        {unit}
+                      </span>
+                    ))}
                   </span>
-                ))}
-              </span>
-              <span className="hidden md:inline">
-                {caseStudy.titleLines.desktop.map((unit) => (
-                  <span key={unit} className="inline-block">
-                    {unit}
+                  <span className="hidden md:inline">
+                    {caseStudy.titleLines.desktop.map((unit) => (
+                      <span key={unit} className="inline-block">
+                        {unit}
+                      </span>
+                    ))}
                   </span>
-                ))}
-              </span>
+                </>
+              ) : (
+                caseStudy.title
+              )}
             </h2>
             <p className="mt-5 max-w-[44rem] text-base leading-[1.85] text-slate-600 [text-wrap:pretty]">
               {caseStudy.lead}
             </p>
             <span className="link-arrow mt-8 inline-flex min-h-11 items-center text-sm text-ink transition-colors group-hover:text-accent-600">
-              事例を読む
+              {t.routes.cases.read}
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>

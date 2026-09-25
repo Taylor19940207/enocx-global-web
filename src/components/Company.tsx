@@ -1,15 +1,18 @@
-import { company } from "@/lib/content";
+import { getContent } from "@/lib/content";
+import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 
-export default function Company() {
+export default function Company({ locale = defaultLocale }: { locale?: Locale }) {
+  const t = getDictionary(locale);
+  const { company } = getContent(locale);
   return (
     <section id="company" className="bg-paper-2 py-24 lg:py-section">
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-16 px-6 md:px-10 lg:grid-cols-[0.9fr_1.1fr]">
         <SectionHeading
           eyebrow="Company"
-          title="東京と上海を拠点に、日中の橋渡しを。"
-          lead="会計税務事務所を前身とし、越境ビジネスのハブとして事業を展開しています。"
+          title={t.company.heading}
+          lead={t.company.lead}
         />
 
         <Reveal>

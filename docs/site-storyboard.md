@@ -169,3 +169,16 @@ Detailed implementation is complete only when:
 2. Supplied content remains present unless an explicit project-owner change is recorded.
 3. Homepage and every internal route pass section-level rendered review at mobile and desktop widths.
 4. Changed interactive states and repeated layouts are inspected after fonts, images, and reveal motion settle.
+
+## Locales
+
+Japanese holds the root path; English is served under `/en`. Both trees publish
+identical slugs and the same section sequence — the storyboards above describe
+either language.
+
+The one thing that differs is heading composition. The per-breakpoint line
+plans in §5 are Japanese: the language has no spaces, so display headings are
+cut by hand at 文節 boundaries. English wraps on spaces and carries no plan, so
+its headings are set as written and balanced by the browser. A locale must not
+translate the fragments of a plan — that would break its headings at the
+Japanese boundaries rather than where its own words allow.

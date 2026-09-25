@@ -1,21 +1,24 @@
 import CountUp from "./CountUp";
 import Reveal from "./Reveal";
 import NumbersScrollDirector from "./NumbersScrollDirector";
+import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
 
-const primaryMetrics = [
-  { end: 500, suffix: "+", unit: "件", label: "日本法人の設立ケース" },
-  { end: 380, suffix: "+", unit: "社", label: "設立後の運営・管理を支援中" },
-  { end: 800, suffix: "+", unit: "社", label: "支援した中小企業（累計）" },
-  { end: 35, suffix: "", unit: "社", label: "上場企業クライアント" },
+// Figures stay here; their unit and label are translated. Paired by position,
+// so a dictionary that lists a different number of metrics fails to compile.
+const primaryFigures = [
+  { end: 500, suffix: "+" },
+  { end: 380, suffix: "+" },
+  { end: 800, suffix: "+" },
+  { end: 35, suffix: "" },
 ];
 
-const supportingMetrics = [
-  { end: 1000, unit: "億円", label: "累計資産規模" },
-  { end: 6, unit: "拠点", label: "東京・福岡・上海・北京・香港・シンガポール" },
-  { end: 3, unit: "言語", label: "日本語・中国語・英語で対応" },
-];
+const supportingFigures = [{ end: 1000 }, { end: 6 }, { end: 3 }];
 
-export default function ByTheNumbers() {
+export default function ByTheNumbers({ locale = defaultLocale }: { locale?: Locale }) {
+  const t = getDictionary(locale);
+  const primaryMetrics = primaryFigures.map((figure, i) => ({ ...figure, ...t.numbers.primary[i] }));
+  const supportingMetrics = supportingFigures.map((figure, i) => ({ ...figure, ...t.numbers.supporting[i] }));
+
   return (
     <section id="numbers" className="numbers-scroll-section relative border-y border-mist-line bg-mist-soft py-18 md:py-20 lg:py-24">
       <NumbersScrollDirector />
@@ -23,10 +26,10 @@ export default function ByTheNumbers() {
       <div className="mx-auto max-w-[1320px] px-6 md:px-10">
         <Reveal className="max-w-[44rem]">
           <h2 className="max-w-[20ch] text-[clamp(1.9rem,3.8vw,2.65rem)] font-bold leading-[1.32] tracking-[-0.025em] text-ink [text-wrap:balance]">
-            実績を、数字で。
+            {t.numbers.heading}
           </h2>
           <p className="mt-5 text-base leading-[1.85] text-slate-600 [text-wrap:pretty]">
-            創業以来、日中をまたぐ企業の起業と成長を、積み重ねてきた実績で支えています。
+            {t.numbers.lead}
           </p>
         </Reveal>
 

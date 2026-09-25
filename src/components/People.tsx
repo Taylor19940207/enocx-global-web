@@ -1,10 +1,12 @@
 import Image from "next/image";
-import { experts } from "@/lib/content";
+import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
+import { getContent } from "@/lib/content";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 import ArrowLink from "./ArrowLink";
 
 type Props = {
+  locale?: Locale;
   withHeading?: boolean;
   limit?: number;
   moreHref?: string;
@@ -16,7 +18,10 @@ export default function People({
   limit,
   moreHref,
   bg = "bg-paper-2",
+  locale = defaultLocale,
 }: Props) {
+  const t = getDictionary(locale);
+  const { experts } = getContent(locale);
   // Full page keeps leadership order; the limited (home) view prioritises
   // members with photos for a stronger visual.
   const list = limit
@@ -30,8 +35,8 @@ export default function People({
       <div className="mx-auto max-w-[1320px] px-6 md:px-10">
         {withHeading && (
           <SectionHeading
-            title="有資格の専門家が、直接あなたの課題に向き合う。"
-            lead="税理士・国税OB・司法書士・弁護士など、各分野の実務家がチームとして越境案件を支えます。"
+            title={t.people.heading}
+            lead={t.people.lead}
           />
         )}
 
@@ -103,7 +108,7 @@ export default function People({
         {moreHref && (
           <Reveal className="mt-14 flex justify-center">
             <ArrowLink href={moreHref} variant="outline">
-              専門家チームをすべて見る
+              {t.people.more}
             </ArrowLink>
           </Reveal>
         )}

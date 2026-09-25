@@ -6,21 +6,39 @@
  * engagement may have four nodes and no metric band), and a missing beat must
  * drop out of the page rather than render an empty frame.
  *
- * `titleLines` is required on purpose — CONTRACT §9 caps h1 at 2 lines from
- * 1024px and 3 lines at 390px with no particle-initial line, so every new case
- * has to ship its own line plan. Making it required means TypeScript, not a
- * later rendered audit, is what catches an omission.
+ * `titleLines` carries a manual per-breakpoint line plan (CONTRACT §9, which
+ * caps h1 at 2 lines from 1024px and 3 at 390px, with no particle-initial
+ * line). It is optional because it is a property of the language rather than
+ * of the layout: Japanese has no spaces and breaks display headings by hand,
+ * while a locale that wraps on spaces must omit it. `scripts/qa-case-routes.mjs`
+ * measures the rendered line count, so an omission where one is needed fails
+ * the check rather than passing silently.
  */
 
-export const caseCategories = {
-  "real-estate-odi": { eyebrow: "Real Estate / ODI", label: "不動産・ODI" },
-  "company-formation": { eyebrow: "Company Formation", label: "会社設立・進出" },
-  licensing: { eyebrow: "Licensing / Compliance", label: "許認可・法令対応" },
-  "hr-tax": { eyebrow: "HR & Tax", label: "人事・税務" },
-  "tax-filing": { eyebrow: "Tax Filing", label: "税務申告" },
-} as const;
+/**
+ * The eyebrow is English on both sides — it is set in Latin type as a label,
+ * the way the rest of the site's eyebrows are. Only the prose label, used in
+ * breadcrumbs and in the case navigation, is translated.
+ */
+export const caseCategoryKeys = [
+  "real-estate-odi",
+  "company-formation",
+  "licensing",
+  "hr-tax",
+  "tax-filing",
+] as const;
 
-export type CaseCategoryKey = keyof typeof caseCategories;
+export type CaseCategoryKey = (typeof caseCategoryKeys)[number];
+
+export const caseCategoryEyebrows: Record<CaseCategoryKey, string> = {
+  "real-estate-odi": "Real Estate / ODI",
+  "company-formation": "Company Formation",
+  licensing: "Licensing / Compliance",
+  "hr-tax": "HR & Tax",
+  "tax-filing": "Tax Filing",
+};
+
+export type CaseCategoryLabels = Record<CaseCategoryKey, string>;
 
 /** Per-breakpoint line plan for the case title (CONTRACT §9). */
 export type CaseTitleLines = {
@@ -56,7 +74,7 @@ export type CaseStudy = {
   slug: string;
   category: CaseCategoryKey;
   title: string;
-  titleLines: CaseTitleLines;
+  titleLines?: CaseTitleLines;
   /** Widens the desktop measure for titles whose planned lines run long. */
   longTitle?: boolean;
   lead: string;

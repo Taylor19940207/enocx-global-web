@@ -1,0 +1,111 @@
+import PageHero from "@/components/PageHero";
+import Reveal from "@/components/Reveal";
+import SectionHeading from "@/components/SectionHeading";
+import CTA from "@/components/CTA";
+import { getContent } from "@/lib/content";
+import { defaultLocale, getDictionary, href, type Locale } from "@/lib/i18n";
+
+export default function AboutPage({ locale = defaultLocale }: { locale?: Locale }) {
+  const t = getDictionary(locale).routes.about;
+  const { about } = getContent(locale);
+  const common = getDictionary(locale).common;
+
+  return (
+    <>
+      <PageHero
+        eyebrow={t.eyebrow}
+        title={t.heroTitle}
+        titleLines={t.heroLines}
+        lead={about.promise.lead}
+        crumbs={[{ label: common.home, href: href("/", locale) }, { label: t.crumb }]}
+      />
+
+      {/* Promise */}
+      <section className="bg-paper py-24 lg:py-section">
+        <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-16 px-6 md:px-10 lg:grid-cols-[0.8fr_1.2fr]">
+          <SectionHeading title={about.promise.title} />
+          <div className="grid grid-cols-1 border-t border-mist-line sm:grid-cols-2">
+            {about.promise.points.map((p, i) => (
+              <Reveal
+                key={p.no}
+                delay={i * 100}
+                className={`border-b border-mist-line py-8 sm:px-8 ${i % 2 ? "sm:border-l" : "sm:pl-0"}`}
+              >
+                <p className="text-base leading-relaxed text-ink">
+                  {p.text}
+                </p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Worldview */}
+      <section className="border-y border-mist-line bg-paper-2 py-24 lg:py-section">
+        <div className="mx-auto max-w-[1320px] px-6 md:px-10">
+          <SectionHeading title={about.worldview.title} />
+          <div className="mt-12 grid max-w-4xl grid-cols-1 gap-6">
+            {about.worldview.paragraphs.map((p, i) => (
+              <Reveal
+                key={i}
+                delay={i * 80}
+                as="div"
+              >
+                <p className="text-lg leading-relaxed text-slate-600">{p}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Philosophy */}
+      <section className="bg-paper py-24 lg:py-section">
+        <div className="mx-auto max-w-[1320px] px-6 md:px-10">
+          <SectionHeading title={about.philosophy.title} />
+          <div className="mt-14 grid grid-cols-1 gap-12 lg:grid-cols-2">
+            <Reveal>
+              <p className="text-sm font-semibold text-slate">
+                {t.focus}
+              </p>
+              <ul className="mt-6 space-y-4">
+                {about.philosophy.commit.map((c) => (
+                  <li key={c} className="border-b border-mist-line pb-4 text-base leading-relaxed text-ink">
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+            <Reveal delay={120}>
+              <p className="text-sm font-semibold text-slate">
+                {t.promise}
+              </p>
+              <ul className="mt-6 space-y-4">
+                {about.philosophy.never.map((c) => (
+                  <li key={c} className="border-b border-mist-line pb-4 text-base leading-relaxed text-ink">
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Value */}
+      <section className="bg-paper-2 py-24 lg:py-section">
+        <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-16 px-6 md:px-10 lg:grid-cols-[0.8fr_1.2fr]">
+          <SectionHeading title={about.value.title} />
+          <div className="grid grid-cols-1 gap-6">
+            {about.value.paragraphs.map((p, i) => (
+              <Reveal key={i} delay={i * 80}>
+                <p className="text-base leading-relaxed text-ink">{p}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <CTA locale={locale} />
+    </>
+  );
+}

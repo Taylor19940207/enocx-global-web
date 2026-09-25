@@ -1,7 +1,7 @@
 # EnocX Requirement Traceability Matrix
 
 Status: Frontend implementation matrix  
-Updated: 2026-08-27
+Updated: 2026-09-18
 
 ## Status vocabulary
 
@@ -38,7 +38,8 @@ Updated: 2026-08-27
 | PEOPLE-01 | Preserve supplied team roster and photos | Supplied project content | P0 | Full roster remains; missing portrait uses branded profile field | Rendered pass | Support variable biography length | People component and route | 390/1440 image and text review |
 | COMPANY-01 | Preserve supplied company, office, history, partner, and client information | Supplied project content | P0 | All surfaces remain; history uses balanced editorial split | Rendered pass | Keep partner content after identity/history/presence | Company, Footer, Contact | Route and section review |
 | BRAND-01 | Present promise, worldview, philosophy, and value | Supplied brand material | P1 | Implemented on About | Rendered pass | Maintain editorial hierarchy | About route | Middle/lower section screenshots |
-| LANG-01 | Current interface language is Japanese | Current project implementation | P2 | Japanese routes and labels remain | External input | Do not invent additional language routes | Routing and Header | Route inventory |
+| LANG-01 | Japanese is the primary interface language and holds the root path | Current project implementation; owner instruction 2026-09-18 | P2 | Japanese routes and labels unchanged at `/`; English served under `/en` | Rendered pass | Do not add a language route without an owner instruction; both locales publish identical slugs | Routing, Header, metadata | Visible text compared byte-for-byte against the pre-i18n build across all 16 Japanese pages |
+| LANG-02 | Serve an English version without displacing the Japanese site | Owner instruction 2026-09-18 | P1 | `/en` tree with one root layout per locale, a page-aware language switcher, hreflang and per-locale canonicals | Rendered pass | Manual line plans are Japanese-only (§9); English omits them. No in-site link may cross locales except the switcher | All routes, `src/lib/i18n`, `src/lib/content`, `src/lib/cases` | `scripts/qa-locale-links.mjs`, `scripts/qa-locale-text.mjs`, `scripts/qa-seo.mjs`, `scripts/qa-case-routes.mjs` |
 | A11Y-01 | Meet focus, contrast, touch, and reduced-motion presentation requirements | Workflow | P0 | Frontend states and fallbacks implemented | Rendered pass | Recheck affected components after changes | Shared interactions | QA matrix |
 | QA-01 | Cover route x viewport x state x region | Updated workflow and prior QA failure | P0 | Homepage six-width matrix and internal route mobile/desktop regression completed | Rendered pass | Keep evidence section-specific | All changed surfaces | `docs/qa-coverage-matrix.md` |
 | MOTION-01 | Prototype a continuous scroll-linked handoff from Hero through Services into Numbers | Project-owner instruction, 2026-07-23 | P0 | Hero route hands off into a pinned four-service progression and staggered Numbers reveal; mobile keeps the accordion with a lighter route treatment; reduced-motion CSS removes pinning and transforms | Implemented | Preserve brand/content/IA and keep the effect limited to this homepage sequence until owner review | Hero, Services, ByTheNumbers, Homepage | In-app browser review at 390×844 and 1440×900; zero horizontal overflow and no runtime warnings; reduced-motion source audit; lint and production build pass |

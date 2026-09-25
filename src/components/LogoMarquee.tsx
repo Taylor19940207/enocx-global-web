@@ -1,7 +1,9 @@
 import Image from "next/image";
-import { partnerLogos } from "@/lib/content";
+import { defaultLocale, type Locale } from "@/lib/i18n";
+import { getContent } from "@/lib/content";
 
-export default function LogoMarquee() {
+export default function LogoMarquee({ locale = defaultLocale }: { locale?: Locale }) {
+  const { partnerLogos } = getContent(locale);
   const loop = [...partnerLogos, ...partnerLogos];
   return (
     <div className="marquee-mask overflow-hidden">
