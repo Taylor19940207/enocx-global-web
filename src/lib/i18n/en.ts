@@ -92,15 +92,17 @@ const en: Dictionary = {
     heading: "The record, in numbers",
     lead: "Since the firm was founded we have supported companies working across Japan and China — from incorporation through to growth.",
     primary: [
-      { unit: "", label: "Japanese entities incorporated" },
-      { unit: "", label: "companies whose operations we manage" },
-      { unit: "", label: "small and mid-sized companies supported to date" },
-      { unit: "", label: "listed-company clients" },
+      { figure: 500, suffix: "+", unit: "", label: "Japanese entities incorporated" },
+      { figure: 380, suffix: "+", unit: "", label: "companies whose operations we manage" },
+      { figure: 800, suffix: "+", unit: "", label: "small and mid-sized companies supported to date" },
+      { figure: 35, unit: "", label: "listed-company clients" },
     ],
+    // 1,000億円 is 100 billion yen, not 1,000 billion: 億 is a unit English
+    // does not have, so the figure is restated rather than the unit translated.
     supporting: [
-      { unit: "billion yen", label: "in assets under management" },
-      { unit: "offices", label: "Tokyo, Fukuoka, Shanghai, Beijing, Hong Kong, Singapore" },
-      { unit: "languages", label: "English, Japanese and Chinese" },
+      { figure: 100, unit: "billion yen", label: "in assets under management" },
+      { figure: 6, unit: "offices", label: "Tokyo, Fukuoka, Shanghai, Beijing, Hong Kong, Singapore" },
+      { figure: 3, unit: "languages", label: "English, Japanese and Chinese" },
     ],
   },
 
