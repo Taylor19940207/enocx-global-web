@@ -9,5 +9,5 @@
  */
 export const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 
-/** Issued to the recipient's inbox at web3forms.com. Empty = not yet wired. */
-export const WEB3FORMS_ACCESS_KEY = "";
+/** Form access key from web3forms.com (public by design, see above). */
+export const WEB3FORMS_ACCESS_KEY = "8da88933-9a3c-4e2c-9879-53863e7386bc";

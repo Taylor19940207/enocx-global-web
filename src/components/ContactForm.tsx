@@ -21,21 +21,23 @@ export default function ContactForm({ locale = defaultLocale }: { locale?: Local
     if (status === "sending") return;
     setStatus("sending");
 
-    const data = new FormData(e.currentTarget);
-    data.append("access_key", WEB3FORMS_ACCESS_KEY);
-    data.append("from_name", "ENOCX Website");
-    data.append(
-      "subject",
-      `【ENOCX】お問い合わせ（${data.get("topic") ?? ""}）${data.get("name") ?? ""}様`,
-    );
-    data.append("language", locale);
+    const fields = Object.fromEntries(new FormData(e.currentTarget));
+    const payload = {
+      ...fields,
+      access_key: WEB3FORMS_ACCESS_KEY,
+      from_name: "ENOCX Website",
+      subject: `【ENOCX】お問い合わせ（${fields.topic ?? ""}）${fields.name ?? ""}様`,
+      language: locale,
+    };
 
     try {
       if (!WEB3FORMS_ACCESS_KEY) throw new Error("Web3Forms access key is not set");
+      // Must be a JSON body: a multipart post gets an HTML page back even on
+      // success, which would read as a failure here.
       const res = await fetch(WEB3FORMS_ENDPOINT, {
         method: "POST",
-        headers: { Accept: "application/json" },
-        body: data,
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
       });
       const json = (await res.json()) as { success?: boolean; message?: string };
       if (!res.ok || !json.success) throw new Error(json.message ?? `HTTP ${res.status}`);
