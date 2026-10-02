@@ -84,6 +84,9 @@ const ja = {
     ],
     message: "お問い合わせ内容",
     submit: "送信する",
+    sending: "送信中…",
+    errorTitle: "送信できませんでした。",
+    errorBody: "通信状況をご確認のうえ再度お試しいただくか、info@enocx.co.jp まで直接メールでお問い合わせください。",
   },
 
   numbers: {
