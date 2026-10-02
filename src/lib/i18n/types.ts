@@ -16,5 +16,19 @@ export type Dictionary = typeof ja;
  */
 export type LinePlan = { mobile: string[]; desktop: string[] };
 
+/**
+ * A headline figure, with the number itself in the dictionary.
+ *
+ * The number belongs to the locale, not to the layout: 1,000億円 and 100
+ * billion yen are the same sum written in each language's own unit, so a
+ * shared figure with a translated unit would state one of them wrongly.
+ */
+export type Metric = {
+  figure: number;
+  suffix?: string;
+  unit: string;
+  label: string;
+};
+
 /** Semantic wrap units: a line break may only fall between units. */
 export type WrapUnits = string[];

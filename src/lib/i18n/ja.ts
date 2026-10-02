@@ -1,4 +1,4 @@
-import type { LinePlan, WrapUnits } from "./types";
+import type { LinePlan, Metric, WrapUnits } from "./types";
 
 /**
  * Japanese UI copy.
@@ -18,6 +18,12 @@ const lines = (mobile: string[], desktop: string[]): LinePlan | undefined => ({
   desktop,
 });
 const units = (...u: string[]): WrapUnits | undefined => u;
+
+// The Numbers grid is built for four primary figures and three supporting
+// ones, so these are tuples: a locale that lists a different number of
+// metrics fails to compile rather than dropping one silently.
+const primaryMetrics = (...m: [Metric, Metric, Metric, Metric]) => m;
+const supportingMetrics = (...m: [Metric, Metric, Metric]) => m;
 
 const ja = {
   meta: {
@@ -89,17 +95,17 @@ const ja = {
   numbers: {
     heading: "実績を、数字で。",
     lead: "創業以来、日中をまたぐ企業の起業と成長を、積み重ねてきた実績で支えています。",
-    primary: [
-      { unit: "件", label: "日本法人の設立ケース" },
-      { unit: "社", label: "設立後の運営・管理を支援中" },
-      { unit: "社", label: "支援した中小企業（累計）" },
-      { unit: "社", label: "上場企業クライアント" },
-    ],
-    supporting: [
-      { unit: "億円", label: "累計資産規模" },
-      { unit: "拠点", label: "東京・福岡・上海・北京・香港・シンガポール" },
-      { unit: "言語", label: "日本語・中国語・英語で対応" },
-    ],
+    primary: primaryMetrics(
+      { figure: 500, suffix: "+", unit: "件", label: "日本法人の設立ケース" },
+      { figure: 380, suffix: "+", unit: "社", label: "設立後の運営・管理を支援中" },
+      { figure: 800, suffix: "+", unit: "社", label: "支援した中小企業（累計）" },
+      { figure: 35, unit: "社", label: "上場企業クライアント" },
+    ),
+    supporting: supportingMetrics(
+      { figure: 1000, unit: "億円", label: "累計資産規模" },
+      { figure: 6, unit: "拠点", label: "東京・福岡・上海・北京・香港・シンガポール" },
+      { figure: 3, unit: "言語", label: "日本語・中国語・英語で対応" },
+    ),
   },
 
   services: {

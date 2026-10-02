@@ -3,21 +3,9 @@ import Reveal from "./Reveal";
 import NumbersScrollDirector from "./NumbersScrollDirector";
 import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
 
-// Figures stay here; their unit and label are translated. Paired by position,
-// so a dictionary that lists a different number of metrics fails to compile.
-const primaryFigures = [
-  { end: 500, suffix: "+" },
-  { end: 380, suffix: "+" },
-  { end: 800, suffix: "+" },
-  { end: 35, suffix: "" },
-];
-
-const supportingFigures = [{ end: 1000 }, { end: 6 }, { end: 3 }];
-
 export default function ByTheNumbers({ locale = defaultLocale }: { locale?: Locale }) {
   const t = getDictionary(locale);
-  const primaryMetrics = primaryFigures.map((figure, i) => ({ ...figure, ...t.numbers.primary[i] }));
-  const supportingMetrics = supportingFigures.map((figure, i) => ({ ...figure, ...t.numbers.supporting[i] }));
+  const { primary, supporting } = t.numbers;
 
   return (
     <section id="numbers" className="numbers-scroll-section relative border-y border-mist-line bg-mist-soft py-18 md:py-20 lg:py-24">
@@ -34,7 +22,7 @@ export default function ByTheNumbers({ locale = defaultLocale }: { locale?: Loca
         </Reveal>
 
         <dl className="mt-14 grid border-t border-mist-line sm:grid-cols-2 lg:grid-cols-4">
-          {primaryMetrics.map((metric, index) => (
+          {primary.map((metric, index) => (
             <Reveal
               key={metric.label}
               delay={index * 45}
@@ -43,7 +31,7 @@ export default function ByTheNumbers({ locale = defaultLocale }: { locale?: Loca
               className={`relative border-b border-mist-line py-8 sm:px-7 lg:py-10 ${index % 2 ? "sm:border-l" : ""} ${index > 0 ? "lg:border-l" : "lg:border-l-0"}`}
             >
               <dt className="flex min-w-0 items-baseline gap-1 text-ink">
-                <CountUp end={metric.end} className="font-latin text-[clamp(2.8rem,5vw,4.5rem)] font-bold leading-none tracking-[-0.05em]" />
+                <CountUp end={metric.figure} className="font-latin text-[clamp(2.8rem,5vw,4.5rem)] font-bold leading-none tracking-[-0.05em]" />
                 <span className="font-latin text-xl font-semibold text-accent-600">{metric.suffix}</span>
                 <span className="ml-1 text-base font-semibold text-accent-600">{metric.unit}</span>
               </dt>
@@ -53,7 +41,7 @@ export default function ByTheNumbers({ locale = defaultLocale }: { locale?: Loca
         </dl>
 
         <dl className="grid sm:grid-cols-3">
-          {supportingMetrics.map((metric, index) => (
+          {supporting.map((metric, index) => (
             <Reveal
               key={metric.label}
               delay={index * 45}
@@ -62,7 +50,7 @@ export default function ByTheNumbers({ locale = defaultLocale }: { locale?: Loca
               className={`relative border-b border-mist-line py-7 sm:px-7 ${index > 0 ? "sm:border-l" : ""}`}
             >
               <dt className="flex items-baseline gap-2">
-                <CountUp end={metric.end} className="font-latin text-3xl font-bold tracking-[-0.04em] text-ink" />
+                <CountUp end={metric.figure} className="font-latin text-3xl font-bold tracking-[-0.04em] text-ink" />
                 <span className="text-sm font-bold text-accent-600">{metric.unit}</span>
               </dt>
               <dd className="mt-3 text-sm leading-[1.75] text-slate-600">{metric.label}</dd>
