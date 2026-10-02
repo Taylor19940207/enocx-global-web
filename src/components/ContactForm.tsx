@@ -22,12 +22,22 @@ export default function ContactForm({ locale = defaultLocale }: { locale?: Local
     setStatus("sending");
 
     const fields = Object.fromEntries(new FormData(e.currentTarget));
+    // Web3Forms prints each key as the field label in the email body, so the
+    // keys are the labels the recipient reads (Simplified Chinese). The
+    // English keys are its control fields; `replyto` keeps "Reply" working
+    // now that the address is no longer under `email`.
     const payload = {
-      ...fields,
+      姓名: fields.name,
+      公司名称: fields.company,
+      邮箱: fields.email,
+      咨询领域: fields.topic,
+      咨询内容: fields.message,
+      填写语言: locale === "en" ? "英语" : "日语",
       access_key: WEB3FORMS_ACCESS_KEY,
       from_name: "ENOCX Website",
       subject: `【ENOCX】お問い合わせ（${fields.topic ?? ""}）${fields.name ?? ""}様`,
-      language: locale,
+      replyto: fields.email,
+      botcheck: fields.botcheck,
     };
 
     try {
