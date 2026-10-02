@@ -86,6 +86,9 @@ const en: Dictionary = {
     ],
     message: "Your message",
     submit: "Send",
+    sending: "Sending…",
+    errorTitle: "Your message couldn't be sent.",
+    errorBody: "Please check your connection and try again, or email us directly at info@enocx.co.jp.",
   },
 
   numbers: {

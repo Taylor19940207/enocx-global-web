@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { WEB3FORMS_ACCESS_KEY, WEB3FORMS_ENDPOINT } from "@/lib/contact";
 import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
+
+type Status = "idle" | "sending" | "sent" | "error";
 
 const field =
   "w-full rounded-lg border border-mist-line bg-paper px-4 py-3 text-base text-ink outline-none transition focus:border-slate focus:ring-2 focus:ring-slate/15";
@@ -9,15 +12,53 @@ const label = "block text-sm font-medium text-ink";
 
 export default function ContactForm({ locale = defaultLocale }: { locale?: Locale }) {
   const t = getDictionary(locale);
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  // Only a confirmed delivery may show the thank-you: anything else keeps the
+  // visitor's text on screen and points them to the mailto fallback.
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Placeholder submit — wire to an API route or form backend later.
-    setSent(true);
+    if (status === "sending") return;
+    setStatus("sending");
+
+    const fields = Object.fromEntries(new FormData(e.currentTarget));
+    // Web3Forms prints each key as the field label in the email body, so the
+    // keys are the labels the recipient reads (Simplified Chinese). The
+    // English keys are its control fields; `replyto` keeps "Reply" working
+    // now that the address is no longer under `email`.
+    const payload = {
+      姓名: fields.name,
+      公司名称: fields.company,
+      邮箱: fields.email,
+      咨询领域: fields.topic,
+      咨询内容: fields.message,
+      填写语言: locale === "en" ? "英语" : "日语",
+      access_key: WEB3FORMS_ACCESS_KEY,
+      from_name: "ENOCX Website",
+      subject: `【ENOCX】お問い合わせ（${fields.topic ?? ""}）${fields.name ?? ""}様`,
+      replyto: fields.email,
+      botcheck: fields.botcheck,
+    };
+
+    try {
+      if (!WEB3FORMS_ACCESS_KEY) throw new Error("Web3Forms access key is not set");
+      // Must be a JSON body: a multipart post gets an HTML page back even on
+      // success, which would read as a failure here.
+      const res = await fetch(WEB3FORMS_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const json = (await res.json()) as { success?: boolean; message?: string };
+      if (!res.ok || !json.success) throw new Error(json.message ?? `HTTP ${res.status}`);
+      setStatus("sent");
+    } catch (err) {
+      console.error("Contact form delivery failed:", err);
+      setStatus("error");
+    }
   };
 
-  if (sent) {
+  if (status === "sent") {
     return (
       <div className="rounded-lg border border-mist-line bg-mist-soft p-10 text-center">
         <h3 className="text-xl font-bold text-ink">
@@ -82,11 +123,34 @@ export default function ContactForm({ locale = defaultLocale }: { locale?: Local
           className={`mt-2 ${field} resize-none`}
         />
       </div>
+      {/* Honeypot: invisible to people, ticked by bots; Web3Forms drops those. */}
+      <input
+        type="checkbox"
+        name="botcheck"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+      />
+      {status === "error" && (
+        <div
+          role="alert"
+          className="rounded-lg border border-mist-line bg-mist-soft p-5"
+        >
+          <p className="text-sm font-bold text-ink">
+            {t.contactForm.errorTitle}
+          </p>
+          <p className="mt-2 text-sm leading-relaxed text-slate-600">
+            {t.contactForm.errorBody}
+          </p>
+        </div>
+      )}
       <button
         type="submit"
-        className="w-full rounded-full bg-ink px-8 py-4 text-sm font-semibold text-white transition hover:bg-slate-dark sm:w-auto"
+        disabled={status === "sending"}
+        className="w-full rounded-full bg-ink px-8 py-4 text-sm font-semibold text-white transition hover:bg-slate-dark disabled:cursor-wait disabled:opacity-60 sm:w-auto"
       >
-        {t.contactForm.submit}
+        {status === "sending" ? t.contactForm.sending : t.contactForm.submit}
       </button>
     </form>
   );
