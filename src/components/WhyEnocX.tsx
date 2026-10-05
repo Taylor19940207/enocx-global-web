@@ -2,6 +2,7 @@ import { getContent } from "@/lib/content";
 import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
 import NetworkParallax from "./NetworkParallax";
 import Reveal from "./Reveal";
+import PlannedLines from "./PlannedLines";
 
 const cityPositions = [
   "left-[43%] top-[10%]",
@@ -24,18 +25,7 @@ export default function WhyEnocX({ locale = defaultLocale }: { locale?: Locale }
             <p className="eyebrow text-mist">Why EnocX</p>
             <h2 className="mt-6 text-[clamp(2.15rem,4vw,3.55rem)] font-bold leading-[1.26] tracking-[-0.035em] text-white">
               {t.whyEnocX.headingLines ? (
-                <>
-                  {t.whyEnocX.headingLines.mobile.map((line) => (
-                    <span key={line} className="block lg:hidden">
-                      {line}
-                    </span>
-                  ))}
-                  {t.whyEnocX.headingLines.desktop.map((line) => (
-                    <span key={line} className="hidden lg:block">
-                      {line}
-                    </span>
-                  ))}
-                </>
+                <PlannedLines plan={t.whyEnocX.headingLines} at="lg" />
               ) : (
                 t.whyEnocX.heading
               )}

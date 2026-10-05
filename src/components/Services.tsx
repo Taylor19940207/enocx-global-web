@@ -6,6 +6,7 @@ import { getContent } from "@/lib/content";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 import ArrowLink from "./ArrowLink";
+import PlannedLines from "./PlannedLines";
 
 type Props = {
   locale?: Locale;
@@ -94,18 +95,7 @@ export default function Services({
             title={
               <>
                 {t.services.headingLines ? (
-                  <>
-                    {t.services.headingLines.mobile.map((line) => (
-                      <span key={line} className="block md:hidden">
-                        {line}
-                      </span>
-                    ))}
-                    {t.services.headingLines.desktop.map((line) => (
-                      <span key={line} className="hidden md:block">
-                        {line}
-                      </span>
-                    ))}
-                  </>
+                  <PlannedLines plan={t.services.headingLines} />
                 ) : (
                   t.services.heading
                 )}
