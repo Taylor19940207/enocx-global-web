@@ -5,7 +5,8 @@ import { alternates, defaultLocale, getDictionary, openGraphFor } from "@/lib/i1
 const t = getDictionary(defaultLocale).routes.about;
 
 export const metadata: Metadata = {
-  title: t.metaTitle,
+  // The brand is already inside this title; the template would repeat it.
+  title: { absolute: t.metaTitle },
   description: t.metaDescription,
   alternates: alternates("/about", defaultLocale),
     openGraph: openGraphFor("/about", defaultLocale),
