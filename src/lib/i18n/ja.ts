@@ -27,10 +27,10 @@ const supportingMetrics = (...m: [Metric, Metric, Metric]) => m;
 
 const ja = {
   meta: {
-    titleDefault: "EnocX｜日本進出・法人運営・会計税務のワンストップ支援",
+    titleDefault: "中国・海外企業の日本進出支援｜法人設立・会計税務｜EnocX",
     titleTemplate: "%s｜EnocX",
     description:
-      "中国・海外企業の日本市場進出を、法人設立から会計税務・法務・事業拡大まで一気通貫で支援。有資格の専門家チームが越境ビジネスの意思決定を伴走します。",
+      "中国・海外企業の日本進出を、法人設立、法人口座、会計税務、法務、資産運用、事業拡大まで一つの専門家チームが支援します。日本語・中国語・英語に対応。",
     keywords: [
       "日本法人設立",
       "外国企業 日本進出",
@@ -173,9 +173,9 @@ const ja = {
 
     about: {
       eyebrow: "About EnocX",
-      metaTitle: "EnocXについて",
+      metaTitle: "EnocXについて｜中国・海外企業の日本進出支援チーム",
       metaDescription:
-        "中国系の投資家・企業の日本進出を後押しし、アジア全域のリソース統合で資産を最適化する。EnocXのブランド確約・世界観・理念・価値をご紹介します。",
+        "EnocXは、中国・海外企業の日本進出と設立後の運営を支援する専門家チームです。東京・福岡・上海などのネットワークと多言語対応で越境ビジネスを支えます。",
       crumb: "EnocXについて",
       heroTitle: "日中をつなぎ、アジアへ。",
       heroLines: lines(["日中をつなぎ、", "アジアへ。"], ["日中をつなぎ、アジアへ。"]),
@@ -185,9 +185,9 @@ const ja = {
 
     services: {
       eyebrow: "Services",
-      metaTitle: "サービス",
+      metaTitle: "日本進出支援サービス｜法人設立・会計税務・不動産",
       metaDescription:
-        "日本法人設立・会計税務・不動産資産金融・事業経営サポートを核に、法律・金融・医療・物流・教育・ECまで。日本進出のすべての工程をワンストップで支援します。",
+        "日本法人設立、銀行口座、会計税務、法務、不動産・金融、事業運営まで、中国・海外企業の日本進出を分野横断で支援します。",
       crumb: "サービス",
       heroTitle: "日本進出のすべての工程を、一つの窓口で。",
       heroLines: lines(
@@ -200,9 +200,9 @@ const ja = {
 
     marketEntry: {
       eyebrow: "Market Entry",
-      metaTitle: "日本進出支援",
+      metaTitle: "中国企業の日本進出支援｜法人設立・銀行口座・会計税務",
       metaDescription:
-        "外国企業の日本市場進出を、戦略設計・法人設立・口座と許認可・運営と成長の4ステップで支援。口座開設や税務設計などの典型的なリスクにも事前に対応します。",
+        "中国企業の日本進出を、事業スキーム、資本金送金、会社登記、法人口座、許認可、会計税務、社会保険まで一貫して支援します。",
       crumb: "日本進出",
       heroTitle: "日本進出は、点ではなく一連のプロセス。",
       heroLines: lines(
@@ -217,9 +217,9 @@ const ja = {
 
     cases: {
       eyebrow: "Case Study",
-      metaTitle: "支援事例",
+      metaTitle: "中国・海外企業の日本進出支援事例",
       metaDescription:
-        "日本進出・法人設立・許認可・会計税務の実際の案件を、進め方と期日、結果まで公開しています。掲載はお客様の許諾を得た範囲に限っています。",
+        "法人設立、ODI、東京不動産取得、電気用品輸入、人事・税務、給与・源泉税など、EnocXによる日本進出支援の実例をご紹介します。",
       crumb: "支援事例",
       heroTitle: "実際の案件で、どう進めたかを公開する。",
       heroLines: lines(
@@ -235,9 +235,9 @@ const ja = {
 
     people: {
       eyebrow: "People",
-      metaTitle: "専門家チーム",
+      metaTitle: "日本進出・国際税務を支援する専門家チーム",
       metaDescription:
-        "税理士・国税OB税理士・司法書士・社会保険労務士・行政書士・弁護士など、有資格の実務家がチームとして日中の越境案件を支援します。",
+        "税理士、国税OB、司法書士、弁護士など、日本進出・国際税務・法務・資産運用を支援するEnocXの専門家チームをご紹介します。",
       crumb: "専門家",
       heroTitle: "有資格の専門家が、直接あなたの課題に向き合う。",
       heroLines: lines(
@@ -271,9 +271,9 @@ const ja = {
 
     career: {
       eyebrow: "Career",
-      metaTitle: "採用情報",
+      metaTitle: "採用情報｜日中越境ビジネスを支援するEnocX",
       metaDescription:
-        "EnocXの採用情報。東京・上海の拠点で、日中の越境ビジネスを支えるメンバーを募集しています。",
+        "日本進出、会計税務、不動産、経営支援など、日中の越境ビジネスに携わるEnocXの採用情報をご案内します。",
       crumb: "採用情報",
       heroTitle: "日中をつなぐ仕事を、一緒に。",
       heroLines: lines(
@@ -292,9 +292,9 @@ const ja = {
 
     contact: {
       eyebrow: "Contact",
-      metaTitle: "お問い合わせ",
+      metaTitle: "日本進出の無料相談・お問い合わせ",
       metaDescription:
-        "日本進出・法人運営に関するご相談はこちら。先行相談料はいただきません。日本語・中国語・英語で対応いたします。",
+        "日本法人設立、法人口座、会計税務、不動産投資、事業運営について、日本語・中国語・英語でご相談いただけます。先行相談料はいただきません。",
       crumb: "お問い合わせ",
       heroTitle: "日本進出の第一歩を、まずは相談から。",
       heroLines: lines(

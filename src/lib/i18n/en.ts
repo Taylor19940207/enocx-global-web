@@ -23,7 +23,7 @@ import type { Dictionary } from "./types";
 
 const en: Dictionary = {
   meta: {
-    titleDefault: "EnocX | Japan market entry, corporate operations, accounting and tax",
+    titleDefault: "Japan market entry, company formation and tax support | EnocX",
     titleTemplate: "%s | EnocX",
     description:
       "One firm for entering the Japanese market: company formation, accounting and tax, legal support and the operations that follow. A team of licensed professionals works directly on the decisions that matter.",
@@ -178,7 +178,7 @@ const en: Dictionary = {
 
     services: {
       eyebrow: "Services",
-      metaTitle: "Services",
+      metaTitle: "Japan market entry services | Incorporation, accounting and tax",
       metaDescription:
         "Company formation, accounting and tax, real estate and asset finance, and business operations support — extending to legal, financial, medical, logistics, education and e-commerce. Every stage of entering Japan, handled by one firm.",
       crumb: "Services",
@@ -190,7 +190,7 @@ const en: Dictionary = {
 
     marketEntry: {
       eyebrow: "Market Entry",
-      metaTitle: "Entering the Japanese market",
+      metaTitle: "Japan market entry support for Chinese and overseas companies",
       metaDescription:
         "Support for overseas companies entering Japan across four stages: strategy, company formation, banking and licensing, and operations and growth. The predictable obstacles — opening an account, structuring for tax — are handled before they bite.",
       crumb: "Market entry",
@@ -204,7 +204,7 @@ const en: Dictionary = {
 
     cases: {
       eyebrow: "Case Study",
-      metaTitle: "Case studies",
+      metaTitle: "Japan market entry case studies",
       metaDescription:
         "Real engagements in market entry, company formation, licensing and tax — how the work was run, the dates it hit, and what it produced. Published only as far as our clients have agreed.",
       crumb: "Case studies",
@@ -218,7 +218,7 @@ const en: Dictionary = {
 
     people: {
       eyebrow: "People",
-      metaTitle: "Our team",
+      metaTitle: "Japan market entry and international tax experts",
       metaDescription:
         "Certified Public Tax Accountants, former National Tax Agency officials, judicial scriveners, Labor and Social Security Attorneys, Certified Administrative Procedures Legal Specialists and attorneys — licensed practitioners handling cross-border work as one team.",
       crumb: "Team",

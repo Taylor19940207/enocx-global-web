@@ -6,20 +6,20 @@ const caseStudy: CaseStudy = {
   title: "Notification of business for seven electrical products, through to the amendments",
   titleLines: undefined,
   longTitle: true,
-  lead: "Compliance with the Electrical Appliance and Material Safety Act for chargers and lithium-ion batteries sold through cross-border e-commerce. From recovering access to the filing system, through preparing the product documentation and filing with METI, to reconciling the records held by customs — completed in about two and a half months.",
+  lead: "Compliance with the Electrical Appliance and Material Safety Act (PSE) for chargers and lithium-ion batteries sold through cross-border e-commerce. From recovering access to the filing system, through preparing the product documentation and filing with METI, to reconciling the records held by customs — completed in about two and a half months.",
   clientLabel: "An importer and distributor of electrical products",
   disclosure:
     "Published without the client's name at their request. The dates and quantities shown are published with their permission.",
   metaTitle: "Notification of business for imported electrical products",
   metaDescription:
-    "How an importer selling chargers and lithium-ion batteries through cross-border e-commerce met the Electrical Appliance and Material Safety Act — from recovering access to the filing system through documentation, filing, amendments and reconciliation with customs records.",
+    "How an importer selling chargers and lithium-ion batteries through cross-border e-commerce met the Electrical Appliance and Material Safety Act (PSE) — from recovering access to the filing system through documentation, filing, amendments and reconciliation with customs records.",
   profile: [
     { k: "Sector", v: "Import and distribution of electrical products" },
     { k: "Channel", v: "Cross-border e-commerce" },
     { k: "Products", v: "Seven charger and lithium-ion battery products" },
     {
       k: "Regulation",
-      v: "Notification of business under the Electrical Appliance and Material Safety Act",
+      v: "Notification of business under the Electrical Appliance and Material Safety Act (PSE)",
     },
     {
       k: "Scope",
