@@ -101,6 +101,7 @@ export default function ContactForm({ locale = defaultLocale }: { locale?: Local
 
   return (
     <form onSubmit={onSubmit} className="space-y-5">
+      <p className="text-sm leading-relaxed text-slate-600">{t.contactForm.noSales}</p>
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
           <label className={label} htmlFor="name">
