@@ -71,6 +71,7 @@ const en: Dictionary = {
   },
 
   contactForm: {
+    noSales: "Please do not use this form for sales or solicitation.",
     thanksTitle: "Thank you for getting in touch.",
     thanksBody: "We'll review what you've sent and come back to you shortly.",
     name: "Name",

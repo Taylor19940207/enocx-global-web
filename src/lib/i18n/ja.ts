@@ -75,6 +75,7 @@ const ja = {
   },
 
   contactForm: {
+    noSales: "営業・勧誘を目的としたお問い合わせはご遠慮ください。",
     thanksTitle: "お問い合わせありがとうございます。",
     thanksBody: "内容を確認のうえ、担当者よりご連絡いたします。",
     name: "お名前",
