@@ -7,7 +7,7 @@ import { defaultLocale, getDictionary, type Locale } from "@/lib/i18n";
 
 type Status = "idle" | "sending" | "sent" | "error";
 /** Something the visitor has to fix before the form can be sent. */
-type Problem = "message" | "captcha" | null;
+type Problem = "name" | "message" | "captcha" | null;
 
 const field =
   "w-full rounded-lg border border-mist-line bg-paper px-4 py-3 text-base text-ink outline-none transition focus:border-slate focus:ring-2 focus:ring-slate/15";
@@ -27,10 +27,14 @@ export default function ContactForm({ locale = defaultLocale }: { locale?: Local
     if (status === "sending") return;
 
     const fields = Object.fromEntries(new FormData(e.currentTarget));
-    // `required` lets a message of only spaces through; this does not.
-    if (!String(fields.message ?? "").trim() || !String(fields.name ?? "").trim()) {
-      setProblem("message");
-      return;
+    // `required` lets a field of only spaces through; this does not. The
+    // first blank field is named and focused, in the order they appear.
+    for (const name of ["name", "message"] as const) {
+      if (!String(fields[name] ?? "").trim()) {
+        setProblem(name);
+        e.currentTarget.querySelector<HTMLElement>(`#${name}`)?.focus();
+        return;
+      }
     }
     // Checked again by Web3Forms, which refuses a submission without a valid
     // token once hCaptcha is switched on for the form. That server-side check
@@ -169,7 +173,11 @@ export default function ContactForm({ locale = defaultLocale }: { locale?: Local
       />
       {problem && (
         <p role="alert" className="text-sm font-medium text-ink">
-          {problem === "message" ? t.contactForm.messageRequired : t.contactForm.captchaRequired}
+          {problem === "name"
+            ? t.contactForm.nameRequired
+            : problem === "message"
+              ? t.contactForm.messageRequired
+              : t.contactForm.captchaRequired}
         </p>
       )}
       {status === "error" && (
