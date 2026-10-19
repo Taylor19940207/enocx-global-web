@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { LinePlan } from "@/lib/i18n";
+import PlannedLines from "./PlannedLines";
 
 type Crumb = { label: string; href?: string };
 
@@ -60,20 +61,7 @@ export default function PageHero({
             ? "text-[clamp(1.85rem,5vw,3.75rem)] md:max-w-none"
             : "text-[clamp(2.35rem,5vw,3.75rem)] md:max-w-[14em]"
         }`}>
-          {titleLines ? (
-            <>
-              <span className="md:hidden">
-                {titleLines.mobile.map((line) => (
-                  <span key={line} className="block">{line}</span>
-                ))}
-              </span>
-              <span className="hidden md:block">
-                {titleLines.desktop.map((line) => (
-                  <span key={line} className="block">{line}</span>
-                ))}
-              </span>
-            </>
-          ) : title}
+          {titleLines ? <PlannedLines plan={titleLines} /> : title}
         </h1>
         {lead && (
           <p className="page-hero-enter page-hero-enter-4 mt-6 max-w-[44rem] text-base leading-[1.85] text-white/75 [text-wrap:pretty] sm:text-lg">

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Reveal from "../Reveal";
+import { PlannedUnits } from "../PlannedLines";
 import { caseCategoryEyebrows, type CaseStudy } from "@/lib/cases";
 import { defaultLocale, getDictionary, href, type Locale } from "@/lib/i18n";
 
@@ -40,26 +41,11 @@ export default function CaseIndexRow({
             </div>
             {/* The case's own line plans double as wrap units — an unplanned
                 break in this narrower column would start a line on a particle.
-                Switched by breakpoint like PageHero: the three-unit mobile plan
-                forced three half-empty lines once the row had a wide column. */}
+                Switched by breakpoint: the three-unit mobile plan forced three
+                half-empty lines once the row had a wide column. */}
             <h2 className="mt-5 max-w-[44rem] text-[clamp(1.6rem,3vw,2.25rem)] font-bold leading-[1.35] tracking-[-0.028em] text-ink transition-colors [text-wrap:balance] group-hover:text-accent-600">
               {caseStudy.titleLines ? (
-                <>
-                  <span className="md:hidden">
-                    {caseStudy.titleLines.mobile.map((unit) => (
-                      <span key={unit} className="inline-block">
-                        {unit}
-                      </span>
-                    ))}
-                  </span>
-                  <span className="hidden md:inline">
-                    {caseStudy.titleLines.desktop.map((unit) => (
-                      <span key={unit} className="inline-block">
-                        {unit}
-                      </span>
-                    ))}
-                  </span>
-                </>
+                <PlannedUnits plan={caseStudy.titleLines} />
               ) : (
                 caseStudy.title
               )}
