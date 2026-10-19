@@ -87,6 +87,8 @@ const en: Dictionary = {
     message: "Your message",
     submit: "Send",
     sending: "Sending…",
+    messageRequired: "Please enter your name and your message.",
+    captchaRequired: "Please complete the verification check before sending.",
     errorTitle: "Your message couldn't be sent.",
     errorBody: "Please check your connection and try again, or email us directly at info@enocx.co.jp.",
   },
